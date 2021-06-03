@@ -4,11 +4,11 @@ import 'package:veggy/util/sizingInfo.dart';
 import 'edgeInsetsApp.dart';
 
 class ResponsiveApp {
-  BuildContext _context;
-  MediaQueryData _mediaQueryData;
-  double _textScaleFactor; // para el tamaño del texto
-  double _scaleFactor; // para el tamaño de ja pantalla
-  EdgeInsetsApp edgeInsetsApp;
+  late BuildContext _context;
+  late MediaQueryData _mediaQueryData;
+  late double _textScaleFactor; // para el tamaño del texto
+  late double _scaleFactor; // para el tamaño de ja pantalla
+  late EdgeInsetsApp edgeInsetsApp;
 
   ResponsiveApp(this._context){
     _mediaQueryData = MediaQuery.of(_context);

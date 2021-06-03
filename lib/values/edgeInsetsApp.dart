@@ -3,43 +3,43 @@ import 'package:veggy/values/responsiveApp.dart';
 
 class EdgeInsetsApp {
   //Todo el margen o widget
-  EdgeInsets allSmallEdgeInsets;
-  EdgeInsets allMediumEdgeInsets;
-  EdgeInsets allLargeEdgeInsets;
-  EdgeInsets allExLargeEdgeInsets;
+  late EdgeInsets allSmallEdgeInsets;
+  late EdgeInsets allMediumEdgeInsets;
+  late EdgeInsets allLargeEdgeInsets;
+  late EdgeInsets allExLargeEdgeInsets;
   //Vertical
-  EdgeInsets vrtSmallEdgeInsets;
-  EdgeInsets vrtMediumEdgeInsets;
-  EdgeInsets vrtLargeEdgeInsets;
-  EdgeInsets vrtExLargeEdgeInsets;
+  late EdgeInsets vrtSmallEdgeInsets;
+  late EdgeInsets vrtMediumEdgeInsets;
+  late EdgeInsets vrtLargeEdgeInsets;
+  late EdgeInsets vrtExLargeEdgeInsets;
   // Horizontal
-  EdgeInsets hrzMediumEdgeInsets;
-  EdgeInsets hrzSmallEdgeInsets;
-  EdgeInsets hrzLargeEdgeInsets;
+  late EdgeInsets hrzMediumEdgeInsets;
+  late EdgeInsets hrzSmallEdgeInsets;
+  late EdgeInsets hrzLargeEdgeInsets;
 
   //Solo derecha, izquierda, arriba y abajo SMALL
-  EdgeInsets onlySmallTopEdgeInsets;
-  EdgeInsets onlySmallBottomEdgeInsets;
-  EdgeInsets onlySmallRightEdgeInsets;
-  EdgeInsets onlySmallLeftEdgeInsets;
+  late EdgeInsets onlySmallTopEdgeInsets;
+  late EdgeInsets onlySmallBottomEdgeInsets;
+  late EdgeInsets onlySmallRightEdgeInsets;
+  late EdgeInsets onlySmallLeftEdgeInsets;
 
   //Solo derecha, izquierda, arriba y abajo MEDIUM
-  EdgeInsets onlyMediumTopEdgeInsets;
-  EdgeInsets onlyMediumBottomEdgeInsets;
-  EdgeInsets onlyMediumRightEdgeInsets;
-  EdgeInsets onlyMediumLeftEdgeInsets;
+  late EdgeInsets onlyMediumTopEdgeInsets;
+  late EdgeInsets onlyMediumBottomEdgeInsets;
+  late EdgeInsets onlyMediumRightEdgeInsets;
+  late EdgeInsets onlyMediumLeftEdgeInsets;
 
   //Solo derecha, izquierda, arriba y abajo LARGE
-  EdgeInsets onlyLargeTopEdgeInsets;
-  EdgeInsets onlyLargeBottomEdgeInsets;
-  EdgeInsets onlyLargeRightEdgeInsets;
-  EdgeInsets onlyLargeLeftEdgeInsets;
+  late EdgeInsets onlyLargeTopEdgeInsets;
+  late EdgeInsets onlyLargeBottomEdgeInsets;
+  late EdgeInsets onlyLargeRightEdgeInsets;
+  late EdgeInsets onlyLargeLeftEdgeInsets;
 
   // Solo arriba
-  EdgeInsets onlyExLargeTopEdgeInsets;
+  late EdgeInsets onlyExLargeTopEdgeInsets;
 
 // Instancia de responsiveApp
-  ResponsiveApp _responsiveApp;
+  late ResponsiveApp _responsiveApp;
 
 // obtenemos el ancho y largo del dispositivo
 // aquí nos damos cuenta si es movil, tablet o escritorio.

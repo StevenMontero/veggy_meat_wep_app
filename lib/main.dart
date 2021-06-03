@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:veggy/routes/routes.dart';
 import 'package:veggy/theme/theme.dart';
 
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Veggy',
-      theme: theme(),
+      theme: theme(),   
       routes: getRoutesApp(),
     );
   }
+
+  
 }
