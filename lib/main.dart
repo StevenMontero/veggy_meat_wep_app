@@ -14,10 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Veggy',
-      theme: theme(),   
+      theme: theme(),
       routes: getRoutesApp(),
     );
   }
-
-  
 }
