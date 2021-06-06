@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:veggy/ui/widgets/navbar.dart';
 import 'package:veggy/ui/widgets/product_card.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:veggy/values/responsiveApp.dart';
@@ -12,96 +11,92 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
     final responsiveApp = ResponsiveApp(context);
-    return Scaffold(
-        appBar: Navbar(),
-        body: Scrollbar(
-          showTrackOnHover: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (!isMobileAndTablet(context))
-                  SizedBox(
-                    height: 50,
-                  ),
-                Center(
-                  child: Card(
-                    child: Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
-                        Container(
-                          height: responsiveApp.width <= 1197 &&
-                                  responsiveApp.width >= 900
+    return Scrollbar(
+      showTrackOnHover: true,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (!isMobileAndTablet(context))
+              SizedBox(
+                height: 50,
+              ),
+            Center(
+              child: Card(
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  children: [
+                    Container(
+                      height: responsiveApp.width <= 1197 &&
+                              responsiveApp.width >= 900
+                          ? 350
+                          : isMobileAndTablet(context)
                               ? 350
-                              : isMobileAndTablet(context)
-                                  ? 350
-                                  : 400,
-                          width: responsiveApp.width <= 1007 &&
-                                  responsiveApp.width >= 900
+                              : 400,
+                      width: responsiveApp.width <= 1007 &&
+                              responsiveApp.width >= 900
+                          ? 350
+                          : isMobileAndTablet(context)
                               ? 350
-                              : isMobileAndTablet(context)
-                                  ? 350
-                                  : 400,
-                          child: Image.network(
-                            'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        buildInfoProduct(themeText, responsiveApp, context)
-                      ],
+                              : 400,
+                      child: Image.network(
+                        'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    buildInfoProduct(themeText, responsiveApp, context)
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 24, bottom: 14, left: isMobile(context) ? 20 : 0),
+                    child: Text(
+                      'Productos relacionados',
+                      style: themeText.headline6,
                     ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: 24,
-                            bottom: 14,
-                            left: isMobile(context) ? 20 : 0),
-                        child: Text(
-                          'Productos relacionados',
-                          style: themeText.headline6,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(
-                            right: isMobile(context) ? 20 : 0,
-                            left: isMobile(context) ? 20 : 0),
-                        width: isMobile(context)
-                            ? double.infinity
-                            : isTablet(context)
-                                ? 600
-                                : 1000,
-                        height: 350,
-                        child: ListView.builder(
-                          itemCount: 5,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return ProductCard(
-                                title: 'Papas',
-                                subtitle: '500',
-                                cornerIcon: Icons.ac_unit_outlined,
-                                imageUrl: '',
-                                onPressCard: () {},
-                                onPressButton: () {});
-                          },
-                        ),
-                      ),
-                    ],
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(
+                        right: isMobile(context) ? 20 : 0,
+                        left: isMobile(context) ? 20 : 0),
+                    width: isMobile(context)
+                        ? double.infinity
+                        : isTablet(context)
+                            ? 600
+                            : 1000,
+                    height: 350,
+                    child: ListView.builder(
+                      itemCount: 5,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                            title: 'Papas',
+                            subtitle: '500',
+                            cornerIcon: Icons.ac_unit_outlined,
+                            imageUrl: '',
+                            onPressCard: () {},
+                            onPressButton: () {});
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 24,
-                )
-              ],
+                ],
+              ),
             ),
-          ),
-        ));
+            SizedBox(
+              height: 24,
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Container buildInfoProduct(

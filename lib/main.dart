@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:veggy/routes/routes.dart';
+import 'package:veggy/router/navigation_key.dart';
+import 'package:veggy/router/routes.dart';
 import 'package:veggy/theme/theme.dart';
+import 'package:veggy/ui/pages/layaut_page.dart';
 
 void main() {
+  Flurorouter.setupRouter();
   runApp(MyApp());
 }
 
@@ -14,8 +16,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Veggy',
+      initialRoute: '/',
       theme: theme(),
-      routes: getRoutesApp(),
+      navigatorKey: NavigationService.navigatorKey,
+      onGenerateRoute: Flurorouter.router.generator,
+      builder: (_, child) {
+        return LayautPage(child!);
+      },
     );
   }
 }
