@@ -131,7 +131,11 @@ class DetailPage extends StatelessWidget {
                   fontSize: 30,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.25),
-              textScaleFactor: isDesktop(context) ? 1 : isMobileAndTablet(context) ? 0.7 : 0.9,
+              textScaleFactor: isDesktop(context)
+                  ? 1
+                  : isMobileAndTablet(context)
+                      ? 0.7
+                      : 0.9,
               textAlign: TextAlign.justify,
             ),
           ),
@@ -147,7 +151,11 @@ class DetailPage extends StatelessWidget {
                   'Arroz (47%), TRIGO integral (37%), azúcar, CEBADA (5%), sal, harina de malta de CEBADA,  extracto de malta  de CEBADA VITAMINAS Y MINERALES: Niacina, hierro, zinc, riboflavina, tiamina, vitamina B6, ácido fólico, vitamina D, vitamina B12',
                   style: themeText.bodyText1,
                   textAlign: TextAlign.justify,
-                  textScaleFactor: isDesktop(context) ? 1: isMobileAndTablet(context) ? 0.9 : 1),
+                  textScaleFactor: isDesktop(context)
+                      ? 1
+                      : isMobileAndTablet(context)
+                          ? 0.9
+                          : 1),
             ),
           ),
           isMobile(context)
@@ -155,6 +163,25 @@ class DetailPage extends StatelessWidget {
                   height: 24,
                 )
               : Expanded(child: Container()),
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.shopping_bag,
+                  size: 24,
+                  color: Colors.green[200],
+                ),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Text('₡4000', style: themeText.headline6),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: ElevatedButton(
@@ -170,18 +197,23 @@ class DetailPage extends StatelessWidget {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      _createInfo(Icons.local_shipping, 'Servicio de envío',context),
-                      SizedBox(width: 5,),
+                      _createInfo(
+                          Icons.local_shipping, 'Servicio de envío', context),
+                      SizedBox(
+                        width: 5,
+                      ),
                       _createInfo(Icons.smartphone_rounded,
-                          'Te avisamos antes de que llegue',context)
+                          'Te avisamos antes de que llegue', context)
                     ],
                   )
                 : Row(
-                   crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _createInfo(
                           Icons.local_shipping, 'Servicio de envío', context),
-                          SizedBox(width: 30,),
+                      SizedBox(
+                        width: 30,
+                      ),
                       _createInfo(Icons.smartphone_rounded,
                           'Te avisamos antes de que llegue', context)
                     ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/ui/widgets/cart_shopping_icon.dart';
 import 'package:veggy/ui/widgets/navbar_avatar.dart';
 import 'package:veggy/ui/widgets/notifications_indicator.dart';
 import 'package:veggy/ui/widgets/search_text.dart';
@@ -20,7 +21,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
               : Padding(
                   padding: const EdgeInsets.only(left: 24),
                   child: TextButton(
-                    onPressed: (){},
+                    onPressed: () {},
                     child: Text(
                       'Veggy',
                       style: TextStyle(
@@ -44,10 +45,18 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
             ),
 
           Spacer(),
-          NotificationsIndicator(),
+          Row(
+            children: [
+              Text('¿Necesita ayuda?\n+506 8939 5313'),
+              Icon(
+                Icons.phone,
+                color: Colors.green,
+              )
+            ],
+          ),
           SizedBox(width: 10),
-          NavbarAvatar(),
-          SizedBox(width: 10)
+          IconCartShoppingIndicator(),
+          SizedBox(width: 24)
         ],
       ),
     );
@@ -58,6 +67,5 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]);
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
