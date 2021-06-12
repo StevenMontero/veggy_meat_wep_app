@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:veggy/ui/pages/404page/notfound_page.dart';
-import 'package:veggy/ui/pages/auth/form_preorder_page.dart';
 import 'package:veggy/ui/pages/detail/detail_page.dart';
+import 'package:veggy/ui/pages/formpage/form_preorder_page.dart';
 import 'package:veggy/ui/pages/homePage.dart';
 
 class Flurorouter {
