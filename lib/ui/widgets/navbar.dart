@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:veggy/ui/widgets/cart_shopping_icon.dart';
 import 'package:veggy/ui/widgets/navbar_avatar.dart';
 import 'package:veggy/ui/widgets/notifications_indicator.dart';
@@ -21,18 +22,12 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
               : Padding(
                   padding: const EdgeInsets.only(left: 24),
                   child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Veggy',
-                      style: TextStyle(
-                        color: Colors.blueGrey[100],
-                        fontSize: 30,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 3,
-                      ),
-                    ),
-                  ),
+                      onPressed: () {},
+                      child: SvgPicture.asset(
+                        'assets/icons/LOGO_VEGGY_PRINCIPAL.svg',
+                        height: 40,
+                        width: 40,
+                      )),
                 ),
 
           Expanded(child: Container()),
@@ -47,7 +42,10 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           Spacer(),
           Row(
             children: [
-              Text('¿Necesita ayuda?\n+506 8939 5313'),
+              Text(
+                '¿Necesita ayuda?\n+506 8939 5313',
+                style: TextStyle(color: Colors.white),
+              ),
               Icon(
                 Icons.phone,
                 color: Colors.green,
@@ -63,8 +61,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   BoxDecoration buildBoxDecoration() => BoxDecoration(
-      color: Colors.white,
-      boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)]);
+      color: Colors.black,
+      boxShadow: [BoxShadow(color: Colors.white, blurRadius: 5)]);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
