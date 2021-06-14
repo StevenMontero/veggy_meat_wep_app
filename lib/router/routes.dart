@@ -18,9 +18,9 @@ class Flurorouter {
       Handler(handlerFunc: (context, parameters) => NoPageFoundPage());
   static void setupRouter() {
     router.define(rootRoute,
-        handler: _detailHandler, transitionType: TransitionType.none);
+        handler: _homeHandler, transitionType: TransitionType.none);
     router.define(pokemonsRoute,
-        handler: _homeHandler, transitionType: TransitionType.fadeIn);
+        handler: _detailHandler, transitionType: TransitionType.fadeIn);
 
     router.notFoundHandler = _notFoundHandler;
   }
