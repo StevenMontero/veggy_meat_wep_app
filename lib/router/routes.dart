@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:veggy/ui/pages/404page/notfound_page.dart';
 import 'package:veggy/ui/pages/detail/detail_page.dart';
 import 'package:veggy/ui/pages/homePage.dart';
+import 'package:veggy/ui/pages/department_filter_page.dart';
 
 class Flurorouter {
   static final FluroRouter router = FluroRouter();
@@ -11,7 +12,7 @@ class Flurorouter {
   static String trainersRoute = '/home';
 
   static Handler _detailHandler =
-      Handler(handlerFunc: (context, parameters) => DetailPage());
+      Handler(handlerFunc: (context, parameters) => DepartmentFilterPage());
   static Handler _homeHandler =
       Handler(handlerFunc: (context, parameters) => HomePage());
   static Handler _notFoundHandler =
