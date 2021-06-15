@@ -1,8 +1,10 @@
-class Carousel{
+class CarouselModel{
+  int? index; 
   String? image;
   bool? isSelected;
 
-  Carousel({
+  CarouselModel({
+    this.index,
     this.image,
     this.isSelected,
   });

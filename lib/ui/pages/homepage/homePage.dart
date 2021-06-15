@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veggy/theme/theme.dart';
+import 'package:veggy/ui/widgets/carousel.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -11,13 +11,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: theme().backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       floatingActionButton: FloatingActionButton(
         onPressed: (){},
         child: Icon(Icons.arrow_upward),
       ),
-      /*drawer: ,
-      body: ,*/
+      /*drawer: ,*/
+      body: ListView(children: [
+        //Carousel(context),
+        //GridProductWidget(),
+      ],),
     );
   }
 }
