@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:veggy/ui/widgets/cart_shopping_icon.dart';
-import 'package:veggy/ui/widgets/navbar_avatar.dart';
-import 'package:veggy/ui/widgets/notifications_indicator.dart';
 import 'package:veggy/ui/widgets/search_text.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:websafe_svg/websafe_svg.dart';
