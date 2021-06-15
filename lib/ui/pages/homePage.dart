@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/theme/theme.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -9,8 +10,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: Center(child: Text("Página de Inicio"),)
+    return Scaffold(
+      backgroundColor: theme().backgroundColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Icon(Icons.arrow_upward),
+      ),
+      /*drawer: ,
+      body: ,*/
     );
   }
 }
