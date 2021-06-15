@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 
 class IconCartShoppingIndicator extends StatelessWidget {
   const IconCartShoppingIndicator() : super();
@@ -6,35 +9,26 @@ class IconCartShoppingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        hoverColor: Colors.green[50],
-        icon: Stack(
-          children: [
-            Icon(
-              Icons.shopping_cart,
-              size: 30.0,
-              color: Colors.green,
-            ),
-            3 == 0
-                ? new Container()
-                : new Positioned(
-                    child: new Stack(children: <Widget>[
-                    new Icon(Icons.brightness_1_rounded,
-                        size: 25.0, color: Colors.green[300]),
-                    new Positioned(
-                        top: 7,
-                        right: 4.7,
-                        child: new Center(
-                          child: new Text(
-                            '190',
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ))
-                  ])),
-          ],
+      onPressed: () {} ,
+      icon: Badge(
+        position: BadgePosition.topEnd(top: -6, end: -3),
+        animationDuration: Duration(milliseconds: 300),
+        animationType: BadgeAnimationType.scale,
+        badgeContent: BlocBuilder<ShoppingcartCubit, ShoppingcartState>(
+          buildWhen: (previous, current) =>
+              previous.listProducts != current.listProducts,
+          builder: (context, state) {
+            return Text(
+              state.listProducts.length.toString(),
+              style: TextStyle(color: Colors.white, fontSize: 12),
+            );
+          },
         ),
-        onPressed: () {});
+        child: Icon(
+          Icons.shopping_cart,
+          color: Colors.green,
+        ),
+      ),
+    );
   }
 }

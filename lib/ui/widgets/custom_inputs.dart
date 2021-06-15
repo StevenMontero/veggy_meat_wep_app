@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomInputs {
   static InputDecoration loginInputDecoration({
     required String hint,
-    required String? errorText,
+    String? errorText,
     required String label,
     required IconData icon,
   }) {
