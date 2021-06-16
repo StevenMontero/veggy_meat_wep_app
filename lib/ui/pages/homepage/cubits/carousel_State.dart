@@ -1,18 +1,23 @@
 part of 'carousel_cubit.dart';
 
-class CarouselState extends Equatable {
-  final List<CarouselModel>? bannersList;
+class CarousellState extends Equatable {
+  final List<CarouselModel> bannersList;
+  final FormzStatus status;
 
-  const CarouselState({
-    this.bannersList,
+  const CarousellState({
+    required this.bannersList,
+    this.status = FormzStatus.pure
   });
 
-  CarouselState copyWith({
-    required List<CarouselModel> bannersList,
+  CarousellState copyWith({
+     List<CarouselModel>? bannersList,
+     FormzStatus? status,
   }) {
-    return CarouselState(bannersList: bannersList);
+    return CarousellState(
+      bannersList: bannersList ?? this.bannersList,
+      status: status ?? this.status,);
   }
 
   @override
-  List<Object?> get props => [bannersList];
+  List<Object?> get props => [bannersList, status];
 }
