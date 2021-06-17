@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veggy/ui/pages/detail/cubit/counterquantity_cubit.dart';
+import 'package:veggy/ui/widgets/counter_buttons.dart';
 import 'package:veggy/ui/widgets/product_card.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:veggy/values/responsiveApp.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage() : super();
+  const DetailPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CounterquantityCubit(),
+      child: Body(),
+    );
+  }
+}
+
+class Body extends StatelessWidget {
+  const Body() : super();
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +120,7 @@ class DetailPage extends StatelessWidget {
       height: responsiveApp.width <= 1197 && responsiveApp.width >= 900
           ? 400
           : isMobileAndTablet(context)
-              ? 370
+              ? 470
               : 500,
       width: responsiveApp.width <= 1197 && responsiveApp.width >= 900
           ? 400
@@ -173,6 +188,20 @@ class DetailPage extends StatelessWidget {
                 Text('₡4000', style: themeText.headline6),
               ],
             ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          BlocBuilder<CounterquantityCubit, int>(
+            builder: (context, state) {
+              return CounterProductWidget(
+                  quantity: state,
+                  addFunction: () =>
+                      context.read<CounterquantityCubit>().addProductQuatity(),
+                  removeFunction: () => context
+                      .read<CounterquantityCubit>()
+                      .removeProductQuatity());
+            },
           ),
           SizedBox(
             height: 10,
