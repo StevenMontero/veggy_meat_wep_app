@@ -57,33 +57,33 @@ class ProductApi {
       this.ecommerceActive = 0});
 
   ProductApi.fromJson(Map<String, dynamic> json) {
-    cImpProductId = json['cImpProductId'];
-    id = json['Id'];
-    code = json['code'];
-    name = json['name'];
-    upcCode = json['upcCode'];
-    itemGroupId = json['ItemGroupId'];
-    itemGroup = json['ItemGroup'];
-    listPrice = json['listPrice'];
-    minPrice = json['minPrice'];
-    miscAmount = json['miscAmount'];
-    costPrice = json['costPrice'];
-    mSRP = json['MSRP'];
-    packSize = json['packSize'];
-    unitWeight = json['unitWeight'];
-    grossWeight = json['grossWeight'];
-    inStock = json['InStock'];
-    unitType = json['UnitType'];
-    misc1 = json['misc1'];
-    misc2 = json['misc2'];
-    misc3 = json['misc3'];
-    misc4 = json['misc4'];
-    misc5 = json['misc5'];
-    misc6 = json['misc6'];
-    misc7 = json['misc7'];
-    misc8 = json['misc8'];
-    active = json['active'];
-    ecommerceActive = json['ecommerceActive'];
+    cImpProductId = json['cImpProductId'] ?? '';
+    id = json['Id'] ?? '';
+    code = json['code'] ?? '';
+    name = json['name'] ?? '';
+    upcCode = json['upcCode'] ?? '';
+    itemGroupId = json['ItemGroupId'] ?? '';
+    itemGroup = json['ItemGroup'] ?? '';
+    listPrice = json['listPrice'] ?? '';
+    minPrice = json['minPrice']  ??  0.0;
+    miscAmount = json['miscAmount'] ??  0.0;
+    costPrice = json['costPrice'] ??  0.0;
+    mSRP = json['MSRP'] ??  0.0;
+    packSize = json['packSize'] ??  0.0;
+    unitWeight = json['unitWeight'] ??  0.0;
+    grossWeight = json['grossWeight'] ??  0.0;
+    inStock = json['InStock'] ??  0.0;
+    unitType = json['UnitType'] ??  0.0;
+    misc1 = json['misc1'] ?? '';
+    misc2 = json['misc2']?? '';
+    misc3 = json['misc3']?? '';
+    misc4 = json['misc4']?? '';
+    misc5 = json['misc5']?? '';
+    misc6 = json['misc6']?? '';
+    misc7 = json['misc7']?? '';
+    misc8 = json['misc8']?? '';
+    active = json['active'] ?? 1;
+    ecommerceActive = json['ecommerceActive'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
