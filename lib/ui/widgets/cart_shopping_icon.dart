@@ -9,11 +9,8 @@ class IconCartShoppingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _case = ProductUseCase();
     return IconButton(
-      onPressed: () {
-        _case.searchProductsByCategory('carne de pollo','POLLO');
-      },
+      onPressed: () {},
       icon: Badge(
         position: BadgePosition.topEnd(top: -6, end: -3),
         animationDuration: Duration(milliseconds: 300),
