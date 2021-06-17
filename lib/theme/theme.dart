@@ -6,6 +6,7 @@ import 'package:veggy/theme/colors.dart';
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.grey[50],
+    backgroundColor: ColorsApp.backgroundColor,
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
     primaryColor: ColorsApp.primaryColor,

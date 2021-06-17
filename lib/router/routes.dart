@@ -2,7 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:veggy/ui/pages/404page/notfound_page.dart';
 import 'package:veggy/ui/pages/detail/detail_page.dart';
 import 'package:veggy/ui/pages/formpage/form_preorder_page.dart';
-import 'package:veggy/ui/pages/homePage.dart';
+import 'package:veggy/ui/pages/homepage/homePage.dart';
 import 'package:veggy/ui/pages/department_filter_page.dart';
 
 class Flurorouter {
@@ -26,11 +26,13 @@ class Flurorouter {
       Handler(handlerFunc: (context, parameters) => DepartmentFilterPage());
   static void setupRouter() {
     router.define(rootRoute,
-        handler: _departmentFilterHandler, transitionType: TransitionType.none);
-    router.define(departmentFilterRoute,
-        handler: _detailHandler, transitionType: TransitionType.none);
+        handler: _homeHandler , transitionType: TransitionType.none);
     router.define(detailRoute,
-        handler: _homeHandler, transitionType: TransitionType.fadeIn);
+        handler: _detailHandler, transitionType: TransitionType.none);
+    router.define(formPreOrderRoute,
+        handler: _formPreOrderHandler, transitionType: TransitionType.fadeIn);
+	router.define(formPreOrderRoute,
+        handler: _formPreOrderHandler, transitionType: TransitionType.fadeIn);
     router.define(formPreOrderRoute,
         handler: _formPreOrderHandler, transitionType: TransitionType.none);
 

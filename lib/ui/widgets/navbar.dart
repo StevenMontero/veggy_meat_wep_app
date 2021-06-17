@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:veggy/ui/widgets/cart_shopping_icon.dart';
-import 'package:veggy/ui/widgets/navbar_avatar.dart';
-import 'package:veggy/ui/widgets/notifications_indicator.dart';
 import 'package:veggy/ui/widgets/search_text.dart';
 import 'package:veggy/util/sizingInfo.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -18,12 +16,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       child: Row(
         children: [
           isMobileAndTablet(context)
-              ? IconButton(icon: Icon(Icons.menu_outlined), onPressed: () {})
+              ? IconButton(
+                  icon: Icon(
+                    Icons.menu_outlined,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {})
               : Padding(
                   padding: const EdgeInsets.only(left: 24),
                   child: TextButton(
                       onPressed: () {},
-                      child: SvgPicture.asset(
+                      child: WebsafeSvg.asset(
                         'assets/icons/LOGO_VEGGY_PRINCIPAL.svg',
                         height: 40,
                         width: 40,
@@ -40,16 +43,21 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
             ),
 
           Spacer(),
+
           Row(
             children: [
               Text(
-                '¿Necesita ayuda?\n+506 8939 5313',
+                'Contáctenos:\n+506 8939 5313',
+                textAlign: TextAlign.left,
                 style: TextStyle(color: Colors.white),
               ),
-              Icon(
-                Icons.phone,
-                color: Colors.green,
-              )
+              SizedBox(width: 5.0),
+              WebsafeSvg.asset(
+                'assets/icons/whatsapplogo.svg',
+                height: 24,
+                width: 24,
+                fit: BoxFit.cover,
+              ),
             ],
           ),
           SizedBox(width: 10),
