@@ -123,6 +123,9 @@ class DepartmentFilterPage extends StatelessWidget {
                                   title: 'Soya Chips',
                                   subtitle: 'CRC 3000',
                                   cornerIcon: Icons.shop,
+                                  price: 'CRC 3000',
+                                  category: 'Abarrotes',
+                                  code: '2341234',
                                   imageUrl: '',
                                   onPressCard: () {},
                                   onPressButton: () {});

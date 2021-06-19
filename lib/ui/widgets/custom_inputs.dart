@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/theme/colors.dart';
 
 class CustomInputs {
   static InputDecoration loginInputDecoration({
@@ -8,14 +9,19 @@ class CustomInputs {
     required IconData icon,
   }) {
     return InputDecoration(
-      border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3))),
+      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
       enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3))),
+          borderSide:
+              BorderSide(color: ColorsApp.colorPaletteGreen.withOpacity(0.3))),
+      focusedBorder:
+          OutlineInputBorder(borderSide: BorderSide(color: Colors.green)),
       hintText: hint,
       labelText: label,
       errorText: errorText,
-      prefixIcon: Icon(icon, color: Colors.grey),
+      prefixIcon: Icon(icon,
+          color: errorText == null
+              ? ColorsApp.colorPaletteGreen
+              : Colors.red[400]),
       labelStyle: TextStyle(color: Colors.grey),
       hintStyle: TextStyle(color: Colors.grey),
     );

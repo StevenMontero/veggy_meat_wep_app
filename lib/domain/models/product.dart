@@ -1,16 +1,28 @@
 class Product {
   late String codigoArticulo;
+
   late String cantidad;
+
   late String notas;
+
   late String envioParcial;
+
   late String precioSinIva;
+
   late String montoIva;
+
   late String porcentajeIva;
+
   late String codigoTarifa;
+
   late String precioIva;
+
   late String porcentajeDescuento;
+
   late String montoDescuento;
+
   late String bonificacion;
+
   late String codImpuesto;
 
   Product(

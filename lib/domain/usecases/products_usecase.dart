@@ -4,8 +4,14 @@ import 'package:veggy/domain/models/product_api.dart';
 class ProductUseCase {
   final _productsRepo = ProductRepository();
 
-  Future<List<ProductApi>> getProductsByCateforie(String category) {
-    return _productsRepo.getProductsByCategory(category, '000073');
+  Future<List<ProductApi>> getProductsByCateforie(
+      String category, String startDocumet) {
+    return _productsRepo.getProductsByCategory(category, startDocumet);
+  }
+
+  Future<ProductApi> getOneProductsByCateforie(
+      String category, String id) {
+    return _productsRepo.getOneProductsByCategory(category, id);
   }
 
   Future<List<ProductApi>> searchProductsByCategory(
