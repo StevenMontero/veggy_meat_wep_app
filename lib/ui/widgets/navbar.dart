@@ -7,8 +7,6 @@ import 'package:websafe_svg/websafe_svg.dart';
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Container(
       width: double.infinity,
       height: 50,

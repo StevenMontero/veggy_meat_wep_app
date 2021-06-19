@@ -20,8 +20,9 @@ class GridProductWidget extends StatelessWidget {
           itemBuilder: (BuildContext ctx, index) {
             return ProductCard(
                 title: 'Soya Chips',
-                subtitle: 'CRC 3000',
-                cornerIcon: Icons.shop,
+                price: '3000',
+                code: 'Codigo: 1231231',
+                category: 'Categoria: ABARROTES',
                 imageUrl: '',
                 onPressCard: () {},
                 onPressButton: () {});

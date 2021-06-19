@@ -5,15 +5,17 @@ import 'package:veggy/ui/widgets/outline_custom_buttom.dart';
 class ProductCard extends StatelessWidget {
   ProductCard(
       {required this.title,
-      required this.subtitle,
-      required this.cornerIcon,
+      required this.price,
+      required this.code,
+      required this.category,
       required this.imageUrl,
       required this.onPressCard,
       required this.onPressButton})
       : super();
   final String title;
-  final String subtitle;
-  final IconData cornerIcon;
+  final String price;
+  final String code;
+  final String category;
   final String imageUrl;
   final VoidCallback onPressCard;
   final VoidCallback onPressButton;
@@ -28,6 +30,8 @@ class ProductCard extends StatelessWidget {
         shadowColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 10,
@@ -39,17 +43,28 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(title, style: themeText.headline6),
+            Container(
+              width: 150,
+              child: Text(
+                title,
+                style: themeText.bodyText1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             SizedBox(
               height: 5,
             ),
-            startBar,
+            Text('Codigo:$code', style: themeText.overline),
+            SizedBox(
+              height: 5,
+            ),
+            Text('Categoria:$category', style: themeText.overline),
             SizedBox(
               height: 5,
             ),
             Text(
-              subtitle,
-              style: themeText.subtitle2,
+              'CRC $price',
+              style: themeText.subtitle1,
             ),
             SizedBox(
               height: 10,
@@ -67,15 +82,4 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
-
-  final startBar = Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(Icons.star, color: Colors.yellow[600]),
-      Icon(Icons.star, color: Colors.yellow[600]),
-      Icon(Icons.star, color: Colors.yellow[600]),
-      Icon(Icons.star, color: Colors.yellow[600]),
-      Icon(Icons.star_half, color: Colors.yellow[600]),
-    ],
-  );
 }
