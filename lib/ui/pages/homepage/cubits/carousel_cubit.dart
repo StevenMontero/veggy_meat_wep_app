@@ -10,6 +10,10 @@ class CarouselCubit extends Cubit<CarousellState> {
   CarouselCubit(this.bannerRepository) : super(CarousellState(bannersList: []));
   final BannerRepository bannerRepository;
 
+  void isSelectedChange(List<CarouselModel> list){
+    emit(state.copyWith(bannersList: list));
+  }
+
   void getBannersList() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {

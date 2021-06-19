@@ -36,6 +36,7 @@ class _BodyState extends State<Body> {
   _BodyState(this.responsiveApp);
   final CarouselController _controller = CarouselController();
   final ResponsiveApp responsiveApp;
+  int _current = 0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CarouselCubit, CarousellState>(
@@ -53,28 +54,23 @@ class _BodyState extends State<Body> {
                 autoPlay: true,
                 aspectRatio: 18 / 8,
                 onPageChanged: (index, reason) {
-                  // utilizar bloc
                   //se utiliza para saber cual imagen esta selecionada
-                  // setState(() {
-                  //   _current = index;
-                  //   for (int i = 0; i < carouselImages.length; i++)
-                  //     carouselImages[i].isSelected=(i == index)?true:false;
+                   setState(() {
+                   // BlocBuilder<CarouselCubit, CarousellState>(
+                   //   buildWhen: (previuos, current) => previuos.bannersList != current.bannersList,
+                   //   builder: (context, state) {
+                   //     return Container();
+                   //   },
+                   // );
+                     _current = index;
+                     //for (int i = 0; i < imageSliders.length; i++)
+                     //  imageSliders[i].isSelected=(i == index)?true:false;
+                     //  context.read<CarouselCubit>().isSelectedChange(state.bannersList);
                   //
-                  // });
+                   });
                 }),
             carouselController: _controller,
           ),
-          //Positioned.fill(
-          //    child: Center(
-          //      //child: Text(
-          //      //  carousel[_current].title,
-          //      //  style: TextStyle(
-          //      //    letterSpacing: responsiveApp.letterSpacingCarouselWidth,
-          //      //    fontFamily: 'Electrolize',
-          //      //    fontSize: responsiveApp.headline3,
-          //      //  ),
-          //      //),
-          //    )),
           isMobileAndTablet(context)
               ? Container()
               : Positioned.fill(
@@ -94,7 +90,7 @@ class _BodyState extends State<Body> {
                                   onTap: () {
                                     _controller.animateToPage(index);
                                   },
-                                  //tama;o y forma de cada puntito
+                                  //tamaño y forma de cada puntito en el carrusel
                                   child: Container(
                                     width: responsiveApp
                                         .carouselCircleContainerWidth,
@@ -103,11 +99,9 @@ class _BodyState extends State<Body> {
                                     margin: responsiveApp
                                         .edgeInsetsApp.allSmallEdgeInsets,
                                     decoration: BoxDecoration(
-                                        color: Colors.white,
-
-                                        //carouselImages[index].isSelected
-                                        //    ? Colors.white
-                                        //    : Colors.blueGrey,
+                                        color: _current == index
+                                            ? Colors.white
+                                            : Colors.blueGrey,
                                         shape: BoxShape.circle),
                                   ),
                                 )),
