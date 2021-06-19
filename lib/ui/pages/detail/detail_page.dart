@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veggy/domain/models/product_api.dart';
+import 'package:veggy/domain/models/product_detail.dart';
 import 'package:veggy/ui/pages/detail/cubit/counterquantity_cubit.dart';
 import 'package:veggy/ui/widgets/counter_buttons.dart';
+import 'package:veggy/ui/widgets/custom_inputs.dart';
 import 'package:veggy/ui/widgets/product_card.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:veggy/values/responsiveApp.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
-
+  DetailPage(
+      {Key? key, this.product, required this.productId, required this.category})
+      : super(key: key);
+  final ProductDetail? product;
+  final String productId;
+  final String category;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterquantityCubit(),
-      child: Body(),
-    );
+        create: (context) => DeatailCubit(),
+        child: Body(
+          productDetail: product,
+          category: category,
+          productId: productId,
+        ));
   }
 }
 
 class Body extends StatelessWidget {
-  const Body() : super();
-
+  Body({this.productDetail, required this.category, required this.productId})
+      : super();
+  final ProductDetail? productDetail;
+  final String category;
+  final String productId;
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
+    if (productDetail == null) {
+      context.read<DeatailCubit>().productChanged(category, productId);
+    } else {
+      context.read<DeatailCubit>().productLoad(productDetail!);
+    }
     final responsiveApp = ResponsiveApp(context);
     return Scrollbar(
       showTrackOnHover: true,
@@ -37,31 +55,36 @@ class Body extends StatelessWidget {
                 height: 50,
               ),
             Center(
-              child: Card(
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    Container(
-                      height: responsiveApp.width <= 1197 &&
-                              responsiveApp.width >= 900
-                          ? 350
-                          : isMobileAndTablet(context)
-                              ? 350
-                              : 400,
-                      width: responsiveApp.width <= 1007 &&
-                              responsiveApp.width >= 900
-                          ? 350
-                          : isMobileAndTablet(context)
-                              ? 350
-                              : 400,
-                      child: Image.network(
-                        'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
-                        fit: BoxFit.fill,
-                      ),
+              child: BlocBuilder<DeatailCubit, DetailState>(
+                builder: (context, state) {
+                  return Card(
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        Container(
+                          height: responsiveApp.width <= 1197 &&
+                                  responsiveApp.width >= 900
+                              ? 450
+                              : isMobileAndTablet(context)
+                                  ? 350
+                                  : 470,
+                          width: responsiveApp.width <= 1007 &&
+                                  responsiveApp.width >= 900
+                              ? 450
+                              : isMobileAndTablet(context)
+                                  ? 350
+                                  : 470,
+                          child: Image.network(
+                            'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        buildInfoProduct(
+                            themeText, responsiveApp, context, state.productApi)
+                      ],
                     ),
-                    buildInfoProduct(themeText, responsiveApp, context)
-                  ],
-                ),
+                  );
+                },
               ),
             ),
             Center(
@@ -88,17 +111,26 @@ class Body extends StatelessWidget {
                             ? 600
                             : 1000,
                     height: 350,
-                    child: ListView.builder(
-                      itemCount: 5,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return ProductCard(
-                            title: 'Papas',
-                            subtitle: '500',
-                            cornerIcon: Icons.ac_unit_outlined,
-                            imageUrl: '',
-                            onPressCard: () {},
-                            onPressButton: () {});
+                    child: BlocBuilder<DeatailCubit, DetailState>(
+                      buildWhen: (previous, current) =>
+                          previous.listSameProduct != current.listSameProduct,
+                      builder: (context, state) {
+                        return ListView.builder(
+                          itemCount: state.listSameProduct.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return ProductCard(
+                                title: state.listSameProduct[index].name,
+                                price: state.listSameProduct[index].listPrice
+                                    .toString(),
+                                code: state.listSameProduct[index].code,
+                                category:
+                                    state.listSameProduct[index].itemGroup,
+                                imageUrl: '',
+                                onPressCard: () {},
+                                onPressButton: () {});
+                          },
+                        );
                       },
                     ),
                   ),
@@ -114,20 +146,18 @@ class Body extends StatelessWidget {
     );
   }
 
-  Container buildInfoProduct(
-      TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context) {
+  Container buildInfoProduct(TextTheme themeText, ResponsiveApp responsiveApp,
+      BuildContext context, ProductApi product) {
     return Container(
-      height: responsiveApp.width <= 1197 && responsiveApp.width >= 900
-          ? 400
-          : isMobileAndTablet(context)
-              ? 470
-              : 500,
+      height:
+          responsiveApp.width <= 1197 && responsiveApp.width >= 900 ? 600 : 500,
       width: responsiveApp.width <= 1197 && responsiveApp.width >= 900
           ? 400
           : isMobileAndTablet(context)
               ? 600
               : 700,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -136,7 +166,7 @@ class Body extends StatelessWidget {
               top: 24,
             ),
             child: Text(
-              'KELLOGGS cereales special k caja 500 gr',
+              product.name,
               style: GoogleFonts.roboto(
                   fontSize: 30,
                   fontWeight: FontWeight.w500,
@@ -158,7 +188,7 @@ class Body extends StatelessWidget {
             padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
             child: Container(
               child: Text(
-                  'Arroz (47%), TRIGO integral (37%), azúcar, CEBADA (5%), sal, harina de malta de CEBADA,  extracto de malta  de CEBADA VITAMINAS Y MINERALES: Niacina, hierro, zinc, riboflavina, tiamina, vitamina B6, ácido fólico, vitamina D, vitamina B12',
+                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}',
                   style: themeText.bodyText1,
                   textAlign: TextAlign.justify,
                   textScaleFactor: isDesktop(context)
@@ -190,21 +220,45 @@ class Body extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 24,
           ),
-          BlocBuilder<CounterquantityCubit, int>(
+          BlocBuilder<DeatailCubit, DetailState>(
             builder: (context, state) {
-              return CounterProductWidget(
-                  quantity: state,
-                  addFunction: () =>
-                      context.read<CounterquantityCubit>().addProductQuatity(),
-                  removeFunction: () => context
-                      .read<CounterquantityCubit>()
-                      .removeProductQuatity());
+              return product.itemGroup == 'GRANEL'
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 24.0),
+                      child: Container(
+                        width: 300,
+                        child: TextFormField(
+                          initialValue: state.quantityGranel.value,
+                          onChanged: (value) => context
+                              .read<DeatailCubit>()
+                              .productQuatityGranelChanged(value),
+                          style: TextStyle(color: Colors.black),
+                          decoration: CustomInputs.loginInputDecoration(
+                              errorText: state.quantityGranel.invalid
+                                  ? 'Ingrese solo números'
+                                  : null,
+                              hint: 'Ingrese la cantidad que necesita',
+                              label: 'Gramos',
+                              icon: Icons.calculate_rounded),
+                        ),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(right: 24.0),
+                      child: CounterProductWidget(
+                          quantity: state.quantityUnits,
+                          addFunction: () =>
+                              context.read<DeatailCubit>().addProductQuatity(),
+                          removeFunction: () => context
+                              .read<DeatailCubit>()
+                              .removeProductQuatity()),
+                    );
             },
           ),
           SizedBox(
-            height: 10,
+            height: 24,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),

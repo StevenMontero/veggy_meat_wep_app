@@ -30,6 +30,17 @@ class ProductRepository {
     return _resul.docs.map((e) => ProductApi.fromJson(e.data())).toList();
   }
 
+  Future<ProductApi> getOneProductsByCategory(
+      String category, String documentId) async {
+    _productsCategoryRef =
+        FirebaseFirestore.instance.collection(category.toUpperCase());
+
+    final DocumentSnapshot<Map<String, dynamic>> _startDocument =
+        await _productsCategoryRef.doc(documentId).get();
+
+    return ProductApi.fromJson(_startDocument.data()!);
+  }
+
   /*
   no funciona del todo, la busque es complicada, no usar de momento o intenrar mejorla
    */
