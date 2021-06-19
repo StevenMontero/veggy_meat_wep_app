@@ -40,7 +40,7 @@ class Flurorouter {
         handler: _formPreOrderHandler, transitionType: TransitionType.fadeIn);
     router.define(formPreOrderRoute,
         handler: _formPreOrderHandler, transitionType: TransitionType.none);
-    router.define(shoppingCartRoute,
+    router.define(departmentFilterRoute,
         handler: _departmentFilterHandler, transitionType: TransitionType.none);
     router.define(shoppingCartRoute,
         handler: _shoppingCartHandler, transitionType: TransitionType.none);
