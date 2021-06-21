@@ -1,25 +1,25 @@
 class Product {
   late String codigoArticulo;
 
-  late String cantidad;
+  late double cantidad;
 
   late String notas;
 
   late String envioParcial;
 
-  late String precioSinIva;
+  late double precioSinIva;
 
-  late String montoIva;
+  late double montoIva;
 
-  late String porcentajeIva;
+  late double porcentajeIva;
 
   late String codigoTarifa;
 
-  late String precioIva;
+  late double precioIva;
 
-  late String porcentajeDescuento;
+  late double porcentajeDescuento;
 
-  late String montoDescuento;
+  late double montoDescuento;
 
   late String bonificacion;
 
@@ -41,16 +41,16 @@ class Product {
       required this.codImpuesto});
   Product.fromJson(Map<String, dynamic> json) {
     this.codigoArticulo = json['codigo_articulo'];
-    this.cantidad = json['cantidad'];
+    this.cantidad = double.parse(json['cantidad']);
     this.notas = json['notas'];
     this.envioParcial = json['envio_parcial'];
-    this.precioSinIva = json['precio_sin_iva'];
-    this.montoIva = json['monto_iva'];
-    this.porcentajeIva = json['porcentaje_iva'];
+    this.precioSinIva = double.parse(json['precio_sin_iva']);
+    this.montoIva = double.parse(json['monto_iva']);
+    this.porcentajeIva = double.parse(json['porcentaje_iva']);
     this.codigoTarifa = json['codigo_tarifa'];
-    this.precioIva = json['precio_iva'];
-    this.porcentajeDescuento = json['porcentaje_descuento'];
-    this.montoDescuento = json['monto_descuento'];
+    this.precioIva = double.parse(json['precio_iva']);
+    this.porcentajeDescuento = double.parse(json['porcentaje_descuento']);
+    this.montoDescuento = double.parse(json['monto_descuento']);
     this.bonificacion = json['bonificacion'];
     this.codImpuesto = json['cod_impuesto'];
   }
@@ -58,18 +58,28 @@ class Product {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['codigo_articulo'] = this.codigoArticulo;
-    data['cantidad'] = this.cantidad;
+    data['cantidad'] = this.cantidad.toString();
     data['notas'] = this.notas;
     data['envio_parcial'] = this.envioParcial;
-    data['precio_sin_iva'] = this.precioSinIva;
-    data['monto_iva'] = this.montoIva;
-    data['porcentaje_iva'] = this.porcentajeIva;
+    data['precio_sin_iva'] = this.precioSinIva.toString();
+    data['monto_iva'] = this.montoIva.toString();
+    data['porcentaje_iva'] = this.porcentajeIva.toString();
     data['codigo_tarifa'] = this.codigoTarifa;
-    data['precio_iva'] = this.precioIva;
-    data['porcentaje_descuento'] = this.porcentajeDescuento;
-    data['monto_descuento'] = this.montoDescuento;
+    data['precio_iva'] = this.precioIva.toString();
+    data['porcentaje_descuento'] = this.porcentajeDescuento.toString();
+    data['monto_descuento'] = this.montoDescuento.toString();
     data['bonificacion'] = this.bonificacion;
     data['cod_impuesto'] = this.codImpuesto;
     return data;
+  }
+
+  void addQuantity(double cantidad) {
+    if (this.cantidad == 0) {
+      this.cantidad = cantidad;
+    } else {
+      double total =
+          cantidad <= 0 ? this.cantidad + 1 : cantidad + this.cantidad;
+      this.cantidad = total;
+    }
   }
 }

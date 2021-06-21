@@ -1,7 +1,7 @@
 part of 'counterquantity_cubit.dart';
 
 class DetailState extends Equatable {
-  final int quantityUnits;
+  final double quantityUnits;
   final NumberNoEmpty quantityGranel;
   final ProductApi productApi;
   final List<ProductApi> listSameProduct;
@@ -12,7 +12,7 @@ class DetailState extends Equatable {
       required this.productApi});
 
   DetailState copyWith(
-      {int? quantityUnits,
+      {double? quantityUnits,
       NumberNoEmpty? quantityGranel,
       List<ProductApi>? listSameProduct,
       ProductApi? productApi}) {
@@ -24,5 +24,6 @@ class DetailState extends Equatable {
   }
 
   @override
-  List<Object> get props => [quantityGranel, quantityUnits, productApi,listSameProduct];
+  List<Object> get props =>
+      [quantityGranel, quantityUnits, productApi, listSameProduct];
 }

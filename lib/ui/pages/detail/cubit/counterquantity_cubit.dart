@@ -8,8 +8,7 @@ import 'package:veggy/util/regularExpressions/number_no_empty.dart';
 part 'counterquantity_state.dart';
 
 class DeatailCubit extends Cubit<DetailState> {
-  DeatailCubit()
-      : super(DetailState(productApi: ProductApi()));
+  DeatailCubit() : super(DetailState(productApi: ProductApi()));
   final _productUseCase = ProductUseCase();
   final _localDb = ProductSateLocalUseCase();
   void addProductQuatity() {
@@ -34,7 +33,6 @@ class DeatailCubit extends Cubit<DetailState> {
           await _productUseCase.getOneProductsByCateforie(category, id);
       emit(state.copyWith(productApi: _product));
     } else {
-      print(_productSateLocal.sameListProduct[0]);
       emit(state.copyWith(
           productApi: _productSateLocal.product,
           listSameProduct: _productSateLocal.sameListProduct));

@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: NavigationService.navigatorKey,
           onGenerateRoute: Flurorouter.router.generator,
           builder: (_, child) {
+
             return LayautPage(child!);
           },
         ));

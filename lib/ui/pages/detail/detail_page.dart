@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:veggy/domain/models/cart_product.dart';
+import 'package:veggy/domain/models/product.dart';
 import 'package:veggy/domain/models/product_api.dart';
 import 'package:veggy/domain/models/product_detail.dart';
+import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/detail/cubit/counterquantity_cubit.dart';
 import 'package:veggy/ui/widgets/counter_buttons.dart';
 import 'package:veggy/ui/widgets/custom_inputs.dart';
@@ -128,7 +131,31 @@ class Body extends StatelessWidget {
                                     state.listSameProduct[index].itemGroup,
                                 imageUrl: '',
                                 onPressCard: () {},
-                                onPressButton: () {});
+                                onPressButton: () {
+                                  final _product = Product(
+                                      codigoArticulo:
+                                          state.listSameProduct[index].code,
+                                      cantidad: 1,
+                                      notas: '',
+                                      envioParcial: '',
+                                      precioSinIva: 0,
+                                      montoIva: 0,
+                                      porcentajeIva: 0,
+                                      codigoTarifa: 'codigoTarifa',
+                                      precioIva: 0,
+                                      porcentajeDescuento: 0,
+                                      montoDescuento: 0,
+                                      bonificacion: 'bonificacion',
+                                      codImpuesto:
+                                          state.listSameProduct[index].misc3);
+                                  context.read<ShoppingcartCubit>().addProduct(
+                                      CartProduct(
+                                          product: _product,
+                                          isGranel:
+                                              state.productApi.itemGroup ==
+                                                  'GRANEL',
+                                          name: state.productApi.name + '2'));
+                                });
                           },
                         );
                       },
@@ -248,7 +275,7 @@ class Body extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.only(right: 24.0),
                       child: CounterProductWidget(
-                          quantity: state.quantityUnits,
+                          quantity: state.quantityUnits.toInt(),
                           addFunction: () =>
                               context.read<DeatailCubit>().addProductQuatity(),
                           removeFunction: () => context
@@ -261,14 +288,37 @@ class Body extends StatelessWidget {
             height: 24,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text('AGREGAR'),
-              style: ElevatedButton.styleFrom(
-                  primary: Colors.cyan, minimumSize: Size(700, 50)),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: BlocBuilder<DeatailCubit, DetailState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                      child: Text('AGREGAR'),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.cyan, minimumSize: Size(700, 50)),
+                      onPressed: () {
+                        final _product = Product(
+                            codigoArticulo: state.productApi.code,
+                            cantidad: state.quantityUnits,
+                            notas: '',
+                            envioParcial: '',
+                            precioSinIva: 0,
+                            montoIva: 0,
+                            porcentajeIva: 0,
+                            codigoTarifa: 'codigoTarifa',
+                            precioIva: 0,
+                            porcentajeDescuento: 0,
+                            montoDescuento: 0,
+                            bonificacion: 'bonificacion',
+                            codImpuesto: state.productApi.misc3);
+                        context.read<ShoppingcartCubit>().addProduct(
+                            CartProduct(
+                                product: _product,
+                                isGranel:
+                                    state.productApi.itemGroup == 'GRANEL',
+                                name: state.productApi.name));
+                      });
+                },
+              )),
           Padding(
             padding: const EdgeInsets.only(top: 24.0, left: 24, bottom: 24),
             child: isMobileAndTablet(context)
