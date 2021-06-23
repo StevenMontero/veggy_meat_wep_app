@@ -18,8 +18,8 @@ class ShoppingcartCubit extends Cubit<ShoppingcartState> {
 
   void addProduct(CartProduct cartProduct) {
     final List<CartProduct> auxList = List.from(state.listProducts);
-    final productExistedIndex =
-        auxList.indexWhere((element) => element.name == cartProduct.name);
+    final productExistedIndex = auxList.indexWhere((element) =>
+        element.product.codigoArticulo == cartProduct.product.codigoArticulo);
     if (productExistedIndex >= 0) {
       auxList[productExistedIndex]
           .product

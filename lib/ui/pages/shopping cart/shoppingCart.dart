@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veggy/domain/models/cart_product.dart';
+import 'package:veggy/router/navigation_key.dart';
+import 'package:veggy/router/routes.dart';
 import 'package:veggy/theme/colors.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/util/sizingInfo.dart';
@@ -10,74 +11,87 @@ import 'package:google_fonts/google_fonts.dart';
 //Error de borde en tablet
 
 class ShoppingCart extends StatelessWidget {
-  const ShoppingCart() : super();
-
+  ShoppingCart() : super();
+  final _scrollController = ScrollController();
+  final _scrollController2 = ScrollController();
+  final _scrollController3 = ScrollController();
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
     final responsiveApp = ResponsiveApp(context);
-
     return Scrollbar(
+        isAlwaysShown: true,
+        controller: _scrollController3,
         child: Container(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              controller: _scrollController3,
+              child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Material(
-                      color: Colors.white,
-                      child: Text(
-                        'Carrito de compras',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(
-                          fontSize: 30,
-                          color: Colors.black,
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Material(
+                          color: Colors.white,
+                          child: Text(
+                            'Carrito de compras',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                              fontSize: 30,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
+                  ),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Scrollbar(
+                          isAlwaysShown: true,
+                          controller: _scrollController,
+                          child: SingleChildScrollView(
+                            controller: _scrollController,
+                            scrollDirection: Axis.horizontal,
+                            child: Scrollbar(
+                              isAlwaysShown: true,
+                              controller: _scrollController2,
+                              child: SingleChildScrollView(
+                                controller: _scrollController2,
+                                scrollDirection: Axis.vertical,
+                                child: isMobileAndTablet(context)
+                                    ? listProductMovil(
+                                        themeText,
+                                        responsiveApp,
+                                        context,
+                                      )
+                                    : listProduct(
+                                        themeText,
+                                        responsiveApp,
+                                        context,
+                                      ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: resume(themeText, responsiveApp, context),
+                      )
+                    ],
                   ),
                 ],
               ),
-              Wrap(
-                alignment: WrapAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Scrollbar(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SingleChildScrollView(
-                          child: isMobileAndTablet(context)
-                              ? listProductMovil(
-                                  themeText,
-                                  responsiveApp,
-                                  context,
-                                )
-                              : listProduct(
-                                  themeText,
-                                  responsiveApp,
-                                  context,
-                                ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: resume(themeText, responsiveApp, context),
-                  )
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
 //list.count
@@ -94,7 +108,7 @@ class ShoppingCart extends StatelessWidget {
           }
           return Container(
             height: sizeHeight,
-            width: 900,
+            width: 1000,
             color: Colors.white,
             child: ListView.builder(
               itemCount: state.listProducts.length,
@@ -192,6 +206,18 @@ class ShoppingCart extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Container(
+                          child: IconButton(
+                            icon: Icon(Icons.delete),
+                            color: Colors.red,
+                            onPressed: () => context
+                                .read<ShoppingcartCubit>()
+                                .deleteProduct(state.listProducts[index]),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -214,7 +240,7 @@ class ShoppingCart extends StatelessWidget {
         return Material(
           child: Container(
             height: sizeHeight,
-            width: 450,
+            width: 500,
             child: ListView.builder(
               itemCount: state.listProducts.length,
               itemBuilder: (context, index) {
@@ -285,7 +311,8 @@ class ShoppingCart extends StatelessWidget {
                           width: 40,
                           child: Text(
                             'X ' +
-                                state.listProducts[index].product.cantidad.toString(),
+                                state.listProducts[index].product.cantidad
+                                    .toString(),
                             textAlign: TextAlign.center,
                             style: GoogleFonts.roboto(
                               fontSize: 15,
@@ -307,6 +334,18 @@ class ShoppingCart extends StatelessWidget {
                               fontSize: 15,
                               color: Colors.black,
                             ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Container(
+                          child: IconButton(
+                            icon: Icon(Icons.delete),
+                            color: Colors.red,
+                            onPressed: () => context
+                                .read<ShoppingcartCubit>()
+                                .deleteProduct(state.listProducts[index]),
                           ),
                         ),
                       ),
@@ -415,7 +454,9 @@ class ShoppingCart extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NavigationService.navigateTo(Flurorouter.formPreOrderRoute);
+                    },
                     style: ElevatedButton.styleFrom(
                         primary: ColorsApp.colorPaletteGreen,
                         padding: EdgeInsets.all(20)),
