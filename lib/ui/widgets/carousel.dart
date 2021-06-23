@@ -52,7 +52,7 @@ class _BodyState extends State<Body> {
                     : NeverScrollableScrollPhysics(),
                 enlargeCenterPage: true,
                 autoPlay: true,
-                aspectRatio: 18 / 8,
+                aspectRatio: 28 / 8,
                 onPageChanged: (index, reason) {
                   //se utiliza para saber cual imagen esta selecionada
                    setState(() {
