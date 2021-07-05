@@ -14,6 +14,10 @@ class CarouselCubit extends Cubit<CarousellState> {
     emit(state.copyWith(bannersList: list));
   }
 
+  void currentChange(int index){
+    emit(state.copyWith(current: index));
+  }
+
   void getBannersList() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {

@@ -4,9 +4,9 @@ import 'package:veggy/domain/models/category.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class CategoryCard extends StatefulWidget {
-  const CategoryCard({ Key? key, required this.index, this.onPress }) : super(key: key);
+  const CategoryCard({ Key? key, required this.index, required this.onPress }) : super(key: key);
   final int index;
-  final onPress;
+  final VoidCallback onPress;
   @override
   _CategoryCardState createState() => _CategoryCardState();
 }
@@ -19,7 +19,7 @@ class _CategoryCardState extends State<CategoryCard> {
     return Padding(
       padding: responsiveApp.edgeInsetsApp.hrzSmallEdgeInsets,
       child: InkWell(
-        onTap: () => widget.onPress,
+        onTap: widget.onPress,
         child: Container(
           width: responsiveApp.menuContainerWidth,
           height: responsiveApp.menuContainerHeight,

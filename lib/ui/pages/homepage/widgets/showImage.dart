@@ -39,7 +39,7 @@ class _ShowImageState extends State<ShowImage> {
                   ),
                 ),
                 Positioned.fill(
-                  top: 200,
+                  top: 160,
                     child: Center(
                   child: Text('Floristería',
                       style: Theme.of(context).textTheme.headline6!.copyWith(
@@ -70,7 +70,7 @@ class _ShowImageState extends State<ShowImage> {
                   ),
                 ),
                 Positioned.fill(
-                  top: 200,
+                  top: 160,
                     child: Center(
                   child: Text('Miércoles de Feria',
                       style: Theme.of(context).textTheme.headline6!.copyWith(

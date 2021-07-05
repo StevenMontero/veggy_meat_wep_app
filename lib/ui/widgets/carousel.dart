@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:veggy/domain/models/carouselModel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veggy/data/production/repositories/banner_repository.dart';
-import 'package:veggy/ui/pages/homepage/cubits/carousel_cubit.dart';
+import 'package:veggy/ui/pages/homepage/cubits/carouselCubit/carousel_cubit.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:veggy/values/responsiveApp.dart';
 
@@ -54,20 +54,11 @@ class _BodyState extends State<Body> {
                 autoPlay: true,
                 aspectRatio: 28 / 8,
                 onPageChanged: (index, reason) {
+                  context.read<CarouselCubit>().currentChange(index);
                   //se utiliza para saber cual imagen esta selecionada
-                   setState(() {
-                   // BlocBuilder<CarouselCubit, CarousellState>(
-                   //   buildWhen: (previuos, current) => previuos.bannersList != current.bannersList,
-                   //   builder: (context, state) {
-                   //     return Container();
-                   //   },
-                   // );
-                     _current = index;
-                     //for (int i = 0; i < imageSliders.length; i++)
-                     //  imageSliders[i].isSelected=(i == index)?true:false;
-                     //  context.read<CarouselCubit>().isSelectedChange(state.bannersList);
-                  //
-                   });
+                  setState(() {
+                    _current = index;
+                  });
                 }),
             carouselController: _controller,
           ),
@@ -75,16 +66,16 @@ class _BodyState extends State<Body> {
               ? Container()
               : Positioned.fill(
                   child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                      width: responsiveApp.carouselContainerWidth,
-                      height: responsiveApp.carouselContainerHeight,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // se generan los puntitos de cada imagen en el carousel
-                        children: List.generate(
-                            imageSliders.length,
-                            (index) => InkWell(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: responsiveApp.carouselContainerWidth,
+                        height: responsiveApp.carouselContainerHeight,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            // se generan los puntitos de cada imagen en el carousel
+                            children: List.generate(
+                              imageSliders.length,
+                              (index) => InkWell(
                                   splashColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
                                   onTap: () {
@@ -103,15 +94,18 @@ class _BodyState extends State<Body> {
                                             ? Colors.white
                                             : Colors.blueGrey,
                                         shape: BoxShape.circle),
-                                  ),
-                                )),
-                      )),
-                ))
+                                  )),
+                            )),
+                      )))
         ],
       );
     });
   }
 
+  //Se envuelve en un widget cada imagen de firebase para mostrar en el carrousel
+  //y poder generar un borde circular a cada imagen
+  //@ Params : List<CarouselModel> bannersList, lista de imagenes
+  //@ Return : List<Widget>, lista de imagenes envueltas en el widget
   List<Widget> generateImageTiles(List<CarouselModel> bannersList) {
     return bannersList
         .map(

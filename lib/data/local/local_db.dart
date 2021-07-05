@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veggy/domain/models/cart_product.dart';
+import 'package:veggy/domain/models/newProduts.dart';
 import 'package:veggy/domain/models/product_detail.dart';
 
 class LocalBD {
@@ -46,4 +47,24 @@ class LocalBD {
     }
     return null;
   }
+  // Guarda los productos nuevos en el estado-------------
+  void saveNewProductsState(NewProducts product) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encodeMap = jsonEncode(product.toJson());
+    prefs.setString(
+      'stateNewProducts',
+      encodeMap,
+    );
+  }
+  //-------------------------------------------------------
+  // consulta productos nuevos en la base de datos local---
+  Future<NewProducts?> getNewProducts() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('stateNewProducts');
+    if (data != null) {
+      return NewProducts.fromJson(jsonDecode(data));
+    }
+    return null;
+  }
+  //--------------------------------------------------------
 }

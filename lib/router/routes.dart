@@ -16,7 +16,7 @@ class Flurorouter {
   static String detailRoute = '/detail/:category/:id';
   static String homeRoute = '/home';
   static String formPreOrderRoute = '/preorder';
-  static String departmentFilterRoute = '/departmentFilter';
+  static String departmentFilterRoute = '/departmentFilter/:category';
   static String shoppingCartRoute = '/shoppingCart';
 
   static Handler _detailHandler = Handler(handlerFunc: (context, parameters) {
@@ -44,7 +44,10 @@ class Flurorouter {
   static Handler _formPreOrderHandler =
       Handler(handlerFunc: (context, parameters) => FormPreorderPage());
   static Handler _departmentFilterHandler =
-      Handler(handlerFunc: (context, parameters) => DepartmentFilterPage());
+      Handler(handlerFunc: (context, parameters) {
+    final String category = parameters['category']![0];
+    return DepartmentFilterPage();
+  });
   static Handler _shoppingCartHandler =
       Handler(handlerFunc: (context, parameters) => ShoppingCart());
 
