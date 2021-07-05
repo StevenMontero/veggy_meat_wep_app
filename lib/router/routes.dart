@@ -7,7 +7,7 @@ import 'package:veggy/ui/pages/404page/notfound_page.dart';
 import 'package:veggy/ui/pages/detail/detail_page.dart';
 import 'package:veggy/ui/pages/formpage/form_preorder_page.dart';
 import 'package:veggy/ui/pages/homepage/homePage.dart';
-import 'package:veggy/ui/pages/department_filter_page.dart';
+import 'package:veggy/ui/pages/department_filter/department_filter_page.dart';
 import 'package:veggy/ui/pages/shopping%20cart/shoppingCart.dart';
 
 class Flurorouter {
@@ -45,15 +45,19 @@ class Flurorouter {
       Handler(handlerFunc: (context, parameters) => FormPreorderPage());
   static Handler _departmentFilterHandler =
       Handler(handlerFunc: (context, parameters) {
-    final String category = parameters['category']![0];
-    return DepartmentFilterPage();
-  });
+        try {
+          final String category = parameters['category']![0];
+          return DepartmentFilterPage(currentDepartment: category);
+        } catch (e) {
+          return DepartmentFilterPage(currentDepartment: "FRUTASVERDURAS");
+        }
+      });
   static Handler _shoppingCartHandler =
       Handler(handlerFunc: (context, parameters) => ShoppingCart());
 
   static void setupRouter() {
     router.define(rootRoute,
-        handler: _homeHandler, transitionType: TransitionType.none);
+        handler: _departmentFilterHandler, transitionType: TransitionType.none);
     router.define(detailRoute,
         handler: _detailHandler, transitionType: TransitionType.none);
     router.define(formPreOrderRoute,

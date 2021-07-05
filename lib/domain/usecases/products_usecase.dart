@@ -5,7 +5,7 @@ class ProductUseCase {
   final _productsRepo = ProductRepository();
 
   Future<List<ProductApi>> getProductsByCateforie(
-      String category, String startDocumet) {
+      String category, String? startDocumet) {
     return _productsRepo.getProductsByCategory(category, startDocumet);
   }
 
