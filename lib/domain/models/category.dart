@@ -8,15 +8,15 @@ class Category {
 
  List<Category> categories = [
     Category(
-      name: 'ACCESORIOS Y OTROS',
+      name: 'ACCESORIOS',
       image: 'assets/icons/Boton_naranja_inactivo_Accesorios.svg'
     ),
     Category(
-      name: 'CARNE DE CERDO',
+      name: 'CARNICERIA',
       image: 'assets/icons/Boton_naranja_inactivo_carniceria.svg'
     ),
     Category(
-      name: 'FRUTAS',
+      name: 'FRUTASVERDURAS',
       image: 'assets/icons/Boton_naranja_inactivo_Frutas_y_verduras.svg'
     ),
     Category(
@@ -32,7 +32,7 @@ class Category {
       image: 'assets/icons/Boton_naranja_inactivo_Licores_y_cerveza.svg'
     ),
     Category(
-      name: 'PANADERIA',
+      name: 'FRUTASVERDURAS',
       image: 'assets/icons/Boton_naranja_inactivo_panaderia.svg'
     ),
     Category(

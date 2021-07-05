@@ -57,7 +57,7 @@ class Flurorouter {
 
   static void setupRouter() {
     router.define(rootRoute,
-        handler: _departmentFilterHandler, transitionType: TransitionType.none);
+        handler: _homeHandler, transitionType: TransitionType.none);
     router.define(detailRoute,
         handler: _detailHandler, transitionType: TransitionType.none);
     router.define(formPreOrderRoute,
