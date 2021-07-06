@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/domain/models/product_detail.dart';
+import 'package:veggy/router/navigation_key.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veggy/domain/models/product.dart';
@@ -6,7 +8,8 @@ import 'package:veggy/ui/widgets/product_card.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/homepage/cubits/newProductsCubit/new_products_cubit.dart';
-
+//**Esta clase lee desde el state la lista de productos nuevos
+//y los muestra en el home en una tarjeta con su respectiva informacion*/
 class NewProductsView extends StatelessWidget {
   const NewProductsView({Key? key}) : super(key: key);
 
@@ -25,6 +28,7 @@ class _Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //Titulo de la seccion de los productos mas nuevos
           Padding(
             padding: EdgeInsets.only(
                 top: 24, bottom: 14, left: isMobile(context) ? 20 : 0),
@@ -62,7 +66,11 @@ class _Body extends StatelessWidget {
                         code: state.listNewProducts[index].code,
                         category: state.listNewProducts[index].itemGroup,
                         imageUrl: '',
-                        onPressCard: () {},
+                        onPressCard: () {
+                          NavigationService.navigateToWithArguments(
+                          'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',
+                           ProductDetail(product: state.listNewProducts[index], sameListProduct: []));
+                        },
                         onPressButton: () {
                           final _product = Product(
                               codigoArticulo: state.listNewProducts[index].code,

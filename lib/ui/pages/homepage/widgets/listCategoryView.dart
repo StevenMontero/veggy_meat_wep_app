@@ -6,7 +6,8 @@ import 'package:veggy/values/responsiveApp.dart';
 
 // ignore: must_be_immutable
 class ListCategoryView extends StatelessWidget {
-
+//**Esta clase lee desde una lista predefinida en el proyecto las categorias
+//o departamentos del supermercado para mostrar en la pagina de inicio.*/
   ResponsiveApp? responsiveApp;
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class ListCategoryView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        //Titulo de la seccion de las categorias.
         Padding(
           padding: responsiveApp!.edgeInsetsApp.onlyExLargeTopEdgeInsets,
           child: Text(
@@ -24,6 +26,7 @@ class ListCategoryView extends StatelessWidget {
                 .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
+        //Grid con las categorias.  
         Padding(
           padding: responsiveApp!.edgeInsetsApp.allExLargeEdgeInsets,
           child: GridView.extent(
@@ -33,10 +36,8 @@ class ListCategoryView extends StatelessWidget {
                 categories.length,
                 (index) => CategoryCard(
                       index: index,
-                      onPress: () {
-                        print('banano');
-                        NavigationService.navigateTo('departmentFilter/${categories[index].name}');
-                        
+                      onPress: () {                 
+                        NavigationService.navigateTo('departmentFilter/${categories[index].name}');           
                       },
                     )),
           ),

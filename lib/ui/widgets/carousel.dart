@@ -7,6 +7,7 @@ import 'package:veggy/ui/pages/homepage/cubits/carouselCubit/carousel_cubit.dart
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:veggy/values/responsiveApp.dart';
 
+//** Carrousel de la página de inicio*/
 class Carousel extends StatefulWidget {
   @override
   _CarouselState createState() => _CarouselState();

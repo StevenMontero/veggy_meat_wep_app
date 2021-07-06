@@ -1,5 +1,6 @@
 part of 'carousel_cubit.dart';
-
+//** Carrousel state parte del patro cubit, contienen la lista 
+//que se utiliza para cargar las imagenes del carrousel y el status*/
 class CarousellState extends Equatable {
   final List<CarouselModel> bannersList;
   final int current;
@@ -10,7 +11,7 @@ class CarousellState extends Equatable {
     this.status = FormzStatus.pure,
     this.current = 0,
   });
-
+  //**Método que recibe recibe la lista de las imagenes y setea la lista del state */
   CarousellState copyWith({
      List<CarouselModel>? bannersList,
      FormzStatus? status,
