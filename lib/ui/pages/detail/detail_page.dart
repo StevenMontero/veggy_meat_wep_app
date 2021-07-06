@@ -7,6 +7,7 @@ import 'package:veggy/domain/models/product_api.dart';
 import 'package:veggy/domain/models/product_detail.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/detail/cubit/counterquantity_cubit.dart';
+import 'package:veggy/ui/widgets/bottomBar.dart';
 import 'package:veggy/ui/widgets/counter_buttons.dart';
 import 'package:veggy/ui/widgets/custom_inputs.dart';
 import 'package:veggy/ui/widgets/product_card.dart';
@@ -166,7 +167,8 @@ class Body extends StatelessWidget {
             ),
             SizedBox(
               height: 24,
-            )
+            ),
+            isDesktop(context) ? BottomBar() : Container(),
           ],
         ),
       ),
@@ -296,7 +298,8 @@ class Body extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.cyan, minimumSize: Size(700, 50)),
                       onPressed: () {
-                        final double montoIva = state.productApi.listPrice * (state.productApi.misc1 / 100);
+                        final double montoIva = state.productApi.listPrice *
+                            (state.productApi.misc1 / 100);
                         final _product = Product(
                             codigoArticulo: state.productApi.code,
                             cantidad: state.quantityUnits,

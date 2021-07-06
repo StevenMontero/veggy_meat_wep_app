@@ -9,13 +9,14 @@ part 'new_products_state.dart';
 class NewProductsCubit extends Cubit<NewProductState> {
   NewProductsCubit() : super(NewProductState());
   final _localDb = ProductSateLocalUseCase();
-
+  
+  //** */
   void getNewProducts() async {
     final _productSateLocal = await _localDb.getNewProductStateLocalDB();
     emit(state.copyWith(
           listNewProducts: _productSateLocal!.listNewProducts));
  }
-//
+  //** */
   void loadNewProducts(NewProducts productApi) async {
     _localDb.saveNewProductStateLocalDB(productApi);
     emit(state.copyWith(

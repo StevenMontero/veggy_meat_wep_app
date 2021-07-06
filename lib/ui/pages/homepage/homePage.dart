@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/util/sizingInfo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veggy/ui/widgets/carousel.dart';
+import 'package:veggy/ui/widgets/bottomBar.dart';
+import 'package:veggy/values/responsiveApp.dart';
 import 'package:veggy/domain/models/newProduts.dart';
 import 'package:veggy/domain/models/product_api.dart';
-import 'package:veggy/ui/pages/homepage/widgets/newProductsView.dart';
 import 'package:veggy/ui/pages/homepage/widgets/showImage.dart';
-import 'package:veggy/ui/widgets/bottomBar.dart';
-import 'package:veggy/ui/widgets/carousel.dart';
-import 'package:veggy/util/sizingInfo.dart';
-import 'package:veggy/values/responsiveApp.dart';
+import 'package:veggy/ui/pages/homepage/widgets/newProductsView.dart';
 import 'package:veggy/ui/pages/homepage/widgets/listCategoryView.dart';
 import 'package:veggy/ui/pages/homepage/cubits/newProductsCubit/new_products_cubit.dart';
 
@@ -34,8 +34,6 @@ class _HomePageState extends State<HomePage> {
             NewProductsView(),
             SizedBox(height: 20,),
             isDesktop(context)? BottomBar(): Container(),
-            //Body(responsiveApp!),
-            //GridProductWidget(),
           ],
         ),
       ),

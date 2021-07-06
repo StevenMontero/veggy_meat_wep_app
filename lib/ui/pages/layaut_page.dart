@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/widgets/navbar.dart';
-import 'package:veggy/ui/widgets/bottomBar.dart';
-import 'package:veggy/ui/widgets/navbar.dart';
-import 'package:veggy/util/sizingInfo.dart';
 
 class LayautPage extends StatelessWidget {
   LayautPage(this.bodyWidget) : super();

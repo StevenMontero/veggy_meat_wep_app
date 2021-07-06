@@ -4,7 +4,7 @@ import 'package:veggy/ui/widgets/email_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BottomBar extends StatelessWidget implements PreferredSizeWidget {
-
+//** Futter de la página web*/
   @override
   Widget build(BuildContext context) {
     return Container(
