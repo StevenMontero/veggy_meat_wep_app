@@ -155,7 +155,7 @@ class Body extends StatelessWidget {
                                           isGranel:
                                               state.productApi.itemGroup ==
                                                   'GRANEL',
-                                          name: state.productApi.name + '2'));
+                                          name: state.productApi.name));
                                 });
                           },
                         );
