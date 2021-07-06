@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:veggy/domain/models/preorder.dart';
 import 'package:veggy/util/regularExpressions/regular_expressions_models.dart';
@@ -32,14 +33,8 @@ class FormCubit extends Cubit<FormCubitState> {
     final phone = NumberPhone.dirty(value);
     emit(state.copyWith(
       phone: phone,
-      status: Formz.validate([
-        phone,
-        state.addres,
-        state.email,
-        state.phone,
-        state.email,
-        state.id
-      ]),
+      status: Formz.validate(
+          [phone, state.addres, state.email, state.email, state.id]),
     ));
   }
 
@@ -47,14 +42,8 @@ class FormCubit extends Cubit<FormCubitState> {
     final addres = AddrresForm.dirty(value);
     emit(state.copyWith(
       addres: addres,
-      status: Formz.validate([
-        state.phone,
-        addres,
-        state.email,
-        state.phone,
-        state.email,
-        state.id
-      ]),
+      status: Formz.validate(
+          [state.phone, addres, state.email, state.email, state.id]),
     ));
   }
 
@@ -62,18 +51,12 @@ class FormCubit extends Cubit<FormCubitState> {
     final id = NumberNoEmpty.dirty(value);
     emit(state.copyWith(
       id: id,
-      status: Formz.validate([
-        state.phone,
-        state.addres,
-        state.email,
-        state.phone,
-        state.email,
-        id
-      ]),
+      status: Formz.validate(
+          [state.phone, state.addres, state.email, state.email, id]),
     ));
   }
 
-  void sendPreOrder(List<CartProduct> listProduct) {
+  void sendPreOrder(List<CartProduct> listProduct) async {
     if (state.status == FormzStatus.invalid) return;
     final preOrder = PreOrder(
       bodega: '',
@@ -84,12 +67,21 @@ class FormCubit extends Cubit<FormCubitState> {
       nombreCliente: state.userNameComplete.value,
       codigoCliente: '',
       fechaHora: DateTime.now().toString(),
-      notas: '',
+      notas: 'Numero de telefono: +506 ${state.phone.value}',
       ordenCompra: '',
       tipoCedula: 'i',
     );
     listProduct.forEach((product) {
       preOrder.detalles.add(product.product);
     });
+    final message =
+        'Buenos días. He realizado una compra en la página de Veggy. Nombre: ${state.userNameComplete.value} Cédula: ${state.id.value} Teléfono: ${state.phone.value} Fecha: ${DateTime.now().toString()} Por favor confirmar si recibieron el pedido.';
+    await canLaunch(_url(state.phone.value, message))
+        ? await launch(_url(state.phone.value, message))
+        : print('Could not launch $_url');
+  }
+
+  String _url(String phone, String message) {
+    return "https://api.whatsapp.com/send?phone=${'+506 ' + phone}&text=$message"; // new line
   }
 }

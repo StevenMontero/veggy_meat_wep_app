@@ -55,7 +55,7 @@ class _MobileBody extends StatelessWidget {
                 SizedBox(height: 24),
                 Container(
                   width: double.infinity,
-                  height: 450,
+                  height: 550,
                   child: child,
                 ),
               ],
@@ -94,7 +94,7 @@ class _DesktopBody extends StatelessWidget {
             height: double.infinity,
             child: Container(
               width: 500,
-              height: 610,
+              height: 670,
               child: Card(
                 child: Column(
                   children: [

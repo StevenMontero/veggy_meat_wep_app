@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/formpage/formCubit/form_cubit.dart';
+import 'package:veggy/ui/pages/shopping%20cart/shoppingCart.dart';
 import 'package:veggy/ui/widgets/custom_inputs.dart';
 import 'package:veggy/ui/widgets/outline_custom_buttom.dart';
 
@@ -46,7 +48,7 @@ class FormPreOrder extends StatelessWidget {
                     builder: (context, state) {
                       return TextFormField(
                           onChanged: (value) =>
-                              context.read<FormCubit>().userNameChanged(value),
+                              context.read<FormCubit>().idChanged(value),
                           style: TextStyle(color: Colors.black),
                           decoration: CustomInputs.loginInputDecoration(
                               errorText: state.userNameComplete.invalid
@@ -101,7 +103,6 @@ class FormPreOrder extends StatelessWidget {
                       return TextFormField(
                         onChanged: (value) =>
                             context.read<FormCubit>().phoneChanged(value),
-                        obscureText: true,
                         style: TextStyle(color: Colors.black),
                         decoration: CustomInputs.loginInputDecoration(
                             errorText: state.phone.invalid
@@ -119,8 +120,15 @@ class FormPreOrder extends StatelessWidget {
                         previous.status != current.status,
                     builder: (context, state) {
                       return CustomOutlinedButton(
-                        onPressed:
-                            state.status == FormzStatus.valid ? () {} : null,
+                        onPressed: state.status == FormzStatus.valid
+                            ? () {
+                                final list = context
+                                    .read<ShoppingcartCubit>()
+                                    .state
+                                    .listProducts;
+                                context.read<FormCubit>().sendPreOrder(list);
+                              }
+                            : null,
                         text: 'Enviar orden',
                       );
                     },
