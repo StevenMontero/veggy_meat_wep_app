@@ -296,19 +296,20 @@ class Body extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.cyan, minimumSize: Size(700, 50)),
                       onPressed: () {
+                        final double montoIva = state.productApi.listPrice * (state.productApi.misc1 / 100);
                         final _product = Product(
                             codigoArticulo: state.productApi.code,
                             cantidad: state.quantityUnits,
                             notas: '',
                             envioParcial: '',
-                            precioSinIva: 0,
-                            montoIva: 0,
-                            porcentajeIva: 0,
-                            codigoTarifa: 'codigoTarifa',
-                            precioIva: 0,
+                            precioSinIva: state.productApi.listPrice,
+                            montoIva: montoIva,
+                            porcentajeIva: state.productApi.misc1.toDouble(),
+                            codigoTarifa: '',
+                            precioIva: state.productApi.listPrice + montoIva,
                             porcentajeDescuento: 0,
                             montoDescuento: 0,
-                            bonificacion: 'bonificacion',
+                            bonificacion: '',
                             codImpuesto: state.productApi.misc3);
                         context.read<ShoppingcartCubit>().addProduct(
                             CartProduct(
