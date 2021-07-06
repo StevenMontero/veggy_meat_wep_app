@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veggy/domain/models/product_api.dart';
 import 'package:veggy/domain/models/product_detail.dart';
 import 'package:veggy/router/navigation_key.dart';
+import 'package:veggy/router/routes.dart';
 
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 
@@ -14,10 +15,7 @@ class IconCartShoppingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        final a = ProductApi(code: '764009027291', itemGroup: 'ABARROTES',name: 'KELLOGGS cereales special k caja 500 gr',listPrice: 1500,);
-        final b = ProductDetail(product: a, sameListProduct: [a,a,a]);
-        NavigationService.navigateToWithArguments(
-            'detail/${a.itemGroup}/${a.code}', b);
+        NavigationService.navigateTo(Flurorouter.shoppingCartRoute);
       },
       icon: Badge(
         position: BadgePosition.topEnd(top: -6, end: -3),

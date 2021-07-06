@@ -26,8 +26,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       onPressed: () {},
                       child: WebsafeSvg.asset(
                         'assets/icons/LOGO_VEGGY_PRINCIPAL.svg',
-                        height: 40,
-                        width: 40,
+                        height: 70,
+                        width: 70,
                       )),
                 ),
 
