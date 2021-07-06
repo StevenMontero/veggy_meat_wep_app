@@ -44,7 +44,7 @@ class FormPreOrder extends StatelessWidget {
                   //cedula
                   BlocBuilder<FormCubit, FormCubitState>(
                     buildWhen: (previous, current) =>
-                        previous.userNameComplete != current.userNameComplete,
+                        previous.id != current.id,
                     builder: (context, state) {
                       return TextFormField(
                           onChanged: (value) =>
