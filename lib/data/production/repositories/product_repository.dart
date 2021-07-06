@@ -21,6 +21,7 @@ class ProductRepository {
           await _productsCategoryRef.doc(startDocumentId).get();
       _resul = await _productsCategoryRef
           .startAfterDocument(_startDocument)
+          .where('active', isEqualTo: '1')
           .limit(10)
           .get();
     } else {

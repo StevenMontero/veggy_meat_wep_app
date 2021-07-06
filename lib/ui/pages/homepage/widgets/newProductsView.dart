@@ -8,6 +8,7 @@ import 'package:veggy/ui/widgets/product_card.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/homepage/cubits/newProductsCubit/new_products_cubit.dart';
+
 //**Esta clase lee desde el state la lista de productos nuevos
 //y los muestra en el home en una tarjeta con su respectiva informacion*/
 class NewProductsView extends StatelessWidget {
@@ -20,7 +21,6 @@ class NewProductsView extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -68,30 +68,41 @@ class _Body extends StatelessWidget {
                         imageUrl: '',
                         onPressCard: () {
                           NavigationService.navigateToWithArguments(
-                          'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',
-                           ProductDetail(product: state.listNewProducts[index], sameListProduct: []));
+                              'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',
+                              ProductDetail(
+                                  product: state.listNewProducts[index],
+                                  sameListProduct: []));
                         },
                         onPressButton: () {
+                          final double montoIva =
+                              state.listNewProducts[index].listPrice *
+                                  (state.listNewProducts[index].misc1 / 100);
                           final _product = Product(
                               codigoArticulo: state.listNewProducts[index].code,
                               cantidad: 1,
                               notas: '',
                               envioParcial: '',
-                              precioSinIva: 0,
-                              montoIva: 0,
-                              porcentajeIva: 0,
-                              codigoTarifa: 'codigoTarifa',
-                              precioIva: 0,
+                              precioSinIva:
+                                  state.listNewProducts[index].listPrice,
+                              montoIva: montoIva,
+                              porcentajeIva:
+                                  state.listNewProducts[index].misc1.toDouble(),
+                              codigoTarifa: '',
+                              precioIva:
+                                  state.listNewProducts[index].listPrice +
+                                      montoIva,
                               porcentajeDescuento: 0,
                               montoDescuento: 0,
-                              bonificacion: 'bonificacion',
+                              bonificacion: '',
                               codImpuesto: state.listNewProducts[index].misc3);
                           context.read<ShoppingcartCubit>().addProduct(
                               CartProduct(
                                   product: _product,
                                   isGranel:
-                                      state.listNewProducts[index].itemGroup == 'GRANEL',
-                                  name: state.listNewProducts[index].name + '2'));
+                                      state.listNewProducts[index].itemGroup ==
+                                          'GRANEL',
+                                  name:
+                                      state.listNewProducts[index].name + '2'));
                         });
                   },
                 );

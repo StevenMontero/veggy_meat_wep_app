@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:veggy/ui/pages/formpage/formCubit/form_cubit.dart';
 import 'package:veggy/ui/widgets/custom_inputs.dart';
 import 'package:veggy/ui/widgets/outline_custom_buttom.dart';
@@ -38,7 +39,25 @@ class FormPreOrder extends StatelessWidget {
                   ),
 
                   SizedBox(height: 20),
-
+                  //cedula
+                  BlocBuilder<FormCubit, FormCubitState>(
+                    buildWhen: (previous, current) =>
+                        previous.userNameComplete != current.userNameComplete,
+                    builder: (context, state) {
+                      return TextFormField(
+                          onChanged: (value) =>
+                              context.read<FormCubit>().userNameChanged(value),
+                          style: TextStyle(color: Colors.black),
+                          decoration: CustomInputs.loginInputDecoration(
+                              errorText: state.userNameComplete.invalid
+                                  ? 'Solo se pueden ingresar numeros'
+                                  : null,
+                              hint: 'Ingrese su numero de cedula',
+                              label: 'Cedula',
+                              icon: Icons.contact_mail_rounded));
+                    },
+                  ),
+                  SizedBox(height: 20),
                   // Password
                   BlocBuilder<FormCubit, FormCubitState>(
                     buildWhen: (previous, current) =>
@@ -95,9 +114,16 @@ class FormPreOrder extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 24),
-                  CustomOutlinedButton(
-                    onPressed: () {},
-                    text: 'Enviar orden',
+                  BlocBuilder<FormCubit, FormCubitState>(
+                    buildWhen: (previous, current) =>
+                        previous.status != current.status,
+                    builder: (context, state) {
+                      return CustomOutlinedButton(
+                        onPressed:
+                            state.status == FormzStatus.valid ? () {} : null,
+                        text: 'Enviar orden',
+                      );
+                    },
                   ),
                   SizedBox(height: 24),
                 ],

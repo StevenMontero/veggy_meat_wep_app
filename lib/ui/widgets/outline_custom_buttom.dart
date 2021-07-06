@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback? onPressed;
   final String text;
   final Color color;
   final bool isFilled;
@@ -9,7 +9,7 @@ class CustomOutlinedButton extends StatelessWidget {
 
   const CustomOutlinedButton(
       {Key? key,
-      required this.onPressed,
+      this.onPressed,
       required this.text,
       this.color = Colors.blue,
       this.isFilled = false,
@@ -19,7 +19,6 @@ class CustomOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-
         style: ButtonStyle(
           shape: MaterialStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
@@ -27,7 +26,7 @@ class CustomOutlinedButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(
               isFilled ? color.withOpacity(0.3) : Colors.transparent),
         ),
-        onPressed: () => onPressed(),
+        onPressed: onPressed,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Text(

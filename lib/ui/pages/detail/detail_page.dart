@@ -5,6 +5,7 @@ import 'package:veggy/domain/models/cart_product.dart';
 import 'package:veggy/domain/models/product.dart';
 import 'package:veggy/domain/models/product_api.dart';
 import 'package:veggy/domain/models/product_detail.dart';
+import 'package:veggy/router/navigation_key.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/detail/cubit/counterquantity_cubit.dart';
 import 'package:veggy/ui/widgets/bottomBar.dart';
@@ -131,22 +132,37 @@ class Body extends StatelessWidget {
                                 category:
                                     state.listSameProduct[index].itemGroup,
                                 imageUrl: '',
-                                onPressCard: () {},
+                                onPressCard: () {
+                                  NavigationService.navigateToWithArguments(
+                                      'detail/${state.listSameProduct[index].itemGroup}/${state.listSameProduct[index].code}',
+                                      ProductDetail(
+                                          product: state.listSameProduct[index],
+                                          sameListProduct: []));
+                                },
                                 onPressButton: () {
+                                  final double montoIva =
+                                      state.listSameProduct[index].listPrice *
+                                          (state.listSameProduct[index].misc1 /
+                                              100);
                                   final _product = Product(
                                       codigoArticulo:
                                           state.listSameProduct[index].code,
                                       cantidad: 1,
                                       notas: '',
                                       envioParcial: '',
-                                      precioSinIva: 0,
-                                      montoIva: 0,
-                                      porcentajeIva: 0,
-                                      codigoTarifa: 'codigoTarifa',
-                                      precioIva: 0,
+                                      precioSinIva: state
+                                          .listSameProduct[index].listPrice,
+                                      montoIva: montoIva,
+                                      porcentajeIva: state
+                                          .listSameProduct[index].misc1
+                                          .toDouble(),
+                                      codigoTarifa: '',
+                                      precioIva: state.listSameProduct[index]
+                                              .listPrice +
+                                          montoIva,
                                       porcentajeDescuento: 0,
                                       montoDescuento: 0,
-                                      bonificacion: 'bonificacion',
+                                      bonificacion: '',
                                       codImpuesto:
                                           state.listSameProduct[index].misc3);
                                   context.read<ShoppingcartCubit>().addProduct(
@@ -244,7 +260,8 @@ class Body extends StatelessWidget {
                 SizedBox(
                   width: 5.0,
                 ),
-                Text('₡4000', style: themeText.headline6),
+                Text('₡ ${product.listPrice} sin IVA',
+                    style: themeText.headline6),
               ],
             ),
           ),

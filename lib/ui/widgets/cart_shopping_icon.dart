@@ -1,8 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veggy/domain/models/product_api.dart';
-import 'package:veggy/domain/models/product_detail.dart';
 import 'package:veggy/router/navigation_key.dart';
 import 'package:veggy/router/routes.dart';
 
