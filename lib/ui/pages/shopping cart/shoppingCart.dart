@@ -128,7 +128,7 @@ class ShoppingCart extends StatelessWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 50),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Container(
                           height: 100,
                           width: 100,
@@ -139,7 +139,7 @@ class ShoppingCart extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 50),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Container(
                           color: Colors.white,
                           height: 60,
@@ -209,8 +209,11 @@ class ShoppingCart extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Container(
+                          height: 50,
+                          width: 50,
+                          alignment: Alignment.center,
                           child: IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: Icon(Icons.delete, size: 40),
                             color: Colors.red,
                             onPressed: () => context
                                 .read<ShoppingcartCubit>()
@@ -455,7 +458,8 @@ class ShoppingCart extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 child: ElevatedButton(
                     onPressed: () {
-                      NavigationService.navigateTo(Flurorouter.formPreOrderRoute);
+                      NavigationService.navigateTo(
+                          Flurorouter.formPreOrderRoute);
                     },
                     style: ElevatedButton.styleFrom(
                         primary: ColorsApp.colorPaletteGreen,
