@@ -37,9 +37,10 @@ class ProductCard extends StatelessWidget {
               height: 10,
             ),
             Expanded(
-                child: Image.network(
-              'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
-            )),
+                child: Image.asset(
+                  "assets/images/imagen_no_disponible.png",
+                ),
+            ),
             SizedBox(
               height: 10,
             ),
