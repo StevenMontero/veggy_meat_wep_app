@@ -15,6 +15,9 @@ class ShoppingCart extends StatelessWidget {
   final _scrollController = ScrollController();
   final _scrollController2 = ScrollController();
   final _scrollController3 = ScrollController();
+  var impuestos;
+  var subTotal;
+  var total;
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
@@ -116,7 +119,13 @@ class ShoppingCart extends StatelessWidget {
                 var precioxUnidad =
                     state.listProducts[index].product.precioIva *
                         state.listProducts[index].product.cantidad;
-
+                /*
+                impuestos =
+                    impuestos + state.listProducts[index].product.montoIva;
+                subTotal =
+                    subTotal + state.listProducts[index].product.precioSinIva;
+                total = total + state.listProducts[index].product.precioIva;
+                */
                 return Container(
                   height: 150,
                   width: 800,
@@ -250,6 +259,13 @@ class ShoppingCart extends StatelessWidget {
                 var precioxUnidad =
                     state.listProducts[index].product.precioIva *
                         state.listProducts[index].product.cantidad;
+                /*
+                impuestos =
+                    impuestos + state.listProducts[index].product.montoIva;
+                subTotal =
+                    subTotal + state.listProducts[index].product.precioSinIva;
+                total = total + state.listProducts[index].product.precioIva;
+                */
                 return Container(
                   height: 150,
                   width: 450,
@@ -379,7 +395,7 @@ class ShoppingCart extends StatelessWidget {
                 elevation: 0,
                 child: ListTile(
                   title: Text(
-                    'Resumen',
+                    'Detalle de compra',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(
                       fontSize: 30,
@@ -393,7 +409,7 @@ class ShoppingCart extends StatelessWidget {
                 elevation: 0,
                 child: ListTile(
                   title: Text(
-                    'Items',
+                    'Impuestos',
                     textAlign: TextAlign.left,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -401,7 +417,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    state.listProducts.length.toString(),
+                    /*impuestos.toString()*/'+1',
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -415,7 +431,7 @@ class ShoppingCart extends StatelessWidget {
                 elevation: 0,
                 child: ListTile(
                   title: Text(
-                    'Envio',
+                    'SubTotal',
                     textAlign: TextAlign.left,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -423,7 +439,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    '1500',
+                    /*subTotal.toString()*/ '+2',
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -445,7 +461,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    '10 000',
+                    /*total.toString()*/ '+3',
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -465,7 +481,7 @@ class ShoppingCart extends StatelessWidget {
                         primary: ColorsApp.colorPaletteGreen,
                         padding: EdgeInsets.all(20)),
                     child: Text(
-                      'Resumen',
+                      'Finalizar compra',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.roboto(
                           fontSize: 14,
