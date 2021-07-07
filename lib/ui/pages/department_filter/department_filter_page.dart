@@ -35,6 +35,53 @@ class MyMainContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    switch(currentDepartment) {
+      case "FRUTASVERDURAS": {
+        _drawerSelection = DrawerSelection.frutasverduras;
+      }
+      break;
+
+      case "CARNICERIA": {
+        _drawerSelection = DrawerSelection.carniceria;
+      }
+      break;
+
+      case "GRANEL": {
+        _drawerSelection = DrawerSelection.granel;
+      }
+      break;
+
+      case "ABARROTES": {
+        _drawerSelection = DrawerSelection.abarrotes;
+      }
+      break;
+
+      case "LICORES": {
+        _drawerSelection = DrawerSelection.licores;
+      }
+      break;
+
+      case "JARDINERIA": {
+        _drawerSelection = DrawerSelection.jardineria;
+      }
+      break;
+
+      case "ACCESORIOS": {
+        _drawerSelection = DrawerSelection.accesorios;
+      }
+      break;
+
+      case "PANADERIA": {
+        _drawerSelection = DrawerSelection.panaderia;
+      }
+      break;
+
+      default: {
+        _drawerSelection = DrawerSelection.frutasverduras;
+      }
+      break;
+    }
+
     return BlocBuilder<DepartmentFilterCubit, DepartmentFilterState>(
     builder: (context, state) {
       myController.addListener(() {

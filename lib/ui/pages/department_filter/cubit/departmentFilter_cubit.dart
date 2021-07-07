@@ -19,7 +19,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
     List<ProductApi> tempList = [];
     List<String> subCodes = [];
-    if (!state.lastElements.isEmpty){
+    if (!state.lastElements.isNotEmpty){
       subCodes = state.lastElements.split(":");
     }
 
