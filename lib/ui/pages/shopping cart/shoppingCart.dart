@@ -15,9 +15,9 @@ class ShoppingCart extends StatelessWidget {
   final _scrollController = ScrollController();
   final _scrollController2 = ScrollController();
   final _scrollController3 = ScrollController();
-  var impuestos;
-  var subTotal;
-  var total;
+  double impuestos = 0;
+  double subTotal = 0;
+  double total = 0;
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
@@ -119,13 +119,13 @@ class ShoppingCart extends StatelessWidget {
                 var precioxUnidad =
                     state.listProducts[index].product.precioIva *
                         state.listProducts[index].product.cantidad;
-                /*
+
                 impuestos =
                     impuestos + state.listProducts[index].product.montoIva;
                 subTotal =
                     subTotal + state.listProducts[index].product.precioSinIva;
                 total = total + state.listProducts[index].product.precioIva;
-                */
+
                 return Container(
                   height: 150,
                   width: 800,
@@ -224,9 +224,21 @@ class ShoppingCart extends StatelessWidget {
                           child: IconButton(
                             icon: Icon(Icons.delete, size: 40),
                             color: Colors.red,
-                            onPressed: () => context
-                                .read<ShoppingcartCubit>()
-                                .deleteProduct(state.listProducts[index]),
+                            onPressed: () {
+                              if (total > 0) {
+                                total = total -
+                                    state.listProducts[index].product.precioIva;
+                                subTotal = subTotal -
+                                    state.listProducts[index].product
+                                        .precioSinIva;
+                                impuestos = impuestos -
+                                    state.listProducts[index].product.montoIva;
+                              }
+
+                              context
+                                  .read<ShoppingcartCubit>()
+                                  .deleteProduct(state.listProducts[index]);
+                            },
                           ),
                         ),
                       ),
@@ -259,13 +271,13 @@ class ShoppingCart extends StatelessWidget {
                 var precioxUnidad =
                     state.listProducts[index].product.precioIva *
                         state.listProducts[index].product.cantidad;
-                /*
+
                 impuestos =
                     impuestos + state.listProducts[index].product.montoIva;
                 subTotal =
                     subTotal + state.listProducts[index].product.precioSinIva;
                 total = total + state.listProducts[index].product.precioIva;
-                */
+
                 return Container(
                   height: 150,
                   width: 450,
@@ -362,9 +374,21 @@ class ShoppingCart extends StatelessWidget {
                           child: IconButton(
                             icon: Icon(Icons.delete),
                             color: Colors.red,
-                            onPressed: () => context
-                                .read<ShoppingcartCubit>()
-                                .deleteProduct(state.listProducts[index]),
+                            onPressed: () {
+                              if (total > 0) {
+                                total = total -
+                                    state.listProducts[index].product.precioIva;
+                                subTotal = subTotal -
+                                    state.listProducts[index].product
+                                        .precioSinIva;
+                                impuestos = impuestos -
+                                    state.listProducts[index].product.montoIva;
+                              }
+
+                              context
+                                  .read<ShoppingcartCubit>()
+                                  .deleteProduct(state.listProducts[index]);
+                            },
                           ),
                         ),
                       ),
@@ -417,7 +441,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    /*impuestos.toString()*/'+1',
+                    impuestos.toStringAsFixed(2),
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -439,7 +463,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    /*subTotal.toString()*/ '+2',
+                    subTotal.toStringAsFixed(2),
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -461,7 +485,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    /*total.toString()*/ '+3',
+                    total.toStringAsFixed(2),
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,

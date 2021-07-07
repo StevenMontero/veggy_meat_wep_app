@@ -76,12 +76,12 @@ class FormCubit extends Cubit<FormCubitState> {
     });
     final message =
         'Buenos días. He realizado una compra en la página de Veggy. Nombre: ${state.userNameComplete.value} Cédula: ${state.id.value} Teléfono: ${state.phone.value} Fecha: ${DateTime.now().toString()} Por favor confirmar si recibieron el pedido.';
-    await canLaunch(_url(state.phone.value, message))
-        ? await launch(_url(state.phone.value, message))
+    await canLaunch(_url(message))
+        ? await launch(_url(message))
         : print('Could not launch $_url');
   }
 
-  String _url(String phone, String message) {
-    return "https://api.whatsapp.com/send?phone=${'+506 ' + phone}&text=$message"; // new line
+  String _url( String message) {
+    return "https://api.whatsapp.com/send?phone=${'+506 ' + '89395313'}&text=$message"; // new line
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/router/navigation_key.dart';
+import 'package:veggy/router/routes.dart';
 import 'package:veggy/ui/widgets/cart_shopping_icon.dart';
 import 'package:veggy/ui/widgets/search_text.dart';
 import 'package:veggy/util/sizingInfo.dart';
@@ -19,11 +21,15 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                     Icons.menu_outlined,
                     color: Colors.white,
                   ),
-                  onPressed: () {})
+                  onPressed: () {
+                    NavigationService.navigateTo(Flurorouter.homeRoute);
+                  })
               : Padding(
                   padding: const EdgeInsets.only(left: 24),
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        NavigationService.navigateTo(Flurorouter.homeRoute);
+                      },
                       child: WebsafeSvg.asset(
                         'assets/icons/LOGO_VEGGY_PRINCIPAL.svg',
                         height: 70,
