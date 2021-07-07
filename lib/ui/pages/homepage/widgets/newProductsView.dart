@@ -21,6 +21,7 @@ class NewProductsView extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
+  final ScrollController scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -55,56 +56,67 @@ class _Body extends StatelessWidget {
               buildWhen: (previous, current) =>
                   previous.listNewProducts != current.listNewProducts,
               builder: (context, state) {
-                return ListView.builder(
-                  itemCount: state.listNewProducts.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                        title: state.listNewProducts[index].name,
-                        price:
-                            state.listNewProducts[index].listPrice.toString(),
-                        code: state.listNewProducts[index].code,
-                        category: state.listNewProducts[index].itemGroup,
-                        imageUrl: '',
-                        onPressCard: () {
-                          NavigationService.navigateToWithArguments(
-                              'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',
-                              ProductDetail(
-                                  product: state.listNewProducts[index],
-                                  sameListProduct: []));
-                        },
-                        onPressButton: () {
-                          final double montoIva =
-                              state.listNewProducts[index].listPrice *
-                                  (state.listNewProducts[index].misc1 / 100);
-                          final _product = Product(
-                              codigoArticulo: state.listNewProducts[index].code,
-                              cantidad: 1,
-                              notas: '',
-                              envioParcial: '',
-                              precioSinIva:
-                                  state.listNewProducts[index].listPrice,
-                              montoIva: montoIva,
-                              porcentajeIva:
-                                  state.listNewProducts[index].misc1.toDouble(),
-                              codigoTarifa: '',
-                              precioIva:
-                                  state.listNewProducts[index].listPrice +
-                                      montoIva,
-                              porcentajeDescuento: 0,
-                              montoDescuento: 0,
-                              bonificacion: '',
-                              codImpuesto: state.listNewProducts[index].misc3);
-                          context.read<ShoppingcartCubit>().addProduct(
-                              CartProduct(
-                                  product: _product,
-                                  isGranel:
-                                      state.listNewProducts[index].itemGroup ==
-                                          'GRANEL',
-                                  name:
-                                      state.listNewProducts[index].name + '2'));
-                        });
-                  },
+                scrollController.addListener(() {
+                  if (scrollController.position.pixels ==
+                      scrollController.position.maxScrollExtent) {
+                    context.read<NewProductsCubit>().addMore();
+                  }
+                });
+                return Scrollbar(
+                  isAlwaysShown: true,
+                  controller: scrollController,
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: state.listNewProducts.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return ProductCard(
+                          title: state.listNewProducts[index].name,
+                          price:
+                              state.listNewProducts[index].listPrice.toString(),
+                          code: state.listNewProducts[index].code,
+                          category: state.listNewProducts[index].itemGroup,
+                          imageUrl: '',
+                          onPressCard: () {
+                            NavigationService.navigateToWithArguments(
+                                'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',
+                                ProductDetail(
+                                    product: state.listNewProducts[index],
+                                    sameListProduct: []));
+                          },
+                          onPressButton: () {
+                            final double montoIva =
+                                state.listNewProducts[index].listPrice *
+                                    (state.listNewProducts[index].misc1 / 100);
+                            final _product = Product(
+                                codigoArticulo: state.listNewProducts[index].code,
+                                cantidad: 1,
+                                notas: '',
+                                envioParcial: '',
+                                precioSinIva:
+                                    state.listNewProducts[index].listPrice,
+                                montoIva: montoIva,
+                                porcentajeIva:
+                                    state.listNewProducts[index].misc1.toDouble(),
+                                codigoTarifa: '',
+                                precioIva:
+                                    state.listNewProducts[index].listPrice +
+                                        montoIva,
+                                porcentajeDescuento: 0,
+                                montoDescuento: 0,
+                                bonificacion: '',
+                                codImpuesto: state.listNewProducts[index].misc3);
+                            context.read<ShoppingcartCubit>().addProduct(
+                                CartProduct(
+                                    product: _product,
+                                    isGranel:
+                                        state.listNewProducts[index].itemGroup ==
+                                            'GRANEL',
+                                    name:
+                                        state.listNewProducts[index].name + '2'));
+                          });
+                    },
+                  ),
                 );
               },
             ),
