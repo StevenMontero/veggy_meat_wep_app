@@ -28,7 +28,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                   padding: const EdgeInsets.only(left: 24),
                   child: TextButton(
                       onPressed: () {
-                        NavigationService.navigateTo(Flurorouter.homeRoute);
+                        NavigationService.navigateTo(Flurorouter.rootRoute);
                       },
                       child: WebsafeSvg.asset(
                         'assets/icons/LOGO_VEGGY_PRINCIPAL.svg',
