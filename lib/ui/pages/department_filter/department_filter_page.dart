@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veggy/ui/pages/department_filter/cubit/departmentFilter_cubit.dart';
+import 'package:veggy/ui/widgets/bottomBar.dart';
 import 'package:veggy/ui/widgets/grid_product_view.dart';
 import 'package:veggy/domain/usecases/products_usecase.dart';
 import 'package:veggy/router/navigation_key.dart';
@@ -106,6 +107,7 @@ class MyMainContainer extends StatelessWidget {
             ),
             Expanded(
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: 220.0,
@@ -293,8 +295,17 @@ class MyMainContainer extends StatelessWidget {
                         child: GridProductWidget(listProduct: state.listProducts, controller: myController),
                     ),
                   ),
+                  /*
+                  Expanded(
+                    flex: 1,
+                    child:
+                  ),
+                  */
                 ],
               ),
+            ),
+            Container(
+              child: new BottomBar(),
             )
           ],
         ),
