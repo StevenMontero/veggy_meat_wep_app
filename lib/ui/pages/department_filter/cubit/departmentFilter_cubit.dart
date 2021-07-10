@@ -19,10 +19,9 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
     List<ProductApi> tempList = [];
     List<String> subCodes = [];
-    if (!state.lastElements.isNotEmpty){
+    if (state.lastElements.isNotEmpty){
       subCodes = state.lastElements.split(":");
     }
-
     switch(state.currentCategory) {
       //MATERIA PRIMA LICITACIONES
       //NO DEFINIDA
