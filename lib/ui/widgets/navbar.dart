@@ -40,11 +40,11 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           Expanded(child: Container()),
 
           // Search input
-          if (!isMobileAndTablet(context))
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 550),
-              child: SearchText(),
-            ),
+          //if (!isMobileAndTablet(context))
+          //  ConstrainedBox(
+          //    constraints: BoxConstraints(maxWidth: 550),
+          //    child: SearchText(),
+          //  ),
 
           Spacer(),
 
