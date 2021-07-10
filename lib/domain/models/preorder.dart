@@ -43,15 +43,15 @@ class PreOrder {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['codigo_cliente'] = this.codigoCliente;
-    data['orden_compra'] = this.ordenCompra;
-    data['fecha_hora'] = this.fechaHora;
-    data['notas'] = this.notas;
-    data['cedula'] = this.cedula;
-    data['tipo_cedula'] = this.tipoCedula;
+    data['codigo_cliente'] = this.codigoCliente.toString();
+    data['orden_compra'] = this.ordenCompra..toString();
+    data['fecha_hora'] = this.fechaHora.toString();
+    data['notas'] = this.notas.toString();
+    data['cedula'] = this.cedula.toString();
+    data['tipo_cedula'] = this.tipoCedula.toString();
     data['email'] = this.email;
-    data['nombre_cliente'] = this.nombreCliente;
-    data['cargo_envio'] = this.cargoEnvio;
+    data['nombre_cliente'] = this.nombreCliente.toString();
+    data['cargo_envio'] = this.cargoEnvio.toString();
     data['bodega'] = this.bodega;
     data['detalles'] = this.detalles.map((v) => v.toJson()).toList();
     return data;
