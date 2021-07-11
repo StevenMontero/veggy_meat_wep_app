@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veggy/data/production/repositories/qupos_server_repository.dart';
+import 'package:veggy/data/production/repositories/sms_notifications_repo.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:veggy/domain/models/preorder.dart';
 import 'package:veggy/util/regularExpressions/regular_expressions_models.dart';
@@ -60,14 +61,15 @@ class FormCubit extends Cubit<FormCubitState> {
   void sendPreOrder(List<CartProduct> listProduct) async {
     if (state.status == FormzStatus.invalid) return;
     final repoQupos = QuposRepository();
+    final repoNotidications = SmsNotificationRepository();
     final preOrder = PreOrder(
-      bodega: '',
+      bodega: "BODEGA SUPERMERCADO MALL",
       cargoEnvio: 0,
       cedula: state.id.value,
       detalles: [],
       email: state.email.value,
       nombreCliente: state.userNameComplete.value,
-      codigoCliente: '',
+      codigoCliente: '0151',
       fechaHora: DateTime.now().toString(),
       notas: 'Numero de telefono: +506 ${state.phone.value}',
       ordenCompra: '',
@@ -77,8 +79,10 @@ class FormCubit extends Cubit<FormCubitState> {
       preOrder.detalles.add(product.product);
     });
     repoQupos.postPreventa(preOrder);
+
     final message =
-        'Buenos días. He realizado una compra en la página de Veggy. Nombre: ${state.userNameComplete.value} Cédula: ${state.id.value} Teléfono: ${state.phone.value} Fecha: ${DateTime.now().toString()} Por favor confirmar si recibieron el pedido.';
+        'Buenos días. He realizado una compra en la página de Veggy.\nNombre: ${state.userNameComplete.value}\nCédula: ${state.id.value}\nTeléfono: ${state.phone.value}\nFecha: ${DateTime.now().toString()}.\nPor favor confirmar si recibieron el pedido.';
+    repoNotidications.sendWhatsappNotification(message, state.phone.value);
     await canLaunch(_url(message))
         ? await launch(_url(message))
         : print('Could not launch $_url');

@@ -37,9 +37,11 @@ class ProductCard extends StatelessWidget {
               height: 10,
             ),
             Expanded(
-                child: Image.asset(
-                  "assets/images/imagen_no_disponible.png",
-                ),
+              child: Image.network(
+                "http://186.177.135.3:45570/api/Articulos/Imagen?code=$code",
+                errorBuilder: (context, error, stackTrace) =>
+                    Image.asset("assets/images/imagen_no_disponible.png"),
+              ),
             ),
             SizedBox(
               height: 10,

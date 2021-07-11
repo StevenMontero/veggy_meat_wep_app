@@ -80,7 +80,10 @@ class Body extends StatelessWidget {
                                   ? 350
                                   : 470,
                           child: Image.network(
-                            'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
+                            "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.productApi.code}",
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
+                                    "assets/images/imagen_no_disponible.png"),
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -127,7 +130,7 @@ class Body extends StatelessWidget {
                             return ProductCard(
                                 title: state.listSameProduct[index].name,
                                 price: state.listSameProduct[index].listPrice
-                                    .toString(),
+                                    .toStringAsFixed(2),
                                 code: state.listSameProduct[index].code,
                                 category:
                                     state.listSameProduct[index].itemGroup,
@@ -137,7 +140,8 @@ class Body extends StatelessWidget {
                                       'detail/${state.listSameProduct[index].itemGroup}/${state.listSameProduct[index].code}',
                                       ProductDetail(
                                           product: state.listSameProduct[index],
-                                          sameListProduct: []));
+                                          sameListProduct:
+                                              state.listSameProduct));
                                 },
                                 onPressButton: () {
                                   final double montoIva =
@@ -260,7 +264,7 @@ class Body extends StatelessWidget {
                 SizedBox(
                   width: 5.0,
                 ),
-                Text('₡ ${product.listPrice} sin IVA',
+                Text('₡ ${product.listPrice.toStringAsFixed(2)} sin IVA',
                     style: themeText.headline6),
               ],
             ),
