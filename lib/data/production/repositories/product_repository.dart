@@ -45,14 +45,25 @@ class ProductRepository {
   /*
   no funciona del todo, la busque es complicada, no usar de momento o intenrar mejorla
    */
-  Future<List<ProductApi>> searchProductsByCategory(
-      String category, String searchparamenter) async {
-    _productsCategoryRef =
-        FirebaseFirestore.instance.collection(category.toUpperCase());
+  Future<List<ProductApi>> searchProductsByCategory(String category, String searchparamenter) async {
 
-    final _resul = await _productsCategoryRef
-        .where('name', whereIn: [searchparamenter]).get();
+    _productsCategoryRef = FirebaseFirestore.instance.collection(category.toUpperCase());
+
+    final _resul = await _productsCategoryRef.where('name', whereIn: [searchparamenter]).get();
+    //final _resul = await _productsCategoryRef.where('name', 'array-contains', searchparameter.toLowerCase()).get();
+
+    _productsCategoryRef = FirebaseFirestore.instance.collection(category.toUpperCase());
 
     return _resul.docs.map((e) => ProductApi.fromJson(e.data())).toList();
+
+    //final _resul = await _productsCategoryRef.where('name', arrayContains: searchparamenter.toLowerCase()).get();
+
+    /*
+    _productsCategoryRef = FirebaseFirestore.instance.collection(category.toUpperCase());
+    final results = _productsCategoryRef.where((DocumentSnapshot a) => a['name'].toString().contains(searchparamenter));
+    return results.snapshots().map<ProductApi>((DocumentSnapshot b) => ProductApi.fromJson(a.data['name'])).toList();
+     */
+    //map<ProductApi>((DocumentSnapshot a) => ProductApi.fromJson(e.data['name'])).toList();
+
   }
 }

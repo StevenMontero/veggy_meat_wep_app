@@ -258,8 +258,148 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
     return tempList;
   }
 
+  void addResults() async {
+    List<ProductApi> tempList = [];
+    switch(state.currentCategory) {
+      case "FRUTASVERDURAS": {
+        List<ProductApi> listFrutas = await _productUseCase.searchProductsByCategory('FRUTAS', state.searchString);
+        List<ProductApi> listVerduras = await _productUseCase.searchProductsByCategory('VERDURAS', state.searchString);
+        List<ProductApi> listTuberculos = await _productUseCase.searchProductsByCategory('TUBERCULOS', state.searchString);
+        List<ProductApi> listLegumbres = await _productUseCase.searchProductsByCategory('LEGUMBRES', state.searchString);
+
+        int n = 0;
+
+        while (n<listFrutas.length || n<listVerduras.length || n<listTuberculos.length || n<listLegumbres.length) {
+          if(n<listFrutas.length){
+            tempList.add(listFrutas[n]);
+          }
+          if(n<listVerduras.length){
+            tempList.add(listVerduras[n]);
+          }
+          if(n<listTuberculos.length){
+            tempList.add(listTuberculos[n]);
+          }
+          if(n<listLegumbres.length){
+            tempList.add(listLegumbres[n]);
+          }
+          n++;
+        }
+        print("Search finished. List sizes: " + listFrutas.length.toString() + " " + listVerduras.length.toString() + " " + listTuberculos.length.toString() + " " + listLegumbres.length.toString());
+      }
+      break;
+      case "CARNICERIA": {
+        List<ProductApi> listCarneRes = await _productUseCase.searchProductsByCategory('CARNE DE RES', state.searchString);
+        List<ProductApi> listCarneCerdo = await _productUseCase.searchProductsByCategory('CARNE DE CERDO', state.searchString);
+        List<ProductApi> listCarnePollo = await _productUseCase.searchProductsByCategory('CARNE DE POLLO', state.searchString);
+        List<ProductApi> listMariscos = await _productUseCase.searchProductsByCategory('MARISCOS', state.searchString);
+        List<ProductApi> listEmbutidos = await _productUseCase.searchProductsByCategory('EMBUTIDOS', state.searchString);
+
+        int n = 0;
+
+        while (n<listCarneRes.length || n<listCarneCerdo.length || n<listCarnePollo.length || n<listMariscos.length || n<listEmbutidos.length) {
+          if(n<listCarneRes.length){
+            tempList.add(listCarneRes[n]);
+          }
+          if(n<listCarneCerdo.length){
+            tempList.add(listCarneCerdo[n]);
+          }
+          if(n<listCarnePollo.length){
+            tempList.add(listCarnePollo[n]);
+          }
+          if(n<listMariscos.length){
+            tempList.add(listMariscos[n]);
+          }
+          if(n<listEmbutidos.length){
+            tempList.add(listEmbutidos[n]);
+          }
+          n++;
+        }
+      }
+      break;
+      case "GRANEL": {
+        List<ProductApi> listGranel = await _productUseCase.searchProductsByCategory('GRANEL', state.searchString);
+        List<ProductApi> listProcesados = await _productUseCase.searchProductsByCategory('PROCESADOS', state.searchString);
+
+        int n = 0;
+
+        while (n<listGranel.length || n<listProcesados.length) {
+          if(n<listGranel.length){
+            tempList.add(listGranel[n]);
+          }
+          if(n<listProcesados.length){
+            tempList.add(listProcesados[n]);
+          }
+          n++;
+        }
+      }
+      break;
+      case "ABARROTES": {
+        List<ProductApi> listAbarrotes = await _productUseCase.searchProductsByCategory('ABARROTES', state.searchString);
+        List<ProductApi> listLacteos = await _productUseCase.searchProductsByCategory('LACTEOS', state.searchString);
+
+        int n = 0;
+
+        while (n<listAbarrotes.length || n<listLacteos.length) {
+          if(n<listAbarrotes.length){
+            tempList.add(listAbarrotes[n]);
+          }
+          if(n<listLacteos.length){
+            tempList.add(listLacteos[n]);
+          }
+          n++;
+        }
+      }
+      break;
+      case "LICORES": {
+        List<ProductApi> listLicores = await _productUseCase.searchProductsByCategory('LICORES', state.searchString);
+
+        int n = 0;
+
+        while (n<listLicores.length) {
+          tempList.add(listLicores[n]);
+          n++;
+        }
+
+      }
+      break;
+      case "JARDINERIA": {
+        List<ProductApi> listFloristeria = await _productUseCase.searchProductsByCategory('FLORISTERIA', state.searchString);
+
+        int n = 0;
+
+        while (n<listFloristeria.length) {
+          tempList.add(listFloristeria[n]);
+          n++;
+        }
+
+      }
+      break;
+      case "ACCESORIOS": {
+        List<ProductApi> listAccesorios = await _productUseCase.searchProductsByCategory('PRODUCTO TERMINADO FABRICA DE PLASTICO', state.searchString);
+
+        int n = 0;
+
+        while (n<listAccesorios.length) {
+          tempList.add(listAccesorios[n]);
+          n++;
+        }
+      }
+      break;
+      case "PANADERIA": {
+
+      }
+      break;
+    }
+    emit(state.copyWith(listProducts: tempList));
+  }
+
   void changeCategory(String category) async{
     emit(state.copyWith(currentCategory: category, lastElements: ""));
     addProducts();
+  }
+
+  void searchTerm(String category, String searchTerm) async{
+    emit(state.copyWith(currentCategory: category, lastElements: "", searchString: searchTerm));
+    addResults();
   }
 }

@@ -6,6 +6,7 @@ import 'package:veggy/ui/widgets/bottomBar.dart';
 import 'package:veggy/ui/widgets/grid_product_view.dart';
 import 'package:veggy/domain/usecases/products_usecase.dart';
 import 'package:veggy/router/navigation_key.dart';
+import 'package:veggy/util/sizingInfo.dart';
 
 class DepartmentFilterPage extends StatelessWidget {
 
@@ -32,6 +33,7 @@ class MyMainContainer extends StatelessWidget {
   final String currentDepartment;
   final ProductUseCase useCase = ProductUseCase();
   ScrollController myController = new ScrollController();
+  var searchFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -93,18 +95,6 @@ class MyMainContainer extends StatelessWidget {
       return Container(
         child: Column(
           children: [
-            Container(
-              child: Row(
-                children: [
-                  Container(
-                      height: 180.0,
-                      child: Center(
-                        child: Text("Aquí va el banner."),
-                      )
-                  )
-                ],
-              ),
-            ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,6 +104,25 @@ class MyMainContainer extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.0, left: 10.0),
+                          child: Container (
+                            child: TextField(
+                              controller: searchFieldController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Buscar',
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    print("Click registered");
+                                    context.read<DepartmentFilterCubit>().searchTerm(state.currentCategory, searchFieldController.text);
+                                  },
+                                  icon: Icon(Icons.search),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Center(
@@ -295,18 +304,9 @@ class MyMainContainer extends StatelessWidget {
                         child: GridProductWidget(listProduct: state.listProducts, controller: myController),
                     ),
                   ),
-                  /*
-                  Expanded(
-                    flex: 1,
-                    child:
-                  ),
-                  */
                 ],
               ),
             ),
-            Container(
-              child: new BottomBar(),
-            )
           ],
         ),
       );
@@ -314,25 +314,8 @@ class MyMainContainer extends StatelessWidget {
   }
 }
 
-/*child: Scrollbar(
-                        child: GridView.builder(
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 200.0,
-                                childAspectRatio: 0.6,
-                                crossAxisSpacing: 1,
-                                mainAxisSpacing: 1),
-                            itemCount: 40,
-                            itemBuilder: (BuildContext ctx, index) {
-                              return ProductCard(
-                                  title: 'Soya Chips',
-                                  price: 'CRC 3000',
-                                  category: 'Abarrotes',
-                                  code: '2341234',
-                                  imageUrl: '',
-                                  onPressCard: () {},
-                                  onPressButton: () {});
-                            }),
-                      ),
-
+/*
+Container(
+              child: isDesktop(context)? BottomBar(): Container(),
+            )
  */
