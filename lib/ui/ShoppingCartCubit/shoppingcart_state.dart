@@ -10,4 +10,34 @@ class ShoppingcartState extends Equatable {
 
   @override
   List<Object> get props => [listProducts];
+
+  double impuestoShoppingCart() {
+    double impuestos = 0;
+    if (listProducts.isNotEmpty) {
+      for (CartProduct product in listProducts) {
+        impuestos = impuestos + product.product.montoIva;
+      }
+    }
+    return impuestos;
+  }
+
+  double subtotalShoppingCart() {
+    double subTotal = 0;
+    if (listProducts.isNotEmpty) {
+      for (CartProduct product in listProducts) {
+        subTotal = subTotal + product.product.precioSinIva;
+      }
+    }
+    return subTotal;
+  }
+
+  double totalShoppingCart() {
+    double total = 0;
+    if (listProducts.isNotEmpty) {
+      for (CartProduct product in listProducts) {
+        total = total + product.product.precioIva;
+      }
+    }
+    return total;
+  }
 }
