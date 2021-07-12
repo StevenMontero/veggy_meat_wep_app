@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veggy/data/production/repositories/qupos_server_repository.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:veggy/domain/models/preorder.dart';
 import 'package:veggy/util/regularExpressions/regular_expressions_models.dart';
@@ -58,6 +59,7 @@ class FormCubit extends Cubit<FormCubitState> {
 
   void sendPreOrder(List<CartProduct> listProduct) async {
     if (state.status == FormzStatus.invalid) return;
+    final repoQupos = QuposRepository();
     final preOrder = PreOrder(
       bodega: '',
       cargoEnvio: 0,
@@ -74,6 +76,7 @@ class FormCubit extends Cubit<FormCubitState> {
     listProduct.forEach((product) {
       preOrder.detalles.add(product.product);
     });
+    repoQupos.postPreventa(preOrder);
     final message =
         'Buenos días. He realizado una compra en la página de Veggy. Nombre: ${state.userNameComplete.value} Cédula: ${state.id.value} Teléfono: ${state.phone.value} Fecha: ${DateTime.now().toString()} Por favor confirmar si recibieron el pedido.';
     await canLaunch(_url(message))
@@ -81,7 +84,7 @@ class FormCubit extends Cubit<FormCubitState> {
         : print('Could not launch $_url');
   }
 
-  String _url( String message) {
+  String _url(String message) {
     return "https://api.whatsapp.com/send?phone=${'+506 ' + '89395313'}&text=$message"; // new line
   }
 }
