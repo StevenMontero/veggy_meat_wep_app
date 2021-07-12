@@ -187,7 +187,7 @@ _showDialog(BuildContext ctx) {
                 color: ColorsApp.colorPaletteGreen,
                 textColor: Colors.white,
                 onPressed: () =>
-                    NavigationService.navigateTo(Flurorouter.rootRoute),
+                    NavigationService.replaceTo(Flurorouter.rootRoute),
                 child: Text('Listo')),
           ),
         )
