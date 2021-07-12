@@ -171,8 +171,7 @@ class ShoppingCart extends StatelessWidget {
                           width: 150,
                           child: Text(
                             '₡ ' +
-                                state.listProducts[index].product.precioIva
-                                    .toString(),
+                                state.listProducts[index].product.precioIva.toStringAsFixed(2),
                             textAlign: TextAlign.center,
                             style: GoogleFonts.roboto(
                               fontSize: 20,
@@ -206,7 +205,7 @@ class ShoppingCart extends StatelessWidget {
                           height: 50,
                           width: 150,
                           child: Text(
-                            '₡ ' + precioxUnidad.toString(),
+                            '₡ ' + precioxUnidad.toStringAsFixed(2),
                             textAlign: TextAlign.center,
                             style: GoogleFonts.roboto(
                               fontSize: 20,
@@ -324,8 +323,7 @@ class ShoppingCart extends StatelessWidget {
                           width: 100,
                           child: Text(
                             '₡ ' +
-                                state.listProducts[index].product.precioIva
-                                    .toString(),
+                                state.listProducts[index].product.precioIva.toStringAsFixed(2),
                             textAlign: TextAlign.center,
                             style: GoogleFonts.roboto(
                               fontSize: 15,
@@ -359,7 +357,7 @@ class ShoppingCart extends StatelessWidget {
                           height: 40,
                           width: 100,
                           child: Text(
-                            '₡ ' + precioxUnidad.toString(),
+                            '₡ ' + precioxUnidad.toStringAsFixed(2),
                             textAlign: TextAlign.center,
                             style: GoogleFonts.roboto(
                               fontSize: 15,
