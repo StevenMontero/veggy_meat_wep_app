@@ -32,6 +32,10 @@ class ShoppingcartCubit extends Cubit<ShoppingcartState> {
     emit(state.copyWith(listProducts: auxList));
   }
 
+  void cleanShoppingCart() {
+    emit(state.copyWith(listProducts: []));
+  }
+
   void deleteProduct(CartProduct cartProduct) {
     final List<CartProduct> auxList = List.from(state.listProducts)
       ..removeWhere((element) =>

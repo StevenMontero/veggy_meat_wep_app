@@ -130,6 +130,9 @@ class FormPreOrder extends StatelessWidget {
                                     .state
                                     .listProducts;
                                 context.read<FormCubit>().sendPreOrder(list);
+                                context
+                                    .read<ShoppingcartCubit>()
+                                    .cleanShoppingCart();
                                 _showDialog(context);
                               }
                             : null,
