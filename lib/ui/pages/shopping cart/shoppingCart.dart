@@ -133,8 +133,10 @@ class ShoppingCart extends StatelessWidget {
                           height: 100,
                           width: 100,
                           child: Image.network(
-                            'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
-                            fit: BoxFit.fill,
+                            "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.listProducts[index].product.codigoArticulo}",
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(
+                                    "assets/images/imagen_no_disponible.png"),
                           ),
                         ),
                       ),
@@ -461,10 +463,12 @@ class ShoppingCart extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: ElevatedButton(
-                    onPressed: () {
-                      NavigationService.navigateTo(
-                          Flurorouter.formPreOrderRoute);
-                    },
+                    onPressed: state.listProducts.isNotEmpty
+                        ? () {
+                            NavigationService.navigateTo(
+                                Flurorouter.formPreOrderRoute);
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
                         primary: ColorsApp.colorPaletteGreen,
                         padding: EdgeInsets.all(20)),
