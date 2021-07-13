@@ -107,129 +107,216 @@ class ShoppingCart extends StatelessWidget {
           if (sizeHeight >= 700) {
             sizeHeight = 700;
           }
-          return Container(
-            height: sizeHeight,
-            width: 1000,
-            color: Colors.white,
-            child: ListView.builder(
-              itemCount: state.listProducts.length,
-              itemBuilder: (context, index) {
-                var precioxUnidad =
-                    state.listProducts[index].product.precioIva *
-                        state.listProducts[index].product.cantidad;
-                return Container(
-                  height: 150,
-                  width: 800,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                          top: BorderSide(
-                              color: Colors.grey.shade400, width: 0.5))),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          child: Image.network(
-                            "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.listProducts[index].product.codigoArticulo}",
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
-                                    "assets/images/imagen_no_disponible.png"),
+          return Column(
+            children: [
+              Container(
+                height: 40,
+                width: 1000,
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        child: Text(
+                          '',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Container(
+                        color: Colors.white,
+                        height: 60,
+                        width: 250,
+                        child: Text(
+                          'Nombre',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            color: Colors.black,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Container(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 35),
+                      child: Container(
+                        color: Colors.white,
+                        height: 50,
+                        width: 150,
+                        child: Text(
+                          'Precio Unitario',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                        color: Colors.white,
+                        height: 50,
+                        width: 100,
+                        child: Text(
+                          'Cantidad',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Container(
+                        color: Colors.white,
+                        height: 50,
+                        width: 150,
+                        child: Text(
+                          'Precio X unidad',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: sizeHeight,
+                width: 1000,
+                color: Colors.white,
+                child: ListView.builder(
+                  itemCount: state.listProducts.length,
+                  itemBuilder: (context, index) {
+                    var precioxUnidad =
+                        state.listProducts[index].product.precioIva *
+                            state.listProducts[index].product.cantidad;
+                    return Container(
+                      height: 150,
+                      width: 800,
+                      decoration: BoxDecoration(
                           color: Colors.white,
-                          height: 60,
-                          width: 250,
-                          child: Text(
-                            state.listProducts[index].name,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 20,
-                              color: Colors.black,
+                          border: Border(
+                              top: BorderSide(
+                                  color: Colors.grey.shade400, width: 0.5))),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              child: Image.network(
+                                "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.listProducts[index].product.codigoArticulo}",
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.asset(
+                                        "assets/images/imagen_no_disponible.png"),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Container(
-                          color: Colors.white,
-                          height: 50,
-                          width: 150,
-                          child: Text(
-                            '₡ ' +
-                                state.listProducts[index].product.precioIva
-                                    .toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 20,
-                              color: Colors.black,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Container(
+                              color: Colors.white,
+                              height: 60,
+                              width: 250,
+                              child: Text(
+                                state.listProducts[index].name,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Container(
-                          color: Colors.white,
-                          height: 50,
-                          width: 50,
-                          child: Text(
-                            'X ' +
-                                state.listProducts[index].product.cantidad
-                                    .toString(),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 20,
-                              color: Colors.black,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Container(
+                              color: Colors.white,
+                              height: 50,
+                              width: 150,
+                              child: Text(
+                                '₡ ' +
+                                    state.listProducts[index].product.precioIva
+                                        .toStringAsFixed(2),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Container(
-                          color: Colors.white,
-                          height: 50,
-                          width: 150,
-                          child: Text(
-                            '₡ ' + precioxUnidad.toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 20,
-                              color: Colors.black,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Container(
+                              color: Colors.white,
+                              height: 50,
+                              width: 50,
+                              child: Text(
+                                'X ' +
+                                    state.listProducts[index].product.cantidad
+                                        .toString(),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          alignment: Alignment.center,
-                          child: IconButton(
-                            icon: Icon(Icons.delete, size: 40),
-                            color: Colors.red,
-                            onPressed: () {
-                              context
-                                  .read<ShoppingcartCubit>()
-                                  .deleteProduct(state.listProducts[index]);
-                            },
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Container(
+                              color: Colors.white,
+                              height: 50,
+                              width: 150,
+                              child: Text(
+                                '₡ ' + precioxUnidad.toStringAsFixed(2),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              alignment: Alignment.center,
+                              child: IconButton(
+                                icon: Icon(Icons.delete, size: 40),
+                                color: Colors.red,
+                                onPressed: () {
+                                  context
+                                      .read<ShoppingcartCubit>()
+                                      .deleteProduct(state.listProducts[index]);
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),
