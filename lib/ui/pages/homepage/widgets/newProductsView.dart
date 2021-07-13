@@ -73,7 +73,7 @@ class _Body extends StatelessWidget {
                       return ProductCard(
                           title: state.listNewProducts[index].name,
                           price:
-                              state.listNewProducts[index].listPrice.toString(),
+                              state.listNewProducts[index].listPrice.toStringAsFixed(2),
                           code: state.listNewProducts[index].code,
                           category: state.listNewProducts[index].itemGroup,
                           imageUrl: '',

@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:veggy/router/navigation_key.dart';
+import 'package:veggy/router/routes.dart';
+import 'package:veggy/theme/colors.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/ui/pages/formpage/formCubit/form_cubit.dart';
 import 'package:veggy/ui/pages/shopping%20cart/shoppingCart.dart';
@@ -43,8 +47,7 @@ class FormPreOrder extends StatelessWidget {
                   SizedBox(height: 20),
                   //cedula
                   BlocBuilder<FormCubit, FormCubitState>(
-                    buildWhen: (previous, current) =>
-                        previous.id != current.id,
+                    buildWhen: (previous, current) => previous.id != current.id,
                     builder: (context, state) {
                       return TextFormField(
                           onChanged: (value) =>
@@ -127,6 +130,10 @@ class FormPreOrder extends StatelessWidget {
                                     .state
                                     .listProducts;
                                 context.read<FormCubit>().sendPreOrder(list);
+                                context
+                                    .read<ShoppingcartCubit>()
+                                    .cleanShoppingCart();
+                                _showDialog(context);
                               }
                             : null,
                         text: 'Enviar orden',
@@ -138,4 +145,53 @@ class FormPreOrder extends StatelessWidget {
               )),
         ));
   }
+}
+
+var _txtCustomHead = TextStyle(
+  color: ColorsApp.colorPaletteGreen,
+  fontSize: 23.0,
+  fontWeight: FontWeight.w600,
+  fontFamily: "Gotik",
+);
+
+/// Card Popup if success payment
+_showDialog(BuildContext ctx) {
+  showDialog(
+    barrierDismissible: false,
+    context: ctx,
+    builder: (context) => SimpleDialog(
+      backgroundColor: ColorsApp.cardColor,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(top: 30.0, right: 60.0, left: 60.0),
+          color: ColorsApp.cardColor,
+          child: Image.asset(
+            "assets/images/checklist.png",
+            height: 110.0,
+            color: Colors.lightGreen,
+          ),
+        ),
+        Center(
+            child: Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Text(
+            '¡Orden enviada exitosamente!',
+            style: _txtCustomHead,
+          ),
+        )),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16.0, right: 8.0, top: 10),
+          child: Container(
+            alignment: Alignment.bottomRight,
+            child: MaterialButton(
+                color: ColorsApp.colorPaletteGreen,
+                textColor: Colors.white,
+                onPressed: () =>
+                    NavigationService.replaceTo(Flurorouter.rootRoute),
+                child: Text('Listo')),
+          ),
+        )
+      ],
+    ),
+  );
 }

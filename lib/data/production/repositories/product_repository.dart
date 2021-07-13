@@ -46,12 +46,19 @@ class ProductRepository {
   no funciona del todo, la busque es complicada, no usar de momento o intenrar mejorla
    */
   Future<List<ProductApi>> searchProductsByCategory(
-      String category, String searchparamenter) async {
+      String category, String searchQuery) async {
     _productsCategoryRef =
         FirebaseFirestore.instance.collection(category.toUpperCase());
-
+    final upperName = searchQuery.toUpperCase();
     final _resul = await _productsCategoryRef
-        .where('name', whereIn: [searchparamenter]).get();
+        .where(
+          'name',
+          isGreaterThanOrEqualTo: upperName.toUpperCase(),
+          isLessThan: upperName.substring(0, upperName.length - 1) +
+              String.fromCharCode(
+                  upperName.codeUnitAt(upperName.length - 1) + 1),
+        )
+        .get();
 
     return _resul.docs.map((e) => ProductApi.fromJson(e.data())).toList();
   }
