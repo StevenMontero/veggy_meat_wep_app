@@ -115,15 +115,8 @@ class ShoppingCart extends StatelessWidget {
                 color: Colors.white,
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Text(
-                          '',
-                        ),
-                      ),
+                    SizedBox(
+                      width: 100,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50),
@@ -331,126 +324,208 @@ class ShoppingCart extends StatelessWidget {
         if (sizeHeight >= 650) {
           sizeHeight = 650;
         }
-        return Material(
-          child: Container(
-            height: sizeHeight,
-            width: 500,
-            child: ListView.builder(
-              itemCount: state.listProducts.length,
-              itemBuilder: (context, index) {
-                var precioxUnidad =
-                    state.listProducts[index].product.precioIva *
-                        state.listProducts[index].product.cantidad;
-                return Container(
-                  height: 150,
-                  width: 450,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                          top: BorderSide(
-                              color: Colors.grey.shade400, width: 0.5))),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          child: Image.network(
-                            'https://s2.dia.es/medias/hb7/hc3/10643207847966.jpg',
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Container(
-                          color: Colors.white,
-                          height: 50,
-                          width: 130,
-                          child: Text(
-                            state.listProducts[index].name,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Container(
-                          color: Colors.white,
-                          height: 40,
-                          width: 100,
-                          child: Text(
-                            '₡ ' +
-                                state.listProducts[index].product.precioIva
-                                    .toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Container(
-                          color: Colors.white,
-                          height: 40,
-                          width: 40,
-                          child: Text(
-                            'X ' +
-                                state.listProducts[index].product.cantidad
-                                    .toString(),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: Container(
-                          color: Colors.white,
-                          height: 40,
-                          width: 100,
-                          child: Text(
-                            '₡ ' + precioxUnidad.toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Container(
-                          child: IconButton(
-                            icon: Icon(Icons.delete),
-                            color: Colors.red,
-                            onPressed: () {
-                              context
-                                  .read<ShoppingcartCubit>()
-                                  .deleteProduct(state.listProducts[index]);
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+        return Column(
+          children: [
+            Container(
+              height: 40,
+              width: 500,
+              color: Colors.white,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 10,
                   ),
-                );
-              },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50),
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: 130,
+                      child: Text(
+                        'Nombre',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: 100,
+                      child: Text(
+                        'Precio Unitario',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0),
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: 70,
+                      child: Text(
+                        'Cantidad',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0),
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: 100,
+                      child: Text(
+                        'Precio X unidad',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            Material(
+              child: Container(
+                height: sizeHeight,
+                width: 500,
+                child: ListView.builder(
+                  itemCount: state.listProducts.length,
+                  itemBuilder: (context, index) {
+                    var precioxUnidad =
+                        state.listProducts[index].product.precioIva *
+                            state.listProducts[index].product.cantidad;
+                    return Container(
+                      height: 150,
+                      width: 450,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                              top: BorderSide(
+                                  color: Colors.grey.shade400, width: 0.5))),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Image.network(
+                                "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.listProducts[index].product.codigoArticulo}",
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.asset(
+                                        "assets/images/imagen_no_disponible.png"),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              color: Colors.white,
+                              height: 50,
+                              width: 130,
+                              child: Text(
+                                state.listProducts[index].name,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              color: Colors.white,
+                              height: 40,
+                              width: 100,
+                              child: Text(
+                                '₡ ' +
+                                    state.listProducts[index].product.precioIva
+                                        .toStringAsFixed(2),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              color: Colors.white,
+                              height: 40,
+                              width: 40,
+                              child: Text(
+                                'X ' +
+                                    state.listProducts[index].product.cantidad
+                                        .toString(),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Container(
+                              color: Colors.white,
+                              height: 40,
+                              width: 100,
+                              child: Text(
+                                '₡ ' + precioxUnidad.toStringAsFixed(2),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Container(
+                              child: IconButton(
+                                icon: Icon(Icons.delete),
+                                color: Colors.red,
+                                onPressed: () {
+                                  context
+                                      .read<ShoppingcartCubit>()
+                                      .deleteProduct(state.listProducts[index]);
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
