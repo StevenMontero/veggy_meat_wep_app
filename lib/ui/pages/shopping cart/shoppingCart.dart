@@ -613,7 +613,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    state.subtotalShoppingCart().toStringAsFixed(2),
+                    state.totalShoppingCart().toStringAsFixed(2),
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
