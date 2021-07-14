@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veggy/data/production/repositories/product_repository.dart';
 import 'package:veggy/ui/pages/department_filter/cubit/departmentFilter_cubit.dart';
 import 'package:veggy/ui/widgets/bottomBar.dart';
 import 'package:veggy/ui/widgets/grid_product_view.dart';
@@ -105,22 +104,23 @@ class MyMainContainer extends StatelessWidget {
     return BlocBuilder<DepartmentFilterCubit, DepartmentFilterState>(
         builder: (context, state) {
       myController.addListener(() {
-        if (myController.position.pixels ==
-            myController.position.maxScrollExtent) {
+        if (myController.position.pixels == myController.position.maxScrollExtent && searchFieldController.text == "") {
           context.read<DepartmentFilterCubit>().addProducts();
         }
       });
-      return Container(
+
+      return Scrollbar(
+        controller: myController,
         child: Column(
           children: [
             Expanded(
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: 220.0,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           margin: const EdgeInsets.only(
@@ -138,11 +138,10 @@ class MyMainContainer extends StatelessWidget {
                                 labelText: 'Buscar',
                                 suffixIcon: IconButton(
                                   onPressed: () {
-                                    print("Click registered");
                                     context
                                         .read<DepartmentFilterCubit>()
                                         .searchTerm(state.currentCategory,
-                                            searchFieldController.text);
+                                        searchFieldController.text);
                                   },
                                   icon: Icon(Icons.search),
                                 ),
@@ -152,7 +151,7 @@ class MyMainContainer extends StatelessWidget {
                         ),
                         Container(
                           margin:
-                              const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          const EdgeInsets.only(top: 10.0, bottom: 10.0),
                           child: Center(
                             child: Text('Departamentos'),
                           ),
@@ -219,7 +218,7 @@ class MyMainContainer extends StatelessWidget {
                               ),
                               ListTile(
                                 selected:
-                                    _drawerSelection == DrawerSelection.granel,
+                                _drawerSelection == DrawerSelection.granel,
                                 onTap: () {
                                   if (_drawerSelection !=
                                       DrawerSelection.granel) {
@@ -273,7 +272,7 @@ class MyMainContainer extends StatelessWidget {
                               ),
                               ListTile(
                                 selected:
-                                    _drawerSelection == DrawerSelection.licores,
+                                _drawerSelection == DrawerSelection.licores,
                                 onTap: () {
                                   if (_drawerSelection !=
                                       DrawerSelection.licores) {
@@ -382,15 +381,10 @@ class MyMainContainer extends StatelessWidget {
                 ],
               ),
             ),
+            isDesktop(context)? BottomBar(): Container(),
           ],
         ),
       );
     });
   }
 }
-
-/*
-Container(
-              child: isDesktop(context)? BottomBar(): Container(),
-            )
- */
