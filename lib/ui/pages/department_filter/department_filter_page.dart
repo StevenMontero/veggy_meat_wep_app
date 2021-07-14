@@ -373,6 +373,7 @@ class MyMainContainer extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
+                      color: Colors.grey[400],
                       child: GridProductWidget(
                           listProduct: state.listProducts,
                           controller: myController),

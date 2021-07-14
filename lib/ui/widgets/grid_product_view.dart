@@ -59,7 +59,7 @@ class GridProductWidget extends StatelessWidget {
           itemBuilder: (BuildContext ctx, index) {
             return ProductCard(
                 title: listProduct[index].name,
-                price: listProduct[index].name,
+                price: listProduct[index].listPrice.toStringAsFixed(2),
                 code: listProduct[index].code,
                 category: listProduct[index].itemGroup,
                 imageUrl: '',

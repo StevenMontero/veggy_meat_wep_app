@@ -51,7 +51,7 @@ class PreOrder {
     data['tipo_cedula'] = this.tipoCedula.toString();
     data['email'] = this.email;
     data['nombre_cliente'] = this.nombreCliente.toString();
-    data['cargo_envio'] = this.cargoEnvio.toString();
+    data['cargo_envio'] = this.cargoEnvio;
     data['bodega'] = this.bodega;
     data['detalles'] = this.detalles.map((v) => v.toJson()).toList();
     return data;
