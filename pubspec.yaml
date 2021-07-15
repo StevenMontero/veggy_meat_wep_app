@@ -46,6 +46,7 @@ dependencies:
   shared_preferences: ^2.0.6
   scroll_to_index: ^2.0.0
   twilio_flutter: ^0.0.9
+  money_formatter: ^0.0.3
   
 
 
