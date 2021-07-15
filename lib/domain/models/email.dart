@@ -1,3 +1,8 @@
+/**
+ * Clase objeto de correos electrónicos del cliente.
+ * El objeto solo tiene un String para manejar
+ * la dirección electrónica.
+ */
 class Email{
   late String correo;
 

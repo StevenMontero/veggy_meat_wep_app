@@ -4,7 +4,7 @@ import 'package:veggy/ui/widgets/email_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /**
- * Clase que maneja un contenedor que actúa como footer de la aplicación.
+ * Clase tipo Widget que maneja un contenedor que actúa como footer de la aplicación.
  * @Return : Container
  * Contenedor con el contenido del widget.
  */
@@ -77,7 +77,7 @@ class BottomBar extends StatelessWidget implements PreferredSizeWidget {
 
 /**
  * Función encargada de lanzar las direcciones web de redes sociales.
- * @Params:url
+ * @Params : url
  * Dirección en forma de String de la página web la cual abrir.
  */
 _launchURL(url) async {

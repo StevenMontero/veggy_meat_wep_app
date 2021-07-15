@@ -1,5 +1,12 @@
 part of 'departmentFilter_cubit.dart';
 
+/**
+ * Clase de estado de la vista por departamentos para almacenar su
+ * información. Posee una lista de objetos ProductApi como la lista de
+ * productos a mostrar, la categoría actual seleccionada por el usuario,
+ * el valor del último elemento de cada lista y el valor de búsqueda, en
+ * caso de que se busquen productos por nombre.
+ */
 class DepartmentFilterState extends Equatable {
 
   final List<ProductApi> listProducts;
