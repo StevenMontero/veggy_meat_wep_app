@@ -13,6 +13,7 @@ class QuposRepository {
         data: jsonEncode(preOrder.toJson()),
         options: Options(headers: {
           'authorization': basicAuth,
+          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/x-www-form-urlencoded"
         }));
 
