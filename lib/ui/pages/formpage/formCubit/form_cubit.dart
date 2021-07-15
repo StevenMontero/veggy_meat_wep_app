@@ -69,7 +69,7 @@ class FormCubit extends Cubit<FormCubitState> {
       detalles: [],
       email: state.email.value,
       nombreCliente: state.userNameComplete.value,
-      codigoCliente: '0151',
+      codigoCliente: '',
       fechaHora: DateTime.now().toString(),
       notas: 'Numero de telefono: +506 ${state.phone.value}',
       ordenCompra: state.id.value + DateTime.now().toString(),
