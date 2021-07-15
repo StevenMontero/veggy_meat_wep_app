@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:veggy/data/production/repositories/email_repository.dart';
+import 'package:veggy/util/regularExpressions/email.dart';
 
 /**
  * Clase tipo widget que maneja el widget para contener el campo de texto con
@@ -47,20 +48,35 @@ class EmailText extends StatelessWidget {
   _addEmail(text, context) {
     //Aqui se debe manejar el correo que el usuario ingresó.
     var repReference = EmailRepository();
-    repReference.saveEmail(text);
-    showDialog(
-        context: context,
-        builder: (context) {
-          Future.delayed(Duration(seconds: 3), () {
-            Navigator.of(context).pop(true);
-          });
-          return AlertDialog(
-            title: Text('Gracias por brindarnos tu correo'),
-            content: Text('Te haremos llegar información de promociones por este medio.'),
-          );
-        }
-    );
+    if (RegExp(r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$').hasMatch(text)){
+      repReference.saveEmail(text);
+      showDialog(
+          context: context,
+          builder: (context) {
+            Future.delayed(Duration(seconds: 3), () {
+              Navigator.of(context).pop(true);
+            });
+            return AlertDialog(
+              title: Text('Gracias por brindarnos tu correo'),
+              content: Text('Te haremos llegar información de promociones por este medio.'),
+            );
+          }
+      );
+      _controller.text = "";
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            Future.delayed(Duration(seconds: 3), () {
+              Navigator.of(context).pop(true);
+            });
+            return AlertDialog(
+              title: Text('Correo incorrecto'),
+              content: Text('La dirección de correo debe ser válida.'),
+            );
+          }
+      );
+    }
 
-    _controller.text = "";
   }
 }
