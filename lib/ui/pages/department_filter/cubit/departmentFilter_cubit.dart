@@ -4,17 +4,35 @@ import 'package:veggy/domain/models/product_api.dart';
 import 'package:veggy/domain/usecases/products_usecase.dart';
 part 'departmentFilter_state.dart';
 
+/**
+ * Clase de tipo Cubit para manejo de estado de la seccion de vista
+ * por departamentos. Posee un ProductUseCase para solicitar información
+ * de la base de datos.
+ */
 class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
   DepartmentFilterCubit() : super(DepartmentFilterState());
   final _productUseCase = ProductUseCase();
 
+  /**
+   * Función para agregar productos a la lista del estado. Solicita
+   * la lista a la función categorySwitchSearch() y actualiza el
+   * estado con esta lista.
+   */
   void addProducts() async{
     final tempList;
     tempList = await categorySwitchSearch();
     emit(state.copyWith(listProducts: state.listProducts + tempList));
   }
 
+  /**
+   * Función encargada de devolver la lista de productos de la
+   * categoría actualmente seleccionada en el estado. Si el estado
+   * tiene un valor para el último elemento, agrega a la lista actual del
+   * estado más productos apartir de este último elemento.
+   * @Return : Future<List<ProductApi>>
+   * Lista de productos obtenida.
+   */
   Future<List<ProductApi>> categorySwitchSearch() async {
 
     List<ProductApi> tempList = [];
@@ -23,13 +41,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       subCodes = state.lastElements.split(":");
     }
     switch(state.currentCategory) {
-      //MATERIA PRIMA LICITACIONES
-      //NO DEFINIDA
       case "FRUTASVERDURAS": {
-        //FRUTAS
-        //LEGUMBRES
-        //VERDURAS
-        //TUBERCULOS
         List<ProductApi> listFrutas = [];
         List<ProductApi> listVerduras = [];
         List<ProductApi> listTuberculos = [];
@@ -71,11 +83,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       }
       break;
       case "CARNICERIA": {
-        //CARNE DE RES
-        //CARNE DE CERDO
-        //CARNE DE POLLO
-        //MARISCOS
-        //EMBUTIDOS
         List<ProductApi> listCarneRes = [];
         List<ProductApi> listCarneCerdo = [];
         List<ProductApi> listCarnePollo = [];
@@ -124,8 +131,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       }
       break;
       case "GRANEL": {
-        //GRANEL
-        //PROCESADOS
         List<ProductApi> listGranel = [];
         List<ProductApi> listProcesados = [];
         if (!state.lastElements.isEmpty){
@@ -153,8 +158,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       }
       break;
       case "ABARROTES": {
-        //ABARROTES
-        //LACTEOS
         List<ProductApi> listAbarrotes = [];
         List<ProductApi> listLacteos = [];
         if (!state.lastElements.isEmpty){
@@ -228,7 +231,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       }
       break;
       case "ACCESORIOS": {
-        //PRODUCTO TERMINADO FABRICA DE PLASTICO
         List<ProductApi> listAccesorios = [];
         if (!state.lastElements.isEmpty){
           listAccesorios = await _productUseCase.getProductsByCateforie('PRODUCTO TERMINADO FABRICA DE PLASTICO', subCodes[0]);
@@ -258,6 +260,11 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
     return tempList;
   }
 
+  /**
+   * Función para buscar productos que coincidan con el valor de búsqueda
+   * solicitado por el usuario. Se agregan estos elementos a la lista del
+   * estado.
+   */
   void addResults() async {
     List<ProductApi> tempList = [];
     switch(state.currentCategory) {
@@ -284,7 +291,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        print("Search finished. List sizes: " + listFrutas.length.toString() + " " + listVerduras.length.toString() + " " + listTuberculos.length.toString() + " " + listLegumbres.length.toString());
       }
       break;
       case "CARNICERIA": {
@@ -393,11 +399,25 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
     emit(state.copyWith(listProducts: tempList));
   }
 
+  /**
+   * Función para cargar una nueva lista de productos al cambiar de
+   * departamento.
+   * @Params : String cateogry
+   * Nuevo departamento del cual se deben cargar productos.
+   */
   void changeCategory(String category) async{
     emit(state.copyWith(currentCategory: category, lastElements: ""));
     addProducts();
   }
 
+  /**
+   * Función encargada de cargar una nueva lista de productos al
+   * buscar productos por nombre.
+   * @Params : String category
+   * Departamento en el cual se va a buscar el producto.
+   * @Params: String searchTerm
+   * Término que desea buscar el usuario.
+   */
   void searchTerm(String category, String searchTerm) async{
     emit(state.copyWith(currentCategory: category, lastElements: "", searchString: searchTerm));
     addResults();

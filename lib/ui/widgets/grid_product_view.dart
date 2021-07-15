@@ -9,11 +9,29 @@ import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/**
+ * Clase tipo Widget que construye la lista de tarjetas de productos
+ * a mostrar.
+ * @Params : List<ProductApi> listProduct
+ * Lista de productos a cargar en tarjetas de producto.
+ * @Params : ScrollController controller
+ * Controlador de lista desplegable del contenedor padre.
+ */
 class GridProductWidget extends StatelessWidget {
   GridProductWidget({required this.listProduct, required this.controller}) : super();
   final List<ProductApi> listProduct;
   final ScrollController controller;
 
+  /**
+   * Función para cargado de lista de cinco productos similares al producto
+   * a cargar en vista de detalles.
+   * @Params ProductApi product
+   * Producto del cual se desean obtener productos similares.
+   * @Params int index
+   * Índice del producto en la lista de de productos cargados.
+   * @Return List<ProductApi>
+   * Lista obtenida de productos similares.
+   */
   List<ProductApi> loadList(ProductApi product, int index){
     int n = 0;
     int min = index;
@@ -59,7 +77,7 @@ class GridProductWidget extends StatelessWidget {
           itemBuilder: (BuildContext ctx, index) {
             return ProductCard(
                 title: listProduct[index].name,
-                price: listProduct[index].name,
+                price: listProduct[index].listPrice.toStringAsFixed(2),
                 code: listProduct[index].code,
                 category: listProduct[index].itemGroup,
                 imageUrl: '',

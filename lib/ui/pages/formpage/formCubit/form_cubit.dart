@@ -63,17 +63,17 @@ class FormCubit extends Cubit<FormCubitState> {
     final repoQupos = QuposRepository();
     final repoNotidications = SmsNotificationRepository();
     final preOrder = PreOrder(
-      bodega: "BODEGA SUPERMERCADO MALL",
+      bodega: "001",
       cargoEnvio: 0,
       cedula: state.id.value,
       detalles: [],
       email: state.email.value,
       nombreCliente: state.userNameComplete.value,
-      codigoCliente: '0151',
+      codigoCliente: '',
       fechaHora: DateTime.now().toString(),
       notas: 'Numero de telefono: +506 ${state.phone.value}',
-      ordenCompra: '',
-      tipoCedula: 'i',
+      ordenCompra: state.id.value + DateTime.now().toString(),
+      tipoCedula: 'F',
     );
     listProduct.forEach((product) {
       preOrder.detalles.add(product.product);
