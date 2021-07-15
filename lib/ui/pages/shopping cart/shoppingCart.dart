@@ -7,6 +7,7 @@ import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:veggy/values/responsiveApp.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 //Error de borde en tablet
 
@@ -15,7 +16,8 @@ class ShoppingCart extends StatelessWidget {
   final _scrollController = ScrollController();
   final _scrollController2 = ScrollController();
   final _scrollController3 = ScrollController();
-
+  late MoneyFormatter fmf;
+  
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
@@ -535,6 +537,12 @@ class ShoppingCart extends StatelessWidget {
       TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context) {
     return BlocBuilder<ShoppingcartCubit, ShoppingcartState>(
       builder: (context, state) {
+        fmf = MoneyFormatter(amount: state.subtotalShoppingCart());
+        MoneyFormatterOutput subFO = fmf.output;
+        fmf = MoneyFormatter(amount: state.impuestoShoppingCart());
+        MoneyFormatterOutput impuestoFO = fmf.output;
+         fmf = MoneyFormatter(amount: state.totalShoppingCart());
+        MoneyFormatterOutput totalFO = fmf.output;
         return Container(
             height: 300,
             width: 300,
@@ -561,7 +569,7 @@ class ShoppingCart extends StatelessWidget {
                 elevation: 0,
                 child: ListTile(
                   title: Text(
-                    'Impuestos',
+                    'SubTotal',
                     textAlign: TextAlign.left,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -569,7 +577,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    state.impuestoShoppingCart().toStringAsFixed(2),
+                    '₡ '+subFO.nonSymbol,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -583,7 +591,7 @@ class ShoppingCart extends StatelessWidget {
                 elevation: 0,
                 child: ListTile(
                   title: Text(
-                    'SubTotal',
+                    'Impuestos',
                     textAlign: TextAlign.left,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -591,7 +599,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    state.subtotalShoppingCart().toStringAsFixed(2),
+                    '₡ '+impuestoFO.nonSymbol,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -613,7 +621,7 @@ class ShoppingCart extends StatelessWidget {
                     ),
                   ),
                   trailing: Text(
-                    state.totalShoppingCart().toStringAsFixed(2),
+                    '₡ '+totalFO.nonSymbol,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
