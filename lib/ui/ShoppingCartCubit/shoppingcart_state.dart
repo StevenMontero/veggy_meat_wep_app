@@ -11,6 +11,11 @@ class ShoppingcartState extends Equatable {
   @override
   List<Object> get props => [listProducts];
 
+
+/*Este método calcula los impuestos de la compra, multiplicando el impusto * la canntidad 
+de productos seleccionados, ademas de mantener el acumulado de los impuestos de todos los productos.
+   @Params :  
+   @Return : double*/
   double impuestoShoppingCart() {
     double impuestos = 0;
     if (listProducts.isNotEmpty) {
@@ -21,6 +26,10 @@ class ShoppingcartState extends Equatable {
     return impuestos;
   }
 
+/*Este método calcula el subtotal de la compra, multiplicando el precio sin iva * la canntidad 
+de productos seleccionados, ademas de mantener el acumulado de todos los productos.
+   @Params :  
+   @Return : double*/
   double subtotalShoppingCart() {
     double subTotal = 0;
     if (listProducts.isNotEmpty) {
@@ -31,6 +40,10 @@ class ShoppingcartState extends Equatable {
     return subTotal;
   }
 
+/*Este método calcula el total de la compra, multiplicando el precio con el iva  * la canntidad 
+de productos seleccionados, ademas de mantener el acumulado de todos los productos.
+   @Params :  
+   @Return : double*/
   double totalShoppingCart() {
     double total = 0;
     if (listProducts.isNotEmpty) {
