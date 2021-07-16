@@ -8,6 +8,13 @@ import 'package:veggy/domain/usecases/products_usecase.dart';
 import 'package:veggy/router/navigation_key.dart';
 import 'package:veggy/util/sizingInfo.dart';
 
+/**
+ * Clase encargada de manejar la vista de productos por departamento,
+ * ofreciendo un filtro para el contenido mostrado.
+ * @Params : currentDepartment, Departamento actualmente seleccionado por
+ * el usuario. Si no se brinda departamento, se utilizará el departamento
+ * Frutas y Verduras.
+ */
 class DepartmentFilterPage extends StatelessWidget {
   DepartmentFilterPage({required this.currentDepartment}) : super();
   final String currentDepartment;
@@ -24,6 +31,9 @@ class DepartmentFilterPage extends StatelessWidget {
   }
 }
 
+/**
+ * Objeto de manejo de selección de categorías.
+ */
 enum DrawerSelection {
   frutasverduras,
   carniceria,
@@ -35,6 +45,14 @@ enum DrawerSelection {
   panaderia
 }
 
+/**
+ * Clase encargada de popular visualmente la sección de vista
+ * por departamentos.
+ * @Params : String currentDepartment
+ * Departamento del cual se cargarán los productos de la vista.
+ * @Return : BlocBuilder
+ * Objeto de construcción de la vista con el contenido cargado.
+ */
 class MyMainContainer extends StatelessWidget {
   MyMainContainer({required this.currentDepartment}) : super();
   DrawerSelection _drawerSelection = DrawerSelection.frutasverduras;
@@ -45,6 +63,11 @@ class MyMainContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /**
+     * Switch para manejo del departamento seleccionado, marcando el
+     * departamento correcto en el filtro y estableciendo el departamento
+     * del cual obtener los productos.
+     */
     switch (currentDepartment) {
       case "FRUTASVERDURAS":
         {
@@ -117,6 +140,9 @@ class MyMainContainer extends StatelessWidget {
               child: Row(
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  /**
+                   * Contenedor de filtros de la vista.
+                   */
                   Container(
                     width: 220.0,
                     child: Column(
@@ -214,7 +240,7 @@ class MyMainContainer extends StatelessWidget {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                title: Text('Carniceria'),
+                                title: Text('Carnicería'),
                               ),
                               ListTile(
                                 selected:
@@ -322,7 +348,7 @@ class MyMainContainer extends StatelessWidget {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                title: Text('Jardineria'),
+                                title: Text('Jardinería'),
                               ),
                               ListTile(
                                 selected: _drawerSelection ==
@@ -371,6 +397,9 @@ class MyMainContainer extends StatelessWidget {
                       ],
                     ),
                   ),
+                  /**
+                   * Contenedor de la lista de productos.
+                   */
                   Expanded(
                     child: Container(
                       color: Colors.grey[400],
@@ -382,6 +411,9 @@ class MyMainContainer extends StatelessWidget {
                 ],
               ),
             ),
+            /**
+             * Footer de la página.
+             */
             isDesktop(context)? BottomBar(): Container(),
           ],
         ),
