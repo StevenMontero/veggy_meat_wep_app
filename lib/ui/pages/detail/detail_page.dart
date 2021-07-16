@@ -135,6 +135,7 @@ class Body extends StatelessWidget {
                                 category:
                                     state.listSameProduct[index].itemGroup,
                                 imageUrl: '',
+                                unidad: state.listSameProduct[index].unidad,
                                 onPressCard: () {
                                   NavigationService.navigateToWithArguments(
                                       'detail/${state.listSameProduct[index].itemGroup}/${state.listSameProduct[index].code}',
@@ -237,7 +238,7 @@ class Body extends StatelessWidget {
             padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
             child: Container(
               child: Text(
-                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}',
+                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}\n Unidad de medida: ${product.unidad}',
                   style: themeText.bodyText1,
                   textAlign: TextAlign.justify,
                   textScaleFactor: isDesktop(context)
