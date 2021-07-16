@@ -77,6 +77,7 @@ class _Body extends StatelessWidget {
                           code: state.listNewProducts[index].code,
                           category: state.listNewProducts[index].itemGroup,
                           imageUrl: '',
+                          unidad:state.listNewProducts[index].unidad,
                           onPressCard: () {
                             NavigationService.navigateToWithArguments(
                                 'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',

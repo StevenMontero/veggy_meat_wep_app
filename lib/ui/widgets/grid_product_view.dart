@@ -81,6 +81,7 @@ class GridProductWidget extends StatelessWidget {
                 code: listProduct[index].code,
                 category: listProduct[index].itemGroup,
                 imageUrl: '',
+                unidad: listProduct[index].unidad,
                 onPressCard: () {
                   var productDetail = ProductDetail(product: listProduct[index], sameListProduct: loadList(listProduct[index], index));
                   NavigationService.navigateToWithArguments('/detail/${"listProduct[index].itemGroup"}/${"listProduct[index].code"}', productDetail);
