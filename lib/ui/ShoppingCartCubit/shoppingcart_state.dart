@@ -15,7 +15,7 @@ class ShoppingcartState extends Equatable {
     double impuestos = 0;
     if (listProducts.isNotEmpty) {
       for (CartProduct product in listProducts) {
-        impuestos = impuestos + product.product.montoIva;
+        impuestos = impuestos + (product.product.montoIva * product.product.cantidad);
       }
     }
     return impuestos;
@@ -25,7 +25,7 @@ class ShoppingcartState extends Equatable {
     double subTotal = 0;
     if (listProducts.isNotEmpty) {
       for (CartProduct product in listProducts) {
-        subTotal = subTotal + product.product.precioSinIva;
+        subTotal = subTotal + (product.product.precioSinIva * product.product.cantidad);
       }
     }
     return subTotal;
@@ -35,7 +35,7 @@ class ShoppingcartState extends Equatable {
     double total = 0;
     if (listProducts.isNotEmpty) {
       for (CartProduct product in listProducts) {
-        total = total + product.product.precioIva;
+        total = total + (product.product.precioIva * product.product.cantidad);
       }
     }
     return total;
