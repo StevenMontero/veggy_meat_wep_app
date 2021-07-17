@@ -37,7 +37,7 @@ class GridProductWidget extends StatelessWidget {
     int min = index;
     int max = index;
     List<ProductApi> listReturn = [];
-    while(n<5){
+    while( n<5 ){
       if (min == 0 && max==listProduct.length){
         break;
       }
