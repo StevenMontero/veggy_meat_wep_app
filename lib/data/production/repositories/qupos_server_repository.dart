@@ -6,7 +6,7 @@ import 'package:veggy/domain/models/preorder.dart';
 class QuposRepository {
   final dioClient = Dio();
 
-  Future<Map<String, dynamic>?> postPreventa(PreOrder preOrder) async {
+  Future<Map<String, dynamic>> postPreventa(PreOrder preOrder) async {
     print(jsonEncode(preOrder.toJson()));
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('PROYECTO:12345'));
 
@@ -24,9 +24,17 @@ class QuposRepository {
                 'Accept': "*/*",
               }));
 
-      return response.data;
-    } catch (e) {
-      print('ERROR : response.statusCode \n${e.toString()}');
+      return {
+        'exito': response.data['exito'],
+        "numero_pedido": response.data["numero_pedido_generado"],
+        "mensajes": response.data["mensajes"],
+      };
+    } on DioError catch (e) {
+     return {
+        'exito': false,
+        "numero_pedido": '-1',
+        "mensajes": e.message,
+      };
     }
   }
 }

@@ -37,14 +37,15 @@ class GridProductWidget extends StatelessWidget {
     int min = index;
     int max = index;
     List<ProductApi> listReturn = [];
-    while( n<5 ){
+    int safe = 0;
+    while(n<5){
       if (min == 0 && max==listProduct.length){
         break;
       }
-      if ((min-1)>0){
+      if ((min-1)>=0){
         min --;
       }
-      if ((max+1)<listProduct.length){
+      if ((max+1)<=listProduct.length){
         max ++;
       }
       if (min>0 && listProduct[min].itemGroup==product.itemGroup){
@@ -54,6 +55,11 @@ class GridProductWidget extends StatelessWidget {
       if (max<listProduct.length && listProduct[max].itemGroup==product.itemGroup){
         listReturn.add(listProduct[max]);
         n++;
+      }
+      safe ++;
+      if (safe > 20){
+        safe = 0;
+        break;
       }
     }
     return listReturn;

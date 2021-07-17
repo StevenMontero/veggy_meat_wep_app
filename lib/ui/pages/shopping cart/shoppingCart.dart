@@ -97,9 +97,11 @@ class ShoppingCart extends StatelessWidget {
         ));
   }
 
-//list.count
-//recibir lista por parametro
-//hasta .lenth
+/*Este método crea el bloque donde se mostraran los productos del carrito de compras, por medio de
+columnas y filas, obteniendo del state los datos necesarios como: nombre, precio unitario, iva,
+imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de escritorio.
+   @Params :  TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context
+   @Return : Column*/
   Widget listProduct(
       TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context) {
     return Material(
@@ -173,9 +175,9 @@ class ShoppingCart extends StatelessWidget {
                       child: Container(
                         color: Colors.white,
                         height: 50,
-                        width: 150,
+                        width: 200,
                         child: Text(
-                          'Precio X unidad',
+                          'Precio X cantidad',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.roboto(
                             fontSize: 20,
@@ -318,6 +320,11 @@ class ShoppingCart extends StatelessWidget {
     );
   }
 
+/*Este método crea el bloque donde se mostraran los productos del carrito de compras, por medio de
+columnas y filas, obteniendo del state los datos necesarios como: nombre, precio unitario, iva,
+imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dispositivos moviles.
+   @Params :  TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context
+   @Return : Column*/
   Widget listProductMovil(
       TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context) {
     return BlocBuilder<ShoppingcartCubit, ShoppingcartState>(
@@ -392,7 +399,7 @@ class ShoppingCart extends StatelessWidget {
                       height: 50,
                       width: 100,
                       child: Text(
-                        'Precio X unidad',
+                        'Precio X cantidad',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.roboto(
                           fontSize: 15,
@@ -533,6 +540,10 @@ class ShoppingCart extends StatelessWidget {
     );
   }
 
+/*Este método crea la tabla detalle de compra, mostrando los impuestos, subtotal y total de la compra,
+todo obtenido del state, ademas formateando las cantidades con la libreria MoneyFormatter.
+   @Params :  TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context
+   @Return : container*/
   Widget resume(
       TextTheme themeText, ResponsiveApp responsiveApp, BuildContext context) {
     return BlocBuilder<ShoppingcartCubit, ShoppingcartState>(
