@@ -62,7 +62,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         }
 
         int n = 0;
-
         while (n<listFrutas1.length || n<listFrutas2.length || n<listVerduras.length || n<listTuberculos.length || n<listLegumbres.length) {
           if(n<listFrutas1.length){
             tempList.add(listFrutas1[n]);
@@ -81,11 +80,11 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        String newLast = listFrutas1.last.code + ":";
-        newLast += listFrutas2.last.code + ":";
-        newLast += listVerduras.last.code + ":";
-        newLast += listTuberculos.last.code + ":";
-        newLast += listLegumbres.last.code + ":";
+        String newLast = getLastCode(listFrutas1) + ":";
+        newLast += getLastCode(listFrutas2) + ":";
+        newLast += getLastCode(listVerduras) + ":";
+        newLast += getLastCode(listTuberculos) + ":";
+        newLast += getLastCode(listLegumbres) + ":";
         state.lastElements = newLast;
       }
       break;
@@ -129,11 +128,11 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        String newLast = listCarneRes.last.code + ":";
-        newLast += listCarneCerdo.last.code + ":";
-        newLast += listCarnePollo.last.code + ":";
-        newLast += listMariscos.last.code + ":";
-        newLast += listEmbutidos.last.code + ":";
+        String newLast = getLastCode(listCarneRes) + ":";
+        newLast += getLastCode(listCarneCerdo) + ":";
+        newLast += getLastCode(listCarnePollo) + ":";
+        newLast += getLastCode(listMariscos) + ":";
+        newLast += getLastCode(listEmbutidos) + ":";
         state.lastElements = newLast;
       }
       break;
@@ -159,8 +158,8 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        String newLast = listGranel.last.code + ":";
-        newLast += listProcesados.last.code + ":";
+        String newLast = getLastCode(listGranel) + ":";
+        newLast += getLastCode(listProcesados) + ":";
         state.lastElements = newLast;
       }
       break;
@@ -186,13 +185,12 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        String newLast = listAbarrotes.last.code + ":";
-        newLast += listLacteos.last.code + ":";
+        String newLast = getLastCode(listAbarrotes) + ":";
+        newLast += getLastCode(listLacteos) + ":";
         state.lastElements = newLast;
       }
       break;
       case "LICORES": {
-        //LICORES
         List<ProductApi> listLicores = [];
         if (!state.lastElements.isEmpty){
           listLicores = await _productUseCase.getProductsByCateforie('LICORES', subCodes[0]);
@@ -210,7 +208,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        String newLast = listLicores.last.code + ":";
+        String newLast = getLastCode(listLicores) + ":";
         state.lastElements = newLast;
       }
       break;
@@ -233,7 +231,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           }
           n++;
         }
-        String newLast = listFloristeria.last.code + ":";
+        String newLast = getLastCode(listFloristeria) + ":";
         state.lastElements = newLast;
       }
       break;
@@ -272,10 +270,10 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
           n++;
         }
 
-        String newLast = listAccesorios1.last.code + ":";
-        newLast += listAccesorios2.last.code + ":";
-        newLast += listAccesorios3.last.code + ":";
-        newLast += listAccesorios4.last.code + ":";
+        String newLast = getLastCode(listAccesorios1) + ":";
+        newLast += getLastCode(listAccesorios2) + ":";
+        newLast += getLastCode(listAccesorios3) + ":";
+        newLast += getLastCode(listAccesorios4) + ":";
         state.lastElements = newLast;
       }
       break;
@@ -468,5 +466,13 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
   void searchTerm(String category, String searchTerm) async{
     emit(state.copyWith(currentCategory: category, lastElements: "", searchString: searchTerm));
     addResults();
+  }
+
+  String getLastCode(List<ProductApi> list){
+    String returnValue = '';
+    if (list.isNotEmpty){
+      returnValue = list.last.code;
+    }
+    return returnValue;
   }
 }
