@@ -30,8 +30,8 @@ class ResponsiveApp {
   get menuTabContainerHeight=>setHeight(400);//               -
   get sectionHeight=>setHeight(50);//                         -
   get sectionWidth=>setWidth(8);//                            -
-  get imageContainerHeight=>setHeight(200);//                 -
-  get imageContainerwidth=>setWidth(350);//                   -
+  get imageContainerHeight=>setHeight(180);//                 -
+  get imageContainerwidth=>setWidth(300);//                   -
 //                                                            -
 //Radius                                                      -
   get menuRadiusWidth=>setWidth(30);//                        -

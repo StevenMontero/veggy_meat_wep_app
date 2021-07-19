@@ -35,7 +35,11 @@ class _Body extends StatelessWidget {
                 top: 24, bottom: 14, left: isMobile(context) ? 20 : 0),
             child: Text(
               'Lo más nuevo',
-              style: Theme.of(context)
+              style: isMobileAndTablet(context)? Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(fontWeight: FontWeight.bold, color: Colors.white) : 
+                  Theme.of(context)
                   .textTheme
                   .headline4!
                   .copyWith(fontWeight: FontWeight.bold, color: Colors.white),

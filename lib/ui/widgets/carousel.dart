@@ -1,11 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-import 'package:veggy/domain/models/carouselModel.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veggy/data/production/repositories/banner_repository.dart';
 import 'package:veggy/ui/pages/homepage/cubits/carouselCubit/carousel_cubit.dart';
-import 'package:veggy/util/sizingInfo.dart';
+import 'package:veggy/domain/models/carouselModel.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:veggy/values/responsiveApp.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veggy/util/sizingInfo.dart';
+import 'package:flutter/material.dart';
 
 //** Carrousel de la página de inicio*/
 class Carousel extends StatefulWidget {
@@ -17,12 +16,9 @@ class _CarouselState extends State<Carousel> {
   ResponsiveApp? responsiveApp;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     responsiveApp = ResponsiveApp(context);
-    return BlocProvider(
-      create: (context) => CarouselCubit(BannerRepository())..getBannersList(),
-      child: Body(responsiveApp!),
-    );
+    return Body(responsiveApp!);   
   }
 }
 

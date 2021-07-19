@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:veggy/data/production/repositories/banner_repository.dart';
+import 'package:veggy/ui/pages/homepage/cubits/carouselCubit/carousel_cubit.dart';
 import 'package:veggy/util/sizingInfo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veggy/ui/widgets/carousel.dart';
@@ -20,8 +22,12 @@ class _HomePageState extends State<HomePage> {
   
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NewProductsCubit()..loadNewProducts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider( create: (context) => NewProductsCubit()..loadNewProducts(),),
+        BlocProvider(create: (context) => CarouselCubit(BannerRepository())..getBannersList(),),
+        //BlocProvider(create: (context) => CarouselCubit(BannerRepository())..getFeaturedList(),),      
+      ],
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         /*drawer: ,*/
