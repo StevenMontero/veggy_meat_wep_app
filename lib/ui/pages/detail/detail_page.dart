@@ -127,14 +127,19 @@ class Body extends StatelessWidget {
                           itemCount: state.listSameProduct.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
+                            final price = state
+                                        .listSameProduct[index].itemGroup ==
+                                    'GRANEL'
+                                ? state.listSameProduct[index].listPrice / 1000
+                                : state.listSameProduct[index].listPrice;
                             return ProductCard(
                                 title: state.listSameProduct[index].name,
-                                price: state.listSameProduct[index].listPrice
-                                    .toStringAsFixed(2),
+                                price: price.toStringAsFixed(2),
                                 code: state.listSameProduct[index].code,
                                 category:
                                     state.listSameProduct[index].itemGroup,
                                 imageUrl: '',
+                                unidad: state.listSameProduct[index].unidad,
                                 onPressCard: () {
                                   NavigationService.navigateToWithArguments(
                                       'detail/${state.listSameProduct[index].itemGroup}/${state.listSameProduct[index].code}',
@@ -144,26 +149,22 @@ class Body extends StatelessWidget {
                                               state.listSameProduct));
                                 },
                                 onPressButton: () {
-                                  final double montoIva =
-                                      state.listSameProduct[index].listPrice *
-                                          (state.listSameProduct[index].misc1 /
-                                              100);
+                                  final double montoIva = price *
+                                      (state.listSameProduct[index].misc1 /
+                                          100);
                                   final _product = Product(
                                       codigoArticulo:
                                           state.listSameProduct[index].code,
                                       cantidad: 1,
                                       notas: '',
                                       envioParcial: '',
-                                      precioSinIva: state
-                                          .listSameProduct[index].listPrice,
+                                      precioSinIva: price,
                                       montoIva: montoIva,
                                       porcentajeIva: state
                                           .listSameProduct[index].misc1
                                           .toDouble(),
                                       codigoTarifa: '',
-                                      precioIva: state.listSameProduct[index]
-                                              .listPrice +
-                                          montoIva,
+                                      precioIva: price + montoIva,
                                       porcentajeDescuento: 0,
                                       montoDescuento: 0,
                                       bonificacion: '',
@@ -197,6 +198,9 @@ class Body extends StatelessWidget {
 
   Container buildInfoProduct(TextTheme themeText, ResponsiveApp responsiveApp,
       BuildContext context, ProductApi product) {
+    final price = product.itemGroup == 'GRANEL'
+        ? product.listPrice / 1000
+        : product.listPrice;
     return Container(
       height:
           responsiveApp.width <= 1197 && responsiveApp.width >= 900 ? 600 : 500,
@@ -237,7 +241,7 @@ class Body extends StatelessWidget {
             padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
             child: Container(
               child: Text(
-                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}',
+                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}\n Unidad de medida: ${product.unidad}',
                   style: themeText.bodyText1,
                   textAlign: TextAlign.justify,
                   textScaleFactor: isDesktop(context)
@@ -264,8 +268,11 @@ class Body extends StatelessWidget {
                 SizedBox(
                   width: 5.0,
                 ),
-                Text('₡ ${product.listPrice.toStringAsFixed(2)} sin IVA',
-                    style: themeText.headline6),
+                product.itemGroup == 'GRANEL'
+                    ? Text('₡ ${price.toStringAsFixed(2)} x gramo sin IVA',
+                        style: themeText.headline6)
+                    : Text('₡ ${price.toStringAsFixed(2)} sin IVA',
+                        style: themeText.headline6),
               ],
             ),
           ),
@@ -314,23 +321,29 @@ class Body extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: BlocBuilder<DeatailCubit, DetailState>(
                 builder: (context, state) {
+                  final price = state.productApi.itemGroup == 'GRANEL'
+                      ? state.productApi.listPrice / 1000
+                      : state.productApi.listPrice;
                   return ElevatedButton(
                       child: Text('AGREGAR'),
                       style: ElevatedButton.styleFrom(
                           primary: Colors.cyan, minimumSize: Size(700, 50)),
                       onPressed: () {
-                        final double montoIva = state.productApi.listPrice *
-                            (state.productApi.misc1 / 100);
+                        final quatity = state.productApi.itemGroup == 'GRANEL'
+                            ? double.parse(state.quantityGranel.value)
+                            : state.quantityUnits;
+                        final double montoIva =
+                            price * (state.productApi.misc1 / 100);
                         final _product = Product(
                             codigoArticulo: state.productApi.code,
-                            cantidad: state.quantityUnits,
+                            cantidad: quatity,
                             notas: '',
                             envioParcial: '',
-                            precioSinIva: state.productApi.listPrice,
+                            precioSinIva: price,
                             montoIva: montoIva,
                             porcentajeIva: state.productApi.misc1.toDouble(),
                             codigoTarifa: '',
-                            precioIva: state.productApi.listPrice + montoIva,
+                            precioIva: price + montoIva,
                             porcentajeDescuento: 0,
                             montoDescuento: 0,
                             bonificacion: '',

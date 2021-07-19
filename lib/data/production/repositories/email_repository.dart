@@ -2,7 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:veggy/domain/models/email.dart';
 
-/**
+/*
  * Clase para manejo de agregado y cargado de correos de la base
  * de datos.
  */
@@ -10,7 +10,7 @@ class EmailRepository {
   late CollectionReference<Map<String, dynamic>> _emailListReference;
   CollectionReference correosElectronicos = FirebaseFirestore.instance.collection('CORREOS ELECTRONICOS');
 
-  /**
+  /*
    * Función encargada de brindar la lista de correos electrónicos
    * almacenados en la base de datos.
    * @Return Future<List<Email>>
@@ -27,7 +27,7 @@ class EmailRepository {
 
   }
 
-  /**
+  /*
    * Funciön encargada de agregar un nuevo correo electrónico
    * a la base de datos.
    * @Params : String receivedEmail

@@ -56,4 +56,6 @@ class PreOrder {
     data['detalles'] = this.detalles.map((v) => v.toJson()).toList();
     return data;
   }
+
+  
 }

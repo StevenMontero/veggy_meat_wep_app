@@ -9,6 +9,7 @@ class ProductCard extends StatelessWidget {
       required this.code,
       required this.category,
       required this.imageUrl,
+      required this.unidad,
       required this.onPressCard,
       required this.onPressButton})
       : super();
@@ -17,6 +18,7 @@ class ProductCard extends StatelessWidget {
   final String code;
   final String category;
   final String imageUrl;
+  final String unidad;
   final VoidCallback onPressCard;
   final VoidCallback onPressButton;
   @override
@@ -62,6 +64,10 @@ class ProductCard extends StatelessWidget {
               height: 5,
             ),
             Text('Categoria:$category', style: themeText.overline),
+            SizedBox(
+              height: 5,
+            ),
+             Text('Unidad de medida:$unidad', style: themeText.overline),
             SizedBox(
               height: 5,
             ),

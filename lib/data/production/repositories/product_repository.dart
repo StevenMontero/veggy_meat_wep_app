@@ -20,12 +20,12 @@ class ProductRepository {
       final DocumentSnapshot _startDocument =
           await _productsCategoryRef.doc(startDocumentId).get();
       _resul = await _productsCategoryRef
-          .startAfterDocument(_startDocument)
+          .startAfterDocument(_startDocument).where('active',isEqualTo: 1)
           .limit(10)
           .get();
       //.where('active', isEqualTo: '1')
     } else {
-      _resul = await _productsCategoryRef.limit(10).get();
+      _resul = await _productsCategoryRef.where('active',isEqualTo: 1).limit(10).get();
     }
 
     return _resul.docs.map((e) => ProductApi.fromJson(e.data())).toList();
