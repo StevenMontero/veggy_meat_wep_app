@@ -70,14 +70,17 @@ class _Body extends StatelessWidget {
                     itemCount: state.listNewProducts.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
+                      final price =
+                          state.listNewProducts[index].itemGroup == 'GRANEL'
+                              ? state.listNewProducts[index].listPrice / 1000
+                              : state.listNewProducts[index].listPrice;
                       return ProductCard(
                           title: state.listNewProducts[index].name,
-                          price:
-                              state.listNewProducts[index].listPrice.toStringAsFixed(2),
+                          price: price.toStringAsFixed(2),
                           code: state.listNewProducts[index].code,
                           category: state.listNewProducts[index].itemGroup,
                           imageUrl: '',
-                          unidad:state.listNewProducts[index].unidad,
+                          unidad: state.listNewProducts[index].unidad,
                           onPressCard: () {
                             NavigationService.navigateToWithArguments(
                                 'detail/${state.listNewProducts[index].itemGroup}/${state.listNewProducts[index].code}',
@@ -86,19 +89,20 @@ class _Body extends StatelessWidget {
                                     sameListProduct: []));
                           },
                           onPressButton: () {
-                            final double montoIva =
-                                state.listNewProducts[index].listPrice *
-                                    (state.listNewProducts[index].misc1 / 100);
+                            final double montoIva = price *
+                                (state.listNewProducts[index].misc1 / 100);
                             final _product = Product(
-                                codigoArticulo: state.listNewProducts[index].code,
+                                codigoArticulo:
+                                    state.listNewProducts[index].code,
                                 cantidad: 1,
                                 notas: '',
                                 envioParcial: '',
                                 precioSinIva:
                                     state.listNewProducts[index].listPrice,
                                 montoIva: montoIva,
-                                porcentajeIva:
-                                    state.listNewProducts[index].misc1.toDouble(),
+                                porcentajeIva: state
+                                    .listNewProducts[index].misc1
+                                    .toDouble(),
                                 codigoTarifa: '',
                                 precioIva:
                                     state.listNewProducts[index].listPrice +
@@ -106,15 +110,16 @@ class _Body extends StatelessWidget {
                                 porcentajeDescuento: 0,
                                 montoDescuento: 0,
                                 bonificacion: '',
-                                codImpuesto: state.listNewProducts[index].misc3);
+                                codImpuesto:
+                                    state.listNewProducts[index].misc3);
                             context.read<ShoppingcartCubit>().addProduct(
                                 CartProduct(
                                     product: _product,
-                                    isGranel:
-                                        state.listNewProducts[index].itemGroup ==
-                                            'GRANEL',
-                                    name:
-                                        state.listNewProducts[index].name + '2'));
+                                    isGranel: state
+                                            .listNewProducts[index].itemGroup ==
+                                        'GRANEL',
+                                    name: state.listNewProducts[index].name +
+                                        '2'));
                           });
                     },
                   ),
