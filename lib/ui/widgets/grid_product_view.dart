@@ -101,19 +101,19 @@ class GridProductWidget extends StatelessWidget {
                       productDetail);
                 },
                 onPressButton: () {
-                  final double montoIva = listProduct[index].listPrice *
+                  final double montoIva = price *
                       (listProduct[index].misc1 / 100);
                   final _product = Product(
                     codigoArticulo: listProduct[index].code,
                     cantidad: 1,
                     notas: '',
                     envioParcial: '',
-                    precioSinIva: listProduct[index].listPrice,
+                    precioSinIva: price,
                     montoIva: montoIva,
                     porcentajeIva: listProduct[index].misc1.toDouble(),
                     codigoTarifa: '',
                     montoDescuento: 0,
-                    precioIva: montoIva + listProduct[index].listPrice,
+                    precioIva: montoIva + price,
                     bonificacion: '',
                     porcentajeDescuento: 0,
                     codImpuesto: listProduct[index].misc3,

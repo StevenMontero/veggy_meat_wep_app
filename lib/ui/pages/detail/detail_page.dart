@@ -329,13 +329,14 @@ class Body extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.cyan, minimumSize: Size(700, 50)),
                       onPressed: () {
-                        final double montoIva = (price * state.quantityUnits) *
-                            (state.productApi.misc1 / 100);
+                        final quatity = state.productApi.itemGroup == 'GRANEL'
+                            ? double.parse(state.quantityGranel.value)
+                            : state.quantityUnits;
+                        final double montoIva =
+                            price * (state.productApi.misc1 / 100);
                         final _product = Product(
                             codigoArticulo: state.productApi.code,
-                            cantidad: state.productApi.itemGroup == 'GRANEL'
-                                ? double.parse(state.quantityGranel.value)
-                                : state.quantityUnits,
+                            cantidad: quatity,
                             notas: '',
                             envioParcial: '',
                             precioSinIva: price,
