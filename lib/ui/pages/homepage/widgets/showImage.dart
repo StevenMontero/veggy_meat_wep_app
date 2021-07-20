@@ -37,12 +37,11 @@ class _ShowImageState extends State<ShowImage> {
               ),
               Padding(
                 padding: responsiveApp.edgeInsetsApp.allExLargeEdgeInsets,
-                child: GridView.extent(
-                  maxCrossAxisExtent: 350,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: (3 / 2),
-                  shrinkWrap: true,
+                child: Wrap(
+                  alignment: WrapAlignment.start,
+                  direction: Axis.horizontal,
+                  spacing: 20,
+                  runSpacing: 10,
                   children: List.generate(
                       state.listFeatured.length,
                       (index) =>

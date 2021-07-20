@@ -21,28 +21,31 @@ class ListCategoryView extends StatelessWidget {
           padding: responsiveApp!.edgeInsetsApp.onlyExLargeTopEdgeInsets,
           child: Text(
             'Nuestros Departamentos',
-            style: isMobileAndTablet(context)? Theme.of(context)
-                  .textTheme
-                  .headline5!
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.white) : 
-                  Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+            style: isMobileAndTablet(context)
+                ? Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white)
+                : Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        //Grid con las categorias.  
+        //Grid con las categorias.
         Padding(
           padding: responsiveApp!.edgeInsetsApp.allExLargeEdgeInsets,
-          child: GridView.extent(
-            maxCrossAxisExtent: 160,
-            shrinkWrap: true,
+          child: Wrap(
+           alignment: WrapAlignment.start,
+           direction: Axis.horizontal,
+           runSpacing: 10,
             children: List.generate(
                 categories.length,
                 (index) => CategoryCard(
                       index: index,
-                      onPress: () {                 
-                        NavigationService.navigateTo('departmentFilter/${categories[index].name}');           
+                      onPress: () {
+                        NavigationService.navigateTo(
+                            'departmentFilter/${categories[index].name}');
                       },
                     )),
           ),

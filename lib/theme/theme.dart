@@ -17,7 +17,7 @@ ThemeData theme() {
 TextTheme textTheme() {
   return TextTheme(
     headline1: GoogleFonts.roboto(
-        fontSize: 96, fontWeight: FontWeight.w300, letterSpacing: -1.5),
+        fontSize: 296, fontWeight: FontWeight.w300, letterSpacing: -1.5),
     headline2: GoogleFonts.roboto(
         fontSize: 60, fontWeight: FontWeight.w300, letterSpacing: -0.5),
     headline3: GoogleFonts.roboto(fontSize: 48, fontWeight: FontWeight.w400),
