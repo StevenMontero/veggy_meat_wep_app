@@ -6,6 +6,15 @@ import 'package:veggy/domain/models/preorder.dart';
 class QuposRepository {
   final dioClient = Dio();
 
+  /*
+   * Funciön encargada de enviar la preventa al sistema qupos
+   * @Params : PreOrder preOrder
+   * @Return : {
+        'exito': bool,
+        "numero_pedido": string,
+        "mensajes": string,
+      };
+   */
   Future<Map<String, dynamic>> postPreventa(PreOrder preOrder) async {
     print(jsonEncode(preOrder.toJson()));
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('PROYECTO:12345'));
@@ -30,7 +39,7 @@ class QuposRepository {
         "mensajes": response.data["mensajes"],
       };
     } on DioError catch (e) {
-     return {
+      return {
         'exito': false,
         "numero_pedido": '-1',
         "mensajes": e.message,

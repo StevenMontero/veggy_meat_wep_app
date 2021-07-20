@@ -5,9 +5,12 @@ class ProductRepository {
   late CollectionReference<Map<String, dynamic>> _productsCategoryRef;
   /*
     category = nombre de la categoria
-    
     startDocumentId = el utimo ID de producto que se tenga en la lista, 
     si se envia null devuelve los primeros 10 productos de la categoria
+
+  Este método recibe el nombre de la categoria y el id del ultimo documento de la lista,
+   @Params : category,startDocumentId
+   @Return : Future<List<ProductApi>>, lista de los productos
    */
   Future<List<ProductApi>> getProductsByCategory(
       String category, String? startDocumentId) async {
@@ -20,12 +23,15 @@ class ProductRepository {
       final DocumentSnapshot _startDocument =
           await _productsCategoryRef.doc(startDocumentId).get();
       _resul = await _productsCategoryRef
-          .startAfterDocument(_startDocument).where('active',isEqualTo: 1)
+          .startAfterDocument(_startDocument)
+          .where('active', isEqualTo: 1)
           .limit(10)
           .get();
-      //.where('active', isEqualTo: '1')
     } else {
-      _resul = await _productsCategoryRef.where('active',isEqualTo: 1).limit(10).get();
+      _resul = await _productsCategoryRef
+          .where('active', isEqualTo: 1)
+          .limit(10)
+          .get();
     }
 
     return _resul.docs.map((e) => ProductApi.fromJson(e.data())).toList();
@@ -43,7 +49,10 @@ class ProductRepository {
   }
 
   /*
-  no funciona del todo, la busque es complicada, no usar de momento o intenrar mejorla
+   Este método busca en la base de datos los productos que tengan concidencia
+   con el searchQuery
+   @Params : category,searchQuery
+   @Return : Future<List<ProductApi>>, lista de los productos
    */
   Future<List<ProductApi>> searchProductsByCategory(
       String category, String searchQuery) async {

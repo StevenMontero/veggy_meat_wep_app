@@ -45,8 +45,13 @@ class FormCubit extends Cubit<FormCubitState> {
     final addres = AddrresForm.dirty(value);
     emit(state.copyWith(
       addres: addres,
-      status: Formz.validate(
-          [state.phone, addres, state.email, state.id,state.userNameComplete,]),
+      status: Formz.validate([
+        state.phone,
+        addres,
+        state.email,
+        state.id,
+        state.userNameComplete,
+      ]),
     ));
   }
 
@@ -55,7 +60,7 @@ class FormCubit extends Cubit<FormCubitState> {
     emit(state.copyWith(
       id: id,
       status: Formz.validate(
-          [state.phone, state.addres, state.email, id,state.userNameComplete]),
+          [state.phone, state.addres, state.email, id, state.userNameComplete]),
     ));
   }
 
@@ -95,7 +100,7 @@ class FormCubit extends Cubit<FormCubitState> {
     if (responce['exito']) {
       final message =
           'Buenos días.\nHe realizado una compra en la página de Veggy.\nOrdenCompra: ${preOrder.ordenCompra}\nNumeroPedido: ${responce['numero_pedido']} \nNombre: ${state.userNameComplete.value}\nCédula: ${state.id.value}\nTeléfono: ${state.phone.value}\nFecha: ${DateTime.now().toString()}\n Detalle: $detalle\nPor favor confirmar si recibieron el pedido.';
-      repoNotidications.sendWhatsappNotification(message, state.phone.value);
+      repoNotidications.sendWhatsappNotification(message, '89395313');
       await canLaunch(_url(message))
           ? await launch(_url(message))
           : print('Could not launch $_url');

@@ -8,7 +8,10 @@ class SmsNotificationRepository {
           '47cc075d72ad881e40fe3b79ec80a276', // replace xxx with Auth Token
       twilioNumber: '+14155238886' // replace .... with Twilio Number
       );
-
+/*
+   * Funciön encargada conctarse a twilio y enviar un mensaje por whatsapp
+   * @Params : String message
+   */
   void sendWhatsappNotification(String message, String numberPhone) {
     twilioFlutter.sendWhatsApp(
         toNumber: '+506$numberPhone',
