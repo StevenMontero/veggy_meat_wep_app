@@ -17,13 +17,21 @@ class DeatailCubit extends Cubit<DetailState> {
 
   void removeProductQuatity() {
     emit(state.copyWith(
-        quantityUnits: state.quantityUnits <= 0
+        quantityUnits: state.quantityUnits == 1
             ? state.quantityUnits
             : state.quantityUnits - 1));
   }
 
   void productQuatityGranelChanged(String quatity) {
-    emit(state.copyWith(quantityGranel: NumberNoEmpty.dirty(quatity)));
+    if (quatity.isNotEmpty) {
+      final auxQ = int.parse(quatity);
+      emit(state.copyWith(
+          quantityGranel: auxQ >= 1
+              ? NumberNoEmpty.dirty(quatity)
+              : NumberNoEmpty.dirty('a')));
+    } else {
+      emit(state.copyWith(quantityGranel: NumberNoEmpty.dirty(quatity)));
+    }
   }
 
   void productChanged(String category, String id) async {

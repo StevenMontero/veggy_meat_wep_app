@@ -294,7 +294,7 @@ class Body extends StatelessWidget {
                           style: TextStyle(color: Colors.black),
                           decoration: CustomInputs.loginInputDecoration(
                               errorText: state.quantityGranel.invalid
-                                  ? 'Ingrese solo números'
+                                  ? 'Ingrese solo números y una cantidad mayor a 0'
                                   : null,
                               hint: 'Ingrese la cantidad que necesita',
                               label: 'Gramos',
@@ -324,37 +324,76 @@ class Body extends StatelessWidget {
                   final price = state.productApi.itemGroup == 'GRANEL'
                       ? state.productApi.listPrice / 1000
                       : state.productApi.listPrice;
-                  return ElevatedButton(
-                      child: Text('AGREGAR'),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.cyan, minimumSize: Size(700, 50)),
-                      onPressed: () {
-                        final quatity = state.productApi.itemGroup == 'GRANEL'
-                            ? double.parse(state.quantityGranel.value)
-                            : state.quantityUnits;
-                        final double montoIva =
-                            price * (state.productApi.misc1 / 100);
-                        final _product = Product(
-                            codigoArticulo: state.productApi.code,
-                            cantidad: quatity,
-                            notas: '',
-                            envioParcial: '',
-                            precioSinIva: price,
-                            montoIva: montoIva,
-                            porcentajeIva: state.productApi.misc1.toDouble(),
-                            codigoTarifa: '',
-                            precioIva: price + montoIva,
-                            porcentajeDescuento: 0,
-                            montoDescuento: 0,
-                            bonificacion: '',
-                            codImpuesto: state.productApi.misc3);
-                        context.read<ShoppingcartCubit>().addProduct(
-                            CartProduct(
-                                product: _product,
-                                isGranel:
-                                    state.productApi.itemGroup == 'GRANEL',
-                                name: state.productApi.name));
-                      });
+                  return state.productApi.itemGroup == 'GRANEL'
+                      ? ElevatedButton(
+                          child: Text('AGREGAR'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.cyan, minimumSize: Size(700, 50)),
+                          onPressed: state.quantityGranel.valid
+                              ? () {
+                                  final quatity = state.productApi.itemGroup ==
+                                          'GRANEL'
+                                      ? double.parse(state.quantityGranel.value)
+                                      : state.quantityUnits;
+                                  final double montoIva =
+                                      price * (state.productApi.misc1 / 100);
+                                  final _product = Product(
+                                      codigoArticulo: state.productApi.code,
+                                      cantidad: quatity,
+                                      notas: '',
+                                      envioParcial: '',
+                                      precioSinIva: price,
+                                      montoIva: montoIva,
+                                      porcentajeIva:
+                                          state.productApi.misc1.toDouble(),
+                                      codigoTarifa: '',
+                                      precioIva: price + montoIva,
+                                      porcentajeDescuento: 0,
+                                      montoDescuento: 0,
+                                      bonificacion: '',
+                                      codImpuesto: state.productApi.misc3);
+                                  context.read<ShoppingcartCubit>().addProduct(
+                                      CartProduct(
+                                          product: _product,
+                                          isGranel:
+                                              state.productApi.itemGroup ==
+                                                  'GRANEL',
+                                          name: state.productApi.name));
+                                }
+                              : null)
+                      : ElevatedButton(
+                          child: Text('AGREGAR'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.cyan, minimumSize: Size(700, 50)),
+                          onPressed: () {
+                            final quatity =
+                                state.productApi.itemGroup == 'GRANEL'
+                                    ? double.parse(state.quantityGranel.value)
+                                    : state.quantityUnits;
+                            final double montoIva =
+                                price * (state.productApi.misc1 / 100);
+                            final _product = Product(
+                                codigoArticulo: state.productApi.code,
+                                cantidad: quatity,
+                                notas: '',
+                                envioParcial: '',
+                                precioSinIva: price,
+                                montoIva: montoIva,
+                                porcentajeIva:
+                                    state.productApi.misc1.toDouble(),
+                                codigoTarifa: '',
+                                precioIva: price + montoIva,
+                                porcentajeDescuento: 0,
+                                montoDescuento: 0,
+                                bonificacion: '',
+                                codImpuesto: state.productApi.misc3);
+                            context.read<ShoppingcartCubit>().addProduct(
+                                CartProduct(
+                                    product: _product,
+                                    isGranel:
+                                        state.productApi.itemGroup == 'GRANEL',
+                                    name: state.productApi.name));
+                          });
                 },
               )),
           Padding(
