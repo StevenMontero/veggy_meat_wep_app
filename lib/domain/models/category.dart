@@ -24,10 +24,6 @@ class Category {
       image: 'assets/icons/Boton_naranja_inactivo_Granel.svg'
     ),
     Category(
-      name: 'JARDINERIA',
-      image: 'assets/icons/Boton_naranja_inactivo_Jardineria.svg'
-    ),
-    Category(
       name: 'LICORES',
       image: 'assets/icons/Boton_naranja_inactivo_Licores_y_cerveza.svg'
     ),
