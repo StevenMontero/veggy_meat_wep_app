@@ -29,6 +29,7 @@ class ProductCard extends StatelessWidget {
       onTap: onPressCard,
       child: Card(
         elevation: 1,
+        margin: EdgeInsets.only(left: 10, top:10, right: 10, bottom:10),
         shadowColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Column(

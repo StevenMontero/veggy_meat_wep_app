@@ -74,9 +74,9 @@ class GridProductWidget extends StatelessWidget {
       isAlwaysShown: true,
       child: GridView.builder(
           controller: controller,
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
               childAspectRatio: 0.6,
               crossAxisSpacing: 1,
               mainAxisSpacing: 1),
