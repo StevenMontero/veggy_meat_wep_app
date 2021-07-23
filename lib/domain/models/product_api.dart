@@ -27,6 +27,7 @@ class ProductApi {
   late int active;
   late int ecommerceActive;
   late String unidad;
+  late String imageUrl;
 
   ProductApi(
       {this.cImpProductId = 0,
@@ -55,7 +56,8 @@ class ProductApi {
       this.misc7 = '',
       this.misc8 = '',
       this.active = 1,
-      this.unidad ='',
+      this.unidad = '',
+      this.imageUrl = '',
       this.ecommerceActive = 0});
 
   ProductApi.fromJson(Map<String, dynamic> json) {
@@ -89,6 +91,7 @@ class ProductApi {
     misc8 = json['misc8'] ?? '';
     active = json['active'] ?? 1;
     unidad = json['unidad'] ?? '';
+    imageUrl = json['imageUrl'] ?? '';
     ecommerceActive = json['ecommerceActive'] ?? 0;
   }
 
@@ -122,7 +125,8 @@ class ProductApi {
     data['active'] = this.active;
     data['ecommerceActive'] = this.ecommerceActive;
     data['unidad'] = this.unidad;
-    
+    data['imageUrl'] = this.imageUrl;
+
     return data;
   }
 }

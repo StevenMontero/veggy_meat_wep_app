@@ -101,9 +101,9 @@ class FormCubit extends Cubit<FormCubitState> {
       final message =
           'Buenos días.\nHe realizado una compra en la página de Veggy.\nOrdenCompra: ${preOrder.ordenCompra}\nNumeroPedido: ${responce['numero_pedido']} \nNombre: ${state.userNameComplete.value}\nCédula: ${state.id.value}\nTeléfono: ${state.phone.value}\nFecha: ${DateTime.now().toString()}\n Detalle: $detalle\nPor favor confirmar si recibieron el pedido.';
       repoNotidications.sendWhatsappNotification(message, '89395313');
-      await canLaunch(_url(message))
-          ? await launch(_url(message))
-          : print('Could not launch $_url');
+      // await canLaunch(_url(message))
+      //     ? await launch(_url(message))
+      //     : print('Could not launch $_url');
       emit(state.copyWith(statusSummit: StatudSummit.summited, message: ''));
     } else {
       emit(state.copyWith(
@@ -111,7 +111,7 @@ class FormCubit extends Cubit<FormCubitState> {
     }
   }
 
-  String _url(String message) {
-    return "https://api.whatsapp.com/send?phone=${'+506 ' + '89395313'}&text=$message"; // new line
-  }
+  // String _url(String message) {
+  //   return "https://api.whatsapp.com/send?phone=${'+506 ' + '89395313'}&text=$message"; // new line
+  // }
 }

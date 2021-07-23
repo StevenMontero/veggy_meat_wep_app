@@ -83,7 +83,7 @@ class _Body extends StatelessWidget {
                           price: price.toStringAsFixed(2),
                           code: state.listNewProducts[index].code,
                           category: state.listNewProducts[index].itemGroup,
-                          imageUrl: '',
+                          imageUrl: state.listNewProducts[index].imageUrl,
                           unidad: state.listNewProducts[index].unidad,
                           onPressCard: () {
                             NavigationService.navigateToWithArguments(
@@ -93,12 +93,16 @@ class _Body extends StatelessWidget {
                                     sameListProduct: []));
                           },
                           onPressButton: () {
+                            final double quatity =
+                                      state.listNewProducts[index].itemGroup == 'GRANEL'
+                                          ? 1 / 1000
+                                          : 1.0;
                             final double montoIva = price *
                                 (state.listNewProducts[index].misc1 / 100);
                             final _product = Product(
                                 codigoArticulo:
                                     state.listNewProducts[index].code,
-                                cantidad: 1,
+                                cantidad: quatity,
                                 notas: '',
                                 envioParcial: '',
                                 precioSinIva:
@@ -119,6 +123,7 @@ class _Body extends StatelessWidget {
                             context.read<ShoppingcartCubit>().addProduct(
                                 CartProduct(
                                     product: _product,
+                                    imageUrl:  state.listNewProducts[index].imageUrl,
                                     isGranel: state
                                             .listNewProducts[index].itemGroup ==
                                         'GRANEL',

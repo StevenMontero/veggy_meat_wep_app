@@ -217,7 +217,7 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                               height: 100,
                               width: 100,
                               child: Image.network(
-                                "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.listProducts[index].product.codigoArticulo}",
+                                state.listProducts[index].imageUrl,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Image.asset(
                                         "assets/images/imagen_no_disponible.png"),
@@ -272,7 +272,7 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                                         : 'u'),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
-                                  fontSize: 20,
+                                  fontSize: 15,
                                   color: Colors.black,
                                 ),
                               ),
@@ -443,7 +443,7 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                               height: 50,
                               width: 50,
                               child: Image.network(
-                                "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.listProducts[index].product.codigoArticulo}",
+                                state.listProducts[index].imageUrl,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Image.asset(
                                         "assets/images/imagen_no_disponible.png"),
@@ -500,7 +500,7 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                                         .toString(),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
-                                  fontSize: 15,
+                                  fontSize: 12,
                                   color: Colors.black,
                                 ),
                               ),

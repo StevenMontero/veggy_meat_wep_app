@@ -62,7 +62,7 @@ class Product {
     data['notas'] = this.notas.toString();
     data['envio_parcial'] = this.envioParcial.toString();
     data['precio_sin_iva'] = this.precioSinIva;
-    data['monto_iva'] = this.montoIva.toString();
+    data['monto_iva'] = this.montoIva;
     data['porcentaje_iva'] = this.porcentajeIva;
     data['codigo_tarifa'] = this.codigoTarifa.toString();
     data['precio_iva'] = this.precioIva;

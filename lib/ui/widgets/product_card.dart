@@ -39,11 +39,12 @@ class ProductCard extends StatelessWidget {
               height: 10,
             ),
             Expanded(
-              child: Image.network(
-                "http://186.177.135.3:45570/api/Articulos/Imagen?code=$code",
-                errorBuilder: (context, error, stackTrace) =>
-                    Image.asset("assets/images/imagen_no_disponible.png"),
-              ),
+              child: imageUrl.isNotEmpty
+                  ? FadeInImage(
+                      placeholder:
+                          AssetImage('assets/icons/Pulse-1s-200px.gif'),
+                      image: NetworkImage(imageUrl))
+                  : Image.asset('assets/images/imagen_no_disponible.png'),
             ),
             SizedBox(
               height: 10,
@@ -67,7 +68,7 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-             Text('Unidad de medida:$unidad', style: themeText.overline),
+            Text('Unidad de medida:$unidad', style: themeText.overline),
             SizedBox(
               height: 5,
             ),

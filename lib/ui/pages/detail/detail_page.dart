@@ -138,7 +138,7 @@ class Body extends StatelessWidget {
                                 code: state.listSameProduct[index].code,
                                 category:
                                     state.listSameProduct[index].itemGroup,
-                                imageUrl: '',
+                                imageUrl: state.listSameProduct[index].imageUrl,
                                 unidad: state.listSameProduct[index].unidad,
                                 onPressCard: () {
                                   NavigationService.navigateToWithArguments(
@@ -149,13 +149,17 @@ class Body extends StatelessWidget {
                                               state.listSameProduct));
                                 },
                                 onPressButton: () {
+                                  final double quatity =
+                                      state.productApi.itemGroup == 'GRANEL'
+                                          ? 1 / 1000
+                                          : 1.0;
                                   final double montoIva = price *
                                       (state.listSameProduct[index].misc1 /
                                           100);
                                   final _product = Product(
                                       codigoArticulo:
                                           state.listSameProduct[index].code,
-                                      cantidad: 1,
+                                      cantidad: quatity,
                                       notas: '',
                                       envioParcial: '',
                                       precioSinIva: price,
@@ -173,6 +177,8 @@ class Body extends StatelessWidget {
                                   context.read<ShoppingcartCubit>().addProduct(
                                       CartProduct(
                                           product: _product,
+                                          imageUrl: state
+                                              .listSameProduct[index].imageUrl,
                                           isGranel:
                                               state.productApi.itemGroup ==
                                                   'GRANEL',
@@ -357,6 +363,7 @@ class Body extends StatelessWidget {
                                   context.read<ShoppingcartCubit>().addProduct(
                                       CartProduct(
                                           product: _product,
+                                          imageUrl: state.productApi.imageUrl,
                                           isGranel:
                                               state.productApi.itemGroup ==
                                                   'GRANEL',
@@ -393,6 +400,7 @@ class Body extends StatelessWidget {
                             context.read<ShoppingcartCubit>().addProduct(
                                 CartProduct(
                                     product: _product,
+                                    imageUrl: state.productApi.imageUrl,
                                     isGranel:
                                         state.productApi.itemGroup == 'GRANEL',
                                     name: state.productApi.name));

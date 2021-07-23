@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-
 import 'package:veggy/domain/models/preorder.dart';
 
 class QuposRepository {
   final dioClient = Dio();
-
+  String _basicAuth = 'Basic ' + base64Encode(utf8.encode('PROYECTO:12345'));
   /*
    * Funciön encargada de enviar la preventa al sistema qupos
    * @Params : PreOrder preOrder
@@ -17,14 +16,13 @@ class QuposRepository {
    */
   Future<Map<String, dynamic>> postPreventa(PreOrder preOrder) async {
     print(jsonEncode(preOrder.toJson()));
-    String basicAuth = 'Basic ' + base64Encode(utf8.encode('PROYECTO:12345'));
 
     try {
       final response =
           await dioClient.post('http://186.177.135.3:45570/api/Preventas',
               data: jsonEncode(preOrder.toJson()),
               options: Options(headers: {
-                'authorization': basicAuth,
+                'authorization': _basicAuth,
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Headers":
@@ -43,6 +41,32 @@ class QuposRepository {
         'exito': false,
         "numero_pedido": '-1',
         "mensajes": e.message,
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> imageFromBase64String(String code) async {
+    try {
+      final response = await dioClient.get(
+          'http://186.177.135.3:45570/api/Articulos/ImagenBase64?code=$code',
+          options: Options(headers: {
+            'authorization': _basicAuth,
+            'Accept': "*/*",
+          }));
+      if (response.statusCode == 200) {
+        return {
+          'exito': true,
+          'image': base64Decode(response.data),
+        };
+      }
+      return {
+        'exito': false,
+        'image': '',
+      };
+    } on DioError catch (e) {
+      return {
+        'exito': false,
+        'image': '',
       };
     }
   }

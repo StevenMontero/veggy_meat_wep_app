@@ -90,7 +90,7 @@ class GridProductWidget extends StatelessWidget {
                 price: price.toStringAsFixed(2),
                 code: listProduct[index].code,
                 category: listProduct[index].itemGroup,
-                imageUrl: '',
+                imageUrl: listProduct[index].imageUrl,
                 unidad: listProduct[index].unidad,
                 onPressCard: () {
                   var productDetail = ProductDetail(
@@ -101,11 +101,15 @@ class GridProductWidget extends StatelessWidget {
                       productDetail);
                 },
                 onPressButton: () {
+                  final double quatity =
+                                     listProduct[index].itemGroup == 'GRANEL'
+                                          ? 1 / 1000
+                                          : 1.0;
                   final double montoIva = price *
                       (listProduct[index].misc1 / 100);
                   final _product = Product(
                     codigoArticulo: listProduct[index].code,
-                    cantidad: 1,
+                    cantidad: quatity,
                     notas: '',
                     envioParcial: '',
                     precioSinIva: price,
@@ -120,6 +124,7 @@ class GridProductWidget extends StatelessWidget {
                   );
                   context.read<ShoppingcartCubit>().addProduct(CartProduct(
                       product: _product,
+                      imageUrl: listProduct[index].imageUrl,
                       isGranel: listProduct[index].itemGroup == 'GRANEL',
                       name: listProduct[index].name));
                 });
