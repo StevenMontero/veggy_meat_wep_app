@@ -67,26 +67,30 @@ class Body extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: [
                         Container(
-                          height: responsiveApp.width <= 1197 &&
-                                  responsiveApp.width >= 900
-                              ? 450
-                              : isMobileAndTablet(context)
-                                  ? 350
-                                  : 470,
-                          width: responsiveApp.width <= 1007 &&
-                                  responsiveApp.width >= 900
-                              ? 450
-                              : isMobileAndTablet(context)
-                                  ? 350
-                                  : 470,
-                          child: Image.network(
-                            "http://186.177.135.3:45570/api/Articulos/Imagen?code=${state.productApi.code}",
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
-                                    "assets/images/imagen_no_disponible.png"),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
+                            height: responsiveApp.width <= 1197 &&
+                                    responsiveApp.width >= 900
+                                ? 450
+                                : isMobileAndTablet(context)
+                                    ? 350
+                                    : 470,
+                            width: responsiveApp.width <= 1007 &&
+                                    responsiveApp.width >= 900
+                                ? 450
+                                : isMobileAndTablet(context)
+                                    ? 350
+                                    : 470,
+                            child: state.productApi.imageUrl.isNotEmpty
+                                ? FadeInImage(
+                                    placeholder: AssetImage(
+                                        'assets/icons/Pulse-1s-200px.gif'),
+                                    image:
+                                        NetworkImage(state.productApi.imageUrl),
+                                    fit: BoxFit.fill,
+                                  )
+                                : Image.asset(
+                                    'assets/images/imagen_no_disponible.png',
+                                    fit: BoxFit.fill,
+                                  )),
                         buildInfoProduct(
                             themeText, responsiveApp, context, state.productApi)
                       ],
@@ -153,22 +157,26 @@ class Body extends StatelessWidget {
                                       state.productApi.itemGroup == 'GRANEL'
                                           ? 1 / 1000
                                           : 1.0;
-                                  final double montoIva = price *
-                                      (state.listSameProduct[index].misc1 /
-                                          100);
+                                  final double montoIva =
+                                      state.listSameProduct[index].listPrice *
+                                          (state.listSameProduct[index].misc1 /
+                                              100);
                                   final _product = Product(
                                       codigoArticulo:
                                           state.listSameProduct[index].code,
                                       cantidad: quatity,
                                       notas: '',
                                       envioParcial: '',
-                                      precioSinIva: price,
+                                      precioSinIva: state
+                                          .listSameProduct[index].listPrice,
                                       montoIva: montoIva,
                                       porcentajeIva: state
                                           .listSameProduct[index].misc1
                                           .toDouble(),
                                       codigoTarifa: '',
-                                      precioIva: price + montoIva,
+                                      precioIva: state.listSameProduct[index]
+                                              .listPrice +
+                                          montoIva,
                                       porcentajeDescuento: 0,
                                       montoDescuento: 0,
                                       bonificacion: '',
@@ -344,18 +352,20 @@ class Body extends StatelessWidget {
                                               1000
                                           : state.quantityUnits;
                                   final double montoIva =
-                                      price * (state.productApi.misc1 / 100);
+                                      state.productApi.listPrice *
+                                          (state.productApi.misc1 / 100);
                                   final _product = Product(
                                       codigoArticulo: state.productApi.code,
                                       cantidad: quatity,
                                       notas: '',
                                       envioParcial: '',
-                                      precioSinIva: price,
+                                      precioSinIva: state.productApi.listPrice,
                                       montoIva: montoIva,
                                       porcentajeIva:
                                           state.productApi.misc1.toDouble(),
                                       codigoTarifa: '',
-                                      precioIva: price + montoIva,
+                                      precioIva:
+                                          state.productApi.listPrice + montoIva,
                                       porcentajeDescuento: 0,
                                       montoDescuento: 0,
                                       bonificacion: '',

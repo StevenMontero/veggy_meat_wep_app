@@ -97,7 +97,7 @@ class _Body extends StatelessWidget {
                                       state.listNewProducts[index].itemGroup == 'GRANEL'
                                           ? 1 / 1000
                                           : 1.0;
-                            final double montoIva = price *
+                            final double montoIva = state.listNewProducts[index].listPrice *
                                 (state.listNewProducts[index].misc1 / 100);
                             final _product = Product(
                                 codigoArticulo:

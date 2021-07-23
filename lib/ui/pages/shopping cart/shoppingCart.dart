@@ -199,8 +199,10 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                     final cantidad = state.listProducts[index].isGranel
                         ? state.listProducts[index].product.cantidad * 1000
                         : state.listProducts[index].product.cantidad;
-                    var precioxUnidad =
-                        state.listProducts[index].product.precioIva * cantidad;
+                    final price = state.listProducts[index].isGranel
+                        ? state.listProducts[index].product.precioSinIva / 1000
+                        : state.listProducts[index].product.precioSinIva;
+                    var precioxUnidad = price * cantidad;
                     return Container(
                       height: 150,
                       width: 800,
@@ -216,12 +218,15 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                             child: Container(
                               height: 100,
                               width: 100,
-                              child: Image.network(
-                                state.listProducts[index].imageUrl,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Image.asset(
-                                        "assets/images/imagen_no_disponible.png"),
-                              ),
+                              child: state
+                                      .listProducts[index].imageUrl.isNotEmpty
+                                  ? FadeInImage(
+                                      placeholder: AssetImage(
+                                          'assets/icons/Pulse-1s-200px.gif'),
+                                      image: NetworkImage(
+                                          state.listProducts[index].imageUrl))
+                                  : Image.asset(
+                                      'assets/images/imagen_no_disponible.png'),
                             ),
                           ),
                           Padding(
@@ -247,9 +252,7 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                               height: 50,
                               width: 150,
                               child: Text(
-                                '₡ ' +
-                                    state.listProducts[index].product.precioIva
-                                        .toStringAsFixed(2),
+                                '₡ ' + price.toStringAsFixed(2),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
@@ -425,8 +428,10 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                     final cantidad = state.listProducts[index].isGranel
                         ? state.listProducts[index].product.cantidad * 1000
                         : state.listProducts[index].product.cantidad;
-                    var precioxUnidad =
-                        state.listProducts[index].product.precioIva * cantidad;
+                    final price = state.listProducts[index].isGranel
+                        ? state.listProducts[index].product.precioSinIva / 1000
+                        : state.listProducts[index].product.precioSinIva;
+                    var precioxUnidad = price * cantidad;
                     return Container(
                       height: 150,
                       width: 450,
@@ -440,15 +445,17 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Container(
-                              height: 50,
-                              width: 50,
-                              child: Image.network(
-                                state.listProducts[index].imageUrl,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Image.asset(
-                                        "assets/images/imagen_no_disponible.png"),
-                              ),
-                            ),
+                                height: 50,
+                                width: 50,
+                                child: state
+                                        .listProducts[index].imageUrl.isNotEmpty
+                                    ? FadeInImage(
+                                        placeholder: AssetImage(
+                                            'assets/icons/Pulse-1s-200px.gif'),
+                                        image: NetworkImage(
+                                            state.listProducts[index].imageUrl))
+                                    : Image.asset(
+                                        'assets/images/imagen_no_disponible.png')),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -474,9 +481,7 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                               height: 40,
                               width: 100,
                               child: Text(
-                                '₡ ' +
-                                    state.listProducts[index].product.precioIva
-                                        .toStringAsFixed(2),
+                                '₡ ' + price.toStringAsFixed(2),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
                                   fontSize: 15,

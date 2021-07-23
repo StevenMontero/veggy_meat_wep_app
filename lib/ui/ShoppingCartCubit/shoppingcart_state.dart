@@ -19,10 +19,14 @@ de productos seleccionados, ademas de mantener el acumulado de los impuestos de 
     double impuestos = 0;
     if (listProducts.isNotEmpty) {
       for (CartProduct product in listProducts) {
+        final price = product.isGranel
+            ? product.product.precioSinIva / 1000
+            : product.product.precioSinIva;
+        final double montoIva = price * (product.product.porcentajeIva / 100);
         final cantidad = product.isGranel
             ? product.product.cantidad * 1000
             : product.product.cantidad;
-        impuestos = impuestos + (product.product.montoIva * cantidad);
+        impuestos = impuestos + (montoIva * cantidad);
       }
     }
     return impuestos;
@@ -36,10 +40,13 @@ de productos seleccionados, ademas de mantener el acumulado de todos los product
     double subTotal = 0;
     if (listProducts.isNotEmpty) {
       for (CartProduct product in listProducts) {
+        final price = product.isGranel
+            ? product.product.precioSinIva / 1000
+            : product.product.precioSinIva;
         final cantidad = product.isGranel
             ? product.product.cantidad * 1000
             : product.product.cantidad;
-        subTotal = subTotal + (product.product.precioSinIva * cantidad);
+        subTotal = subTotal + (price * cantidad);
       }
     }
     return subTotal;
@@ -53,10 +60,13 @@ de productos seleccionados, ademas de mantener el acumulado de todos los product
     double total = 0;
     if (listProducts.isNotEmpty) {
       for (CartProduct product in listProducts) {
+        final price = product.isGranel
+            ? product.product.precioIva / 1000
+            : product.product.precioIva;
         final cantidad = product.isGranel
             ? product.product.cantidad * 1000
             : product.product.cantidad;
-        total = total + (product.product.precioIva * cantidad);
+        total = total + (price * cantidad);
       }
     }
     return total;

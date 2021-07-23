@@ -97,7 +97,7 @@ class GridProductWidget extends StatelessWidget {
                       product: listProduct[index],
                       sameListProduct: loadList(listProduct[index], index));
                   NavigationService.navigateToWithArguments(
-                      '/detail/${"listProduct[index].itemGroup"}/${"listProduct[index].code"}',
+                      '/detail/${listProduct[index].itemGroup}/${listProduct[index].code}',
                       productDetail);
                 },
                 onPressButton: () {
