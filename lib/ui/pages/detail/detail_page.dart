@@ -241,7 +241,7 @@ class Body extends StatelessWidget {
             padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
             child: Container(
               child: Text(
-                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}\n Unidad de medida: ${product.unidad}',
+                  'Codigo de producto: ${product.code}\nCategoria : ${product.itemGroup}\nUnidad de medida: ${product.unidad}',
                   style: themeText.bodyText1,
                   textAlign: TextAlign.justify,
                   textScaleFactor: isDesktop(context)
@@ -331,10 +331,12 @@ class Body extends StatelessWidget {
                               primary: Colors.cyan, minimumSize: Size(700, 50)),
                           onPressed: state.quantityGranel.valid
                               ? () {
-                                  final quatity = state.productApi.itemGroup ==
-                                          'GRANEL'
-                                      ? double.parse(state.quantityGranel.value)
-                                      : state.quantityUnits;
+                                  final quatity =
+                                      state.productApi.itemGroup == 'GRANEL'
+                                          ? double.parse(
+                                                  state.quantityGranel.value) /
+                                              1000
+                                          : state.quantityUnits;
                                   final double montoIva =
                                       price * (state.productApi.misc1 / 100);
                                   final _product = Product(
@@ -368,7 +370,8 @@ class Body extends StatelessWidget {
                           onPressed: () {
                             final quatity =
                                 state.productApi.itemGroup == 'GRANEL'
-                                    ? double.parse(state.quantityGranel.value)
+                                    ? double.parse(state.quantityGranel.value) /
+                                        1000
                                     : state.quantityUnits;
                             final double montoIva =
                                 price * (state.productApi.misc1 / 100);

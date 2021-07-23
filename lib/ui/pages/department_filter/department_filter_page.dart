@@ -8,7 +8,7 @@ import 'package:veggy/domain/usecases/products_usecase.dart';
 import 'package:veggy/router/navigation_key.dart';
 import 'package:veggy/util/sizingInfo.dart';
 
-/**
+/*
  * Clase encargada de manejar la vista de productos por departamento,
  * ofreciendo un filtro para el contenido mostrado.
  * @Params : currentDepartment, Departamento actualmente seleccionado por
@@ -31,7 +31,7 @@ class DepartmentFilterPage extends StatelessWidget {
   }
 }
 
-/**
+/*
  * Objeto de manejo de selección de categorías.
  */
 enum DrawerSelection {
@@ -45,7 +45,7 @@ enum DrawerSelection {
   panaderia
 }
 
-/**
+/*
  * Clase encargada de popular visualmente la sección de vista
  * por departamentos.
  * @Params : String currentDepartment
@@ -402,7 +402,7 @@ class MyMainContainer extends StatelessWidget {
                    */
                   Expanded(
                     child: Container(
-                      color: Colors.grey[400],
+                      color: Colors.blueGrey[900],
                       child: GridProductWidget(
                           listProduct: state.listProducts,
                           controller: myController),

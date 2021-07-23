@@ -44,7 +44,7 @@ class PreOrder {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['codigo_cliente'] = this.codigoCliente.toString();
-    data['orden_compra'] = this.ordenCompra..toString();
+    data['orden_compra'] = this.ordenCompra.toString();
     data['fecha_hora'] = this.fechaHora.toString();
     data['notas'] = this.notas.toString();
     data['cedula'] = this.cedula.toString();

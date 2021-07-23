@@ -17,7 +17,7 @@ class ShoppingCart extends StatelessWidget {
   final _scrollController2 = ScrollController();
   final _scrollController3 = ScrollController();
   late MoneyFormatter fmf;
-  
+
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
@@ -196,9 +196,11 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                 child: ListView.builder(
                   itemCount: state.listProducts.length,
                   itemBuilder: (context, index) {
+                    final cantidad = state.listProducts[index].isGranel
+                        ? state.listProducts[index].product.cantidad * 1000
+                        : state.listProducts[index].product.cantidad;
                     var precioxUnidad =
-                        state.listProducts[index].product.precioIva *
-                            state.listProducts[index].product.cantidad;
+                        state.listProducts[index].product.precioIva * cantidad;
                     return Container(
                       height: 150,
                       width: 800,
@@ -264,8 +266,10 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de esc
                               width: 50,
                               child: Text(
                                 'X ' +
-                                    state.listProducts[index].product.cantidad
-                                        .toString(),
+                                    cantidad.toString() +
+                                    (state.listProducts[index].isGranel
+                                        ? 'g'
+                                        : 'u'),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
@@ -418,9 +422,11 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                 child: ListView.builder(
                   itemCount: state.listProducts.length,
                   itemBuilder: (context, index) {
+                    final cantidad = state.listProducts[index].isGranel
+                        ? state.listProducts[index].product.cantidad * 1000
+                        : state.listProducts[index].product.cantidad;
                     var precioxUnidad =
-                        state.listProducts[index].product.precioIva *
-                            state.listProducts[index].product.cantidad;
+                        state.listProducts[index].product.precioIva * cantidad;
                     return Container(
                       height: 150,
                       width: 450,
@@ -487,7 +493,10 @@ imagen y cantidad seleccionada, ademas contiene los ajuste para pantalles de dis
                               width: 40,
                               child: Text(
                                 'X ' +
-                                    state.listProducts[index].product.cantidad
+                                    cantidad.toString() +
+                                    (state.listProducts[index].isGranel
+                                            ? 'g'
+                                            : 'u')
                                         .toString(),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.roboto(
@@ -552,7 +561,7 @@ todo obtenido del state, ademas formateando las cantidades con la libreria Money
         MoneyFormatterOutput subFO = fmf.output;
         fmf = MoneyFormatter(amount: state.impuestoShoppingCart());
         MoneyFormatterOutput impuestoFO = fmf.output;
-         fmf = MoneyFormatter(amount: state.totalShoppingCart());
+        fmf = MoneyFormatter(amount: state.totalShoppingCart());
         MoneyFormatterOutput totalFO = fmf.output;
         return Container(
             height: 300,
@@ -588,7 +597,7 @@ todo obtenido del state, ademas formateando las cantidades con la libreria Money
                     ),
                   ),
                   trailing: Text(
-                    '₡ '+subFO.nonSymbol,
+                    '₡ ' + subFO.nonSymbol,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -610,7 +619,7 @@ todo obtenido del state, ademas formateando las cantidades con la libreria Money
                     ),
                   ),
                   trailing: Text(
-                    '₡ '+impuestoFO.nonSymbol,
+                    '₡ ' + impuestoFO.nonSymbol,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -632,7 +641,7 @@ todo obtenido del state, ademas formateando las cantidades con la libreria Money
                     ),
                   ),
                   trailing: Text(
-                    '₡ '+totalFO.nonSymbol,
+                    '₡ ' + totalFO.nonSymbol,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.roboto(
                       fontSize: 20,

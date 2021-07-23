@@ -58,16 +58,16 @@ class Product {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['codigo_articulo'] = this.codigoArticulo.toString();
-    data['cantidad'] = this.cantidad.toString();
+    data['cantidad'] = this.cantidad;
     data['notas'] = this.notas.toString();
     data['envio_parcial'] = this.envioParcial.toString();
-    data['precio_sin_iva'] = this.precioSinIva.toString();
+    data['precio_sin_iva'] = this.precioSinIva;
     data['monto_iva'] = this.montoIva.toString();
-    data['porcentaje_iva'] = this.porcentajeIva.toString();
+    data['porcentaje_iva'] = this.porcentajeIva;
     data['codigo_tarifa'] = this.codigoTarifa.toString();
-    data['precio_iva'] = this.precioIva.toString();
-    data['porcentaje_descuento'] = this.porcentajeDescuento.toString();
-    data['monto_descuento'] = this.montoDescuento.toString();
+    data['precio_iva'] = this.precioIva;
+    data['porcentaje_descuento'] = this.porcentajeDescuento;
+    data['monto_descuento'] = this.montoDescuento;
     data['bonificacion'] = this.bonificacion.toString();
     data['cod_impuesto'] = this.codImpuesto.toString();
     return data;
