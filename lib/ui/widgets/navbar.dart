@@ -18,11 +18,11 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           isMobileAndTablet(context)
               ? IconButton(
                   icon: Icon(
-                    Icons.menu_outlined,
+                    Icons.home_rounded,
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    NavigationService.navigateTo(Flurorouter.homeRoute);
+                    NavigationService.navigateTo(Flurorouter.rootRoute);
                   })
               : Padding(
                   padding: const EdgeInsets.only(left: 24),
