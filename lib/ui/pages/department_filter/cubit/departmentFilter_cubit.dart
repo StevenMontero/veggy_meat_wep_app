@@ -19,10 +19,11 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
    * la lista a la función categorySwitchSearch() y actualiza el
    * estado con esta lista.
    */
-  void addProducts() async{
+  Future<String> addProducts() async{
     final tempList;
     tempList = await categorySwitchSearch();
     emit(state.copyWith(listProducts: state.listProducts + tempList));
+    return "";
   }
 
   /**
@@ -47,7 +48,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         List<ProductApi> listVerduras = [];
         List<ProductApi> listTuberculos = [];
         List<ProductApi> listLegumbres = [];
-        if (!state.lastElements.isEmpty){
+        if (state.lastElements.isNotEmpty){
           listFrutas1 = await _productUseCase.getProductsByCateforie('FRUTAS NACIONALES', subCodes[0]);
           listFrutas2 = await _productUseCase.getProductsByCateforie('FRUTAS INTERNACIONALES', subCodes[1]);
           listVerduras = await _productUseCase.getProductsByCateforie('VERDURAS', subCodes[2]);
@@ -63,19 +64,19 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
         int n = 0;
         while (n<listFrutas1.length || n<listFrutas2.length || n<listVerduras.length || n<listTuberculos.length || n<listLegumbres.length) {
-          if(n<listFrutas1.length){
+          if(n<listFrutas1.length && listFrutas1.length > 1){
             tempList.add(listFrutas1[n]);
           }
-          if(n<listFrutas2.length){
+          if(n<listFrutas2.length && listFrutas2.length > 1){
             tempList.add(listFrutas2[n]);
           }
-          if(n<listVerduras.length){
+          if(n<listVerduras.length && listVerduras.length > 1){
             tempList.add(listVerduras[n]);
           }
-          if(n<listTuberculos.length){
+          if(n<listTuberculos.length && listTuberculos.length > 1){
             tempList.add(listTuberculos[n]);
           }
-          if(n<listLegumbres.length){
+          if(n<listLegumbres.length && listLegumbres.length > 1){
             tempList.add(listLegumbres[n]);
           }
           n++;
@@ -85,7 +86,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         newLast += getLastCode(listVerduras) + ":";
         newLast += getLastCode(listTuberculos) + ":";
         newLast += getLastCode(listLegumbres) + ":";
-        state.lastElements = newLast;
+        state.lastElements == newLast;
       }
       break;
       case "CARNICERIA": {
@@ -212,29 +213,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         state.lastElements = newLast;
       }
       break;
-      case "JARDINERIA": {
-        //FLORISTERIA
-        List<ProductApi> listFloristeria = [];
-        if (!state.lastElements.isEmpty){
-          listFloristeria = await _productUseCase.getProductsByCateforie('FLORISTERIA', subCodes[0]);
-          listFloristeria.addAll(await _productUseCase.getProductsByCateforie('FLORISTERIA', listFloristeria.last.code));
-        } else {
-          listFloristeria = await _productUseCase.getProductsByCateforie('FLORISTERIA', null);
-          listFloristeria.addAll(await _productUseCase.getProductsByCateforie('FLORISTERIA', listFloristeria.last.code));
-        }
-
-        int n = 0;
-
-        while (n<listFloristeria.length) {
-          if(n<listFloristeria.length){
-            tempList.add(listFloristeria[n]);
-          }
-          n++;
-        }
-        String newLast = getLastCode(listFloristeria) + ":";
-        state.lastElements = newLast;
-      }
-      break;
       case "ACCESORIOS": {
         List<ProductApi> listAccesorios1 = [];
         List<ProductApi> listAccesorios2 = [];
@@ -278,7 +256,25 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       }
       break;
       case "PANADERIA": {
+        List<ProductApi> listPanaderia = [];
+        if (!state.lastElements.isEmpty){
+          listPanaderia = await _productUseCase.getProductsByCateforie('PANADERIA', subCodes[0]);
+          listPanaderia.addAll(await _productUseCase.getProductsByCateforie('PANADERIA', listPanaderia.last.code));
+        } else {
+          listPanaderia = await _productUseCase.getProductsByCateforie('PANADERIA', null);
+          listPanaderia.addAll(await _productUseCase.getProductsByCateforie('PANADERIA', listPanaderia.last.code));
+        }
 
+        int n = 0;
+
+        while (n<listPanaderia.length) {
+          if(n<listPanaderia.length){
+            tempList.add(listPanaderia[n]);
+          }
+          n++;
+        }
+        String newLast = getLastCode(listPanaderia) + ":";
+        state.lastElements = newLast;
       }
       break;
     }
@@ -397,18 +393,6 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
       }
       break;
-      case "JARDINERIA": {
-        List<ProductApi> listFloristeria = await _productUseCase.searchProductsByCategory('FLORISTERIA', state.searchString);
-
-        int n = 0;
-
-        while (n<listFloristeria.length) {
-          tempList.add(listFloristeria[n]);
-          n++;
-        }
-
-      }
-      break;
       case "ACCESORIOS": {
 
         List<ProductApi> listAccesorios1 = await _productUseCase.searchProductsByCategory('PRODUCTO TERMINADO FABRICA DE PLASTICO', state.searchString);
@@ -437,6 +421,14 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       }
       break;
       case "PANADERIA": {
+        List<ProductApi> listPanaderia = await _productUseCase.searchProductsByCategory('PANADERIA', state.searchString);
+
+        int n = 0;
+
+        while (n<listPanaderia.length) {
+          tempList.add(listPanaderia[n]);
+          n++;
+        }
 
       }
       break;

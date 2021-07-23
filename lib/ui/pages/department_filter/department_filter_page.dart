@@ -40,7 +40,6 @@ enum DrawerSelection {
   granel,
   abarrotes,
   licores,
-  jardineria,
   accesorios,
   panaderia
 }
@@ -99,12 +98,6 @@ class MyMainContainer extends StatelessWidget {
         }
         break;
 
-      case "JARDINERIA":
-        {
-          _drawerSelection = DrawerSelection.jardineria;
-        }
-        break;
-
       case "ACCESORIOS":
         {
           _drawerSelection = DrawerSelection.accesorios;
@@ -126,12 +119,11 @@ class MyMainContainer extends StatelessWidget {
 
     return BlocBuilder<DepartmentFilterCubit, DepartmentFilterState>(
         builder: (context, state) {
-      myController.addListener(() {
+      myController.addListener((){
         if (myController.position.pixels == myController.position.maxScrollExtent && searchFieldController.text == "") {
           context.read<DepartmentFilterCubit>().addProducts();
         }
       });
-
       return Scrollbar(
         controller: myController,
         child: Column(
@@ -324,34 +316,6 @@ class MyMainContainer extends StatelessWidget {
                               ),
                               ListTile(
                                 selected: _drawerSelection ==
-                                    DrawerSelection.jardineria,
-                                onTap: () {
-                                  if (_drawerSelection !=
-                                      DrawerSelection.jardineria) {
-                                    _drawerSelection =
-                                        DrawerSelection.jardineria;
-                                    context
-                                        .read<DepartmentFilterCubit>()
-                                        .changeCategory("JARDINERIA");
-                                    NavigationService.navigateToWithArguments(
-                                        'departmentFilter/${"JARDINERIA"}',
-                                        null);
-                                  }
-                                },
-                                leading: ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 36,
-                                    maxHeight: 36,
-                                  ),
-                                  child: Image.asset(
-                                    'assets/icons/icono_jardineria.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                title: Text('Jardinería'),
-                              ),
-                              ListTile(
-                                selected: _drawerSelection ==
                                     DrawerSelection.accesorios,
                                 onTap: () {
                                   if (_drawerSelection !=
@@ -379,6 +343,21 @@ class MyMainContainer extends StatelessWidget {
                                 title: Text('Accesorios'),
                               ),
                               ListTile(
+                                selected: _drawerSelection ==
+                                    DrawerSelection.panaderia,
+                                onTap: () {
+                                  if (_drawerSelection !=
+                                      DrawerSelection.panaderia) {
+                                    _drawerSelection =
+                                        DrawerSelection.panaderia;
+                                    context
+                                        .read<DepartmentFilterCubit>()
+                                        .changeCategory("PANADERIA");
+                                    NavigationService.navigateToWithArguments(
+                                        'departmentFilter/${"PANADERIA"}',
+                                        null);
+                                  }
+                                },
                                 leading: ConstrainedBox(
                                   constraints: BoxConstraints(
                                     maxWidth: 36,
@@ -402,7 +381,7 @@ class MyMainContainer extends StatelessWidget {
                    */
                   Expanded(
                     child: Container(
-                      color: Colors.blueGrey[900],
+                      color: Colors.black,
                       child: GridProductWidget(
                           listProduct: state.listProducts,
                           controller: myController),
