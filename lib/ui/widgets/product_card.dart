@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:veggy/ui/widgets/outline_custom_buttom.dart';
+import 'package:veggy/util/sizingInfo.dart';
 
 class ProductCard extends StatelessWidget {
   ProductCard(
@@ -53,25 +54,27 @@ class ProductCard extends StatelessWidget {
             Container(
               width: 150,
               child: Text(
+                
                 title,
+                textAlign: TextAlign.center,
                 style: themeText.bodyText1,
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.visible,
               ),
             ),
             SizedBox(
               height: 5,
             ),
-            Text('Codigo:$code', style: themeText.overline),
+            !isMobile(context)? Text('Codigo:$code', style: themeText.overline):Container(),
             SizedBox(
-              height: 5,
+              height:!isMobile(context)? 5:0,
             ),
-            Text('Categoria:$category', style: themeText.overline),
+             !isMobile(context)?Text('Categoria:$category', style: themeText.overline):Container(),
             SizedBox(
-              height: 5,
+              height: !isMobile(context)? 5:0,
             ),
-            Text('Unidad de medida:$unidad', style: themeText.overline),
+             !isMobile(context)?Text('Unidad de medida:$unidad', style: themeText.overline):Container(),
             SizedBox(
-              height: 5,
+              height: !isMobile(context)? 5:0,
             ),
             Text(
               'CRC $price',

@@ -8,6 +8,7 @@ import 'package:veggy/domain/models/product_detail.dart';
 import 'package:veggy/ui/ShoppingCartCubit/shoppingcart_cubit.dart';
 import 'package:veggy/domain/models/cart_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veggy/util/sizingInfo.dart';
 
 /*
  * Clase tipo Widget que construye la lista de tarjetas de productos
@@ -76,7 +77,7 @@ class GridProductWidget extends StatelessWidget {
           controller: controller,
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
+              crossAxisCount: isMobile(context)? 1 : isTablet(context) ? 2: 4,
               childAspectRatio: 0.6,
               crossAxisSpacing: 1,
               mainAxisSpacing: 1),
