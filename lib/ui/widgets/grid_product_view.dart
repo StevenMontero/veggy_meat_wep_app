@@ -77,7 +77,11 @@ class GridProductWidget extends StatelessWidget {
           controller: controller,
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile(context)? 1 : isTablet(context) ? 2: 4,
+              crossAxisCount: isMobile(context)
+                  ? 1
+                  : isTablet(context)
+                      ? 2
+                      : 4,
               childAspectRatio: 0.6,
               crossAxisSpacing: 1,
               mainAxisSpacing: 1),
@@ -103,11 +107,9 @@ class GridProductWidget extends StatelessWidget {
                 },
                 onPressButton: () {
                   final double quatity =
-                                     listProduct[index].itemGroup == 'GRANEL'
-                                          ? 1 / 1000
-                                          : 1.0;
-                  final double montoIva = price *
-                      (listProduct[index].misc1 / 100);
+                      listProduct[index].itemGroup == 'GRANEL' ? 1 / 1000 : 1.0;
+                  final double montoIva =
+                      price * (listProduct[index].misc1 / 100);
                   final _product = Product(
                     codigoArticulo: listProduct[index].code,
                     cantidad: quatity,
