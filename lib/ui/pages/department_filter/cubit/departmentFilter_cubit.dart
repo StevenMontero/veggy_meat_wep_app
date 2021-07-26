@@ -64,19 +64,19 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
         int n = 0;
         while (n<listFrutas1.length || n<listFrutas2.length || n<listVerduras.length || n<listTuberculos.length || n<listLegumbres.length) {
-          if(n<listFrutas1.length && listFrutas1.length > 1){
+          if(n<listFrutas1.length && verifyList(listFrutas1[n].code)){
             tempList.add(listFrutas1[n]);
           }
-          if(n<listFrutas2.length && listFrutas2.length > 1){
+          if(n<listFrutas2.length && verifyList(listFrutas2[n].code)){
             tempList.add(listFrutas2[n]);
           }
-          if(n<listVerduras.length && listVerduras.length > 1){
+          if(n<listVerduras.length && verifyList(listVerduras[n].code)){
             tempList.add(listVerduras[n]);
           }
-          if(n<listTuberculos.length && listTuberculos.length > 1){
+          if(n<listTuberculos.length && verifyList(listTuberculos[n].code)){
             tempList.add(listTuberculos[n]);
           }
-          if(n<listLegumbres.length && listLegumbres.length > 1){
+          if(n<listLegumbres.length && verifyList(listLegumbres[n].code)){
             tempList.add(listLegumbres[n]);
           }
           n++;
@@ -112,19 +112,19 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listCarneRes.length || n<listCarneCerdo.length || n<listCarnePollo.length || n<listMariscos.length || n<listEmbutidos.length) {
-          if(n<listCarneRes.length){
+          if(n<listCarneRes.length && verifyList(listCarneRes[n].code)){
             tempList.add(listCarneRes[n]);
           }
-          if(n<listCarneCerdo.length){
+          if(n<listCarneCerdo.length && verifyList(listCarneCerdo[n].code)){
             tempList.add(listCarneCerdo[n]);
           }
-          if(n<listCarnePollo.length){
+          if(n<listCarnePollo.length && verifyList(listCarnePollo[n].code)){
             tempList.add(listCarnePollo[n]);
           }
-          if(n<listMariscos.length){
+          if(n<listMariscos.length && verifyList(listMariscos[n].code)){
             tempList.add(listMariscos[n]);
           }
-          if(n<listEmbutidos.length){
+          if(n<listEmbutidos.length && verifyList(listEmbutidos[n].code)){
             tempList.add(listEmbutidos[n]);
           }
           n++;
@@ -151,10 +151,10 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listGranel.length || n<listProcesados.length) {
-          if(n<listGranel.length){
+          if(n<listGranel.length && verifyList(listGranel[n].code)){
             tempList.add(listGranel[n]);
           }
-          if(n<listProcesados.length){
+          if(n<listProcesados.length && verifyList(listProcesados[n].code)){
             tempList.add(listProcesados[n]);
           }
           n++;
@@ -178,10 +178,10 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listAbarrotes.length || n<listLacteos.length) {
-          if(n<listAbarrotes.length){
+          if(n<listAbarrotes.length && verifyList(listAbarrotes[n].code)){
             tempList.add(listAbarrotes[n]);
           }
-          if(n<listLacteos.length){
+          if(n<listLacteos.length && verifyList(listLacteos[n].code)){
             tempList.add(listLacteos[n]);
           }
           n++;
@@ -204,7 +204,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listLicores.length) {
-          if(n<listLicores.length){
+          if(n<listLicores.length && verifyList(listLicores[n].code)){
             tempList.add(listLicores[n]);
           }
           n++;
@@ -233,16 +233,16 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listAccesorios1.length || n<listAccesorios2.length || n<listAccesorios3.length || n<listAccesorios4.length) {
-          if(n<listAccesorios1.length){
+          if(n<listAccesorios1.length && verifyList(listAccesorios1[n].code)){
             tempList.add(listAccesorios1[n]);
           }
-          if(n<listAccesorios2.length){
+          if(n<listAccesorios2.length && verifyList(listAccesorios2[n].code)){
             tempList.add(listAccesorios2[n]);
           }
-          if(n<listAccesorios3.length){
+          if(n<listAccesorios3.length && verifyList(listAccesorios3[n].code)){
             tempList.add(listAccesorios3[n]);
           }
-          if(n<listAccesorios4.length){
+          if(n<listAccesorios4.length && verifyList(listAccesorios4[n].code)){
             tempList.add(listAccesorios4[n]);
           }
           n++;
@@ -268,7 +268,7 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listPanaderia.length) {
-          if(n<listPanaderia.length){
+          if(n<listPanaderia.length && verifyList(listPanaderia[n].code)){
             tempList.add(listPanaderia[n]);
           }
           n++;
@@ -299,19 +299,19 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listFrutas1.length || n<listFrutas2.length || n<listVerduras.length || n<listTuberculos.length || n<listLegumbres.length) {
-          if(n<listFrutas1.length){
+          if(n<listFrutas1.length && verifyList(listFrutas1[n].code)){
             tempList.add(listFrutas1[n]);
           }
-          if(n<listFrutas2.length){
+          if(n<listFrutas2.length && verifyList(listFrutas2[n].code)){
             tempList.add(listFrutas2[n]);
           }
-          if(n<listVerduras.length){
+          if(n<listVerduras.length && verifyList(listVerduras[n].code)){
             tempList.add(listVerduras[n]);
           }
-          if(n<listTuberculos.length){
+          if(n<listTuberculos.length && verifyList(listTuberculos[n].code)){
             tempList.add(listTuberculos[n]);
           }
-          if(n<listLegumbres.length){
+          if(n<listLegumbres.length && verifyList(listLegumbres[n].code)){
             tempList.add(listLegumbres[n]);
           }
           n++;
@@ -328,19 +328,19 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listCarneRes.length || n<listCarneCerdo.length || n<listCarnePollo.length || n<listMariscos.length || n<listEmbutidos.length) {
-          if(n<listCarneRes.length){
+          if(n<listCarneRes.length && verifyList(listCarneRes[n].code)){
             tempList.add(listCarneRes[n]);
           }
-          if(n<listCarneCerdo.length){
+          if(n<listCarneCerdo.length && verifyList(listCarneCerdo[n].code)){
             tempList.add(listCarneCerdo[n]);
           }
-          if(n<listCarnePollo.length){
+          if(n<listCarnePollo.length && verifyList(listCarnePollo[n].code)){
             tempList.add(listCarnePollo[n]);
           }
-          if(n<listMariscos.length){
+          if(n<listMariscos.length && verifyList(listMariscos[n].code)){
             tempList.add(listMariscos[n]);
           }
-          if(n<listEmbutidos.length){
+          if(n<listEmbutidos.length && verifyList(listEmbutidos[n].code)){
             tempList.add(listEmbutidos[n]);
           }
           n++;
@@ -354,10 +354,10 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listGranel.length || n<listProcesados.length) {
-          if(n<listGranel.length){
+          if(n<listGranel.length && verifyList(listGranel[n].code)){
             tempList.add(listGranel[n]);
           }
-          if(n<listProcesados.length){
+          if(n<listProcesados.length && verifyList(listProcesados[n].code)){
             tempList.add(listProcesados[n]);
           }
           n++;
@@ -371,10 +371,10 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listAbarrotes.length || n<listLacteos.length) {
-          if(n<listAbarrotes.length){
+          if(n<listAbarrotes.length && verifyList(listAbarrotes[n].code)){
             tempList.add(listAbarrotes[n]);
           }
-          if(n<listLacteos.length){
+          if(n<listLacteos.length && verifyList(listLacteos[n].code)){
             tempList.add(listLacteos[n]);
           }
           n++;
@@ -387,7 +387,9 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listLicores.length) {
-          tempList.add(listLicores[n]);
+          if (verifyList(listLicores[n].code)) {
+            tempList.add(listLicores[n]);
+          }
           n++;
         }
 
@@ -404,16 +406,16 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
 
         while (n<listAccesorios1.length || n<listAccesorios2.length || n<listAccesorios3.length || n<listAccesorios4.length) {
 
-          if(n<listAccesorios1.length){
+          if(n<listAccesorios1.length && verifyList(listAccesorios1[n].code)){
             tempList.add(listAccesorios1[n]);
           }
-          if(n<listAccesorios2.length){
+          if(n<listAccesorios2.length && verifyList(listAccesorios2[n].code)){
             tempList.add(listAccesorios2[n]);
           }
-          if(n<listAccesorios3.length){
+          if(n<listAccesorios3.length && verifyList(listAccesorios3[n].code)){
             tempList.add(listAccesorios3[n]);
           }
-          if(n<listAccesorios4.length){
+          if(n<listAccesorios4.length && verifyList(listAccesorios4[n].code)){
             tempList.add(listAccesorios4[n]);
           }
           n++;
@@ -426,7 +428,9 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
         int n = 0;
 
         while (n<listPanaderia.length) {
-          tempList.add(listPanaderia[n]);
+          if (verifyList(listPanaderia[n].code)) {
+            tempList.add(listPanaderia[n]);
+          }
           n++;
         }
 
@@ -466,5 +470,20 @@ class DepartmentFilterCubit extends Cubit<DepartmentFilterState> {
       returnValue = list.last.code;
     }
     return returnValue;
+  }
+
+  /**
+   * Función para verificar si un producto a ha sido agregado a la lista
+   * para no agregarlo más de una vez.
+   * @Params: ProductApi object
+   * Objeto del cual queremos
+   */
+  bool verifyList(String object){
+    for (int i = 0; i < state.listProducts.length; i++){
+      if (object == state.listProducts[i].code) {
+        return false;
+      }
+    }
+    return true;
   }
 }
