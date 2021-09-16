@@ -76,8 +76,8 @@ class _Body extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final price =
                           state.listNewProducts[index].itemGroup == 'GRANEL'
-                              ? state.listNewProducts[index].listPrice / 1000
-                              : state.listNewProducts[index].listPrice;
+                              ? (state.listNewProducts[index].listPrice / 1000) + ((state.listNewProducts[index].listPrice / 1000)*(state.listNewProducts[index].misc1/100))
+                              : state.listNewProducts[index].listPrice + (state.listNewProducts[index].listPrice * (state.listNewProducts[index].misc1/100));
                       return ProductCard(
                           title: state.listNewProducts[index].name,
                           price: price.toStringAsFixed(2),

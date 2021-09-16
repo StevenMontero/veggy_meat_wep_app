@@ -131,17 +131,15 @@ class Body extends StatelessWidget {
                           itemCount: state.listSameProduct.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            final price = state
-                                        .listSameProduct[index].itemGroup ==
-                                    'GRANEL'
-                                ? state.listSameProduct[index].listPrice / 1000
-                                : state.listSameProduct[index].listPrice;
+                            //(product.listPrice / 1000) + ((product.listPrice / 1000) * (product.misc1/100))
+                            final price = state.listSameProduct[index].itemGroup == 'GRANEL'
+                                ? (state.listSameProduct[index].listPrice / 1000) + ((state.listSameProduct[index].listPrice / 1000)*(state.listSameProduct[index].misc1/100))
+                                : state.listSameProduct[index].listPrice + (state.listSameProduct[index].listPrice * (state.listSameProduct[index].misc1/100));
                             return ProductCard(
                                 title: state.listSameProduct[index].name,
                                 price: price.toStringAsFixed(2),
                                 code: state.listSameProduct[index].code,
-                                category:
-                                    state.listSameProduct[index].itemGroup,
+                                category: state.listSameProduct[index].itemGroup,
                                 imageUrl: state.listSameProduct[index].imageUrl,
                                 unidad: state.listSameProduct[index].unidad,
                                 onPressCard: () {
@@ -213,8 +211,8 @@ class Body extends StatelessWidget {
   Container buildInfoProduct(TextTheme themeText, ResponsiveApp responsiveApp,
       BuildContext context, ProductApi product) {
     final price = product.itemGroup == 'GRANEL'
-        ? product.listPrice / 1000
-        : product.listPrice;
+        ? (product.listPrice / 1000) + ((product.listPrice / 1000) * (product.misc1/100))
+        : product.listPrice + (product.listPrice * (product.misc1/100));
     return Container(
       height:
           responsiveApp.width <= 1197 && responsiveApp.width >= 900 ? 600 : 500,
@@ -283,9 +281,9 @@ class Body extends StatelessWidget {
                   width: 5.0,
                 ),
                 product.itemGroup == 'GRANEL'
-                    ? Text('₡ ${price.toStringAsFixed(2)} x gramo sin IVA',
+                    ? Text('₡ ${price.toStringAsFixed(2)} x gramo',
                         style: themeText.headline6)
-                    : Text('₡ ${price.toStringAsFixed(2)} sin IVA',
+                    : Text('₡ ${price.toStringAsFixed(2)}',
                         style: themeText.headline6),
               ],
             ),
@@ -336,8 +334,8 @@ class Body extends StatelessWidget {
               child: BlocBuilder<DeatailCubit, DetailState>(
                 builder: (context, state) {
                   final price = state.productApi.itemGroup == 'GRANEL'
-                      ? state.productApi.listPrice / 1000
-                      : state.productApi.listPrice;
+                      ? (state.productApi.listPrice / 1000) + ((state.productApi.listPrice / 1000)*(state.productApi.misc1 / 100))
+                      : state.productApi.listPrice + (state.productApi.listPrice*(state.productApi.misc1 / 100));
                   return state.productApi.itemGroup == 'GRANEL'
                       ? ElevatedButton(
                           child: Text('AGREGAR'),

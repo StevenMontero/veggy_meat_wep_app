@@ -88,15 +88,15 @@ class GridProductWidget extends StatelessWidget {
           itemCount: listProduct.length,
           itemBuilder: (BuildContext ctx, index) {
             final price = listProduct[index].itemGroup == 'GRANEL'
-                ? listProduct[index].listPrice / 1000
-                : listProduct[index].listPrice;
+                ? (listProduct[index].listPrice / 1000) + ((listProduct[index].listPrice / 1000)*(listProduct[index].misc1/100))
+                : listProduct[index].listPrice + (listProduct[index].listPrice * (listProduct[index].misc1/100));
             return ProductCard(
                 title: listProduct[index].name,
                 price: price.toStringAsFixed(2),
-                code: listProduct[index].code,
+                code: listProduct[index].miscAmount.toStringAsFixed(2),//listProduct[index].code,
                 category: listProduct[index].itemGroup,
                 imageUrl: listProduct[index].imageUrl,
-                unidad: listProduct[index].unidad,
+                unidad: listProduct[index].mSRP.toStringAsFixed(2),//listProduct[index].unidad,
                 onPressCard: () {
                   var productDetail = ProductDetail(
                       product: listProduct[index],

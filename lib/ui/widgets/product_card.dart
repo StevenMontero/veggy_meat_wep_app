@@ -22,6 +22,12 @@ class ProductCard extends StatelessWidget {
   final String unidad;
   final VoidCallback onPressCard;
   final VoidCallback onPressButton;
+  //state.listSameProduct[index].listPrice *
+  //                                           (state.listSameProduct[index].misc1 /
+  //                                               100);*********************************************************************************
+  /*double priceD = double.parse(price);
+    double taxD = double.parse(tax);
+    priceWithTax = (priceD + (taxD/100)).toStringAsFixed(2);*/
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
