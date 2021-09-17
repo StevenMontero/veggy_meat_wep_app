@@ -96,7 +96,7 @@ class GridProductWidget extends StatelessWidget {
                 code: listProduct[index].code,
                 category: listProduct[index].itemGroup,
                 imageUrl: listProduct[index].imageUrl,
-                unidad: listProduct[index].mSRP.toStringAsFixed(2),//listProduct[index].unidad,
+                unidad: listProduct[index].unidad,
                 onPressCard: () {
                   var productDetail = ProductDetail(
                       product: listProduct[index],
