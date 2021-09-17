@@ -131,7 +131,6 @@ class Body extends StatelessWidget {
                           itemCount: state.listSameProduct.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            //(product.listPrice / 1000) + ((product.listPrice / 1000) * (product.misc1/100))
                             final price = state.listSameProduct[index].itemGroup == 'GRANEL'
                                 ? (state.listSameProduct[index].listPrice / 1000) + ((state.listSameProduct[index].listPrice / 1000)*(state.listSameProduct[index].misc1/100))
                                 : state.listSameProduct[index].listPrice + (state.listSameProduct[index].listPrice * (state.listSameProduct[index].misc1/100));
