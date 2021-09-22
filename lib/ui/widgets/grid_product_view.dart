@@ -88,11 +88,11 @@ class GridProductWidget extends StatelessWidget {
           itemCount: listProduct.length,
           itemBuilder: (BuildContext ctx, index) {
             final price = listProduct[index].itemGroup == 'GRANEL'
-                ? (listProduct[index].listPrice / 1000) + ((listProduct[index].listPrice / 1000)*(listProduct[index].misc1/100))
-                : listProduct[index].listPrice + (listProduct[index].listPrice * (listProduct[index].misc1/100));
+                ? (listProduct[index].listPrice / 1000)
+                : listProduct[index].listPrice;
             return ProductCard(
                 title: listProduct[index].name,
-                price: price.toStringAsFixed(2),
+                price: (price+(price*(listProduct[index].misc1 / 100))).toStringAsFixed(2),
                 code: listProduct[index].code,
                 category: listProduct[index].itemGroup,
                 imageUrl: listProduct[index].imageUrl,
@@ -109,18 +109,18 @@ class GridProductWidget extends StatelessWidget {
                   final double quatity =
                       listProduct[index].itemGroup == 'GRANEL' ? 1 / 1000 : 1.0;
                   final double montoIva =
-                      price * (listProduct[index].misc1 / 100);
+                      listProduct[index].listPrice * (listProduct[index].misc1 / 100);
                   final _product = Product(
                     codigoArticulo: listProduct[index].code,
                     cantidad: quatity,
                     notas: '',
                     envioParcial: '',
-                    precioSinIva: price,
+                    precioSinIva: listProduct[index].listPrice,
                     montoIva: montoIva,
                     porcentajeIva: listProduct[index].misc1.toDouble(),
                     codigoTarifa: '',
                     montoDescuento: 0,
-                    precioIva: montoIva + price,
+                    precioIva: listProduct[index].listPrice + montoIva,
                     bonificacion: '',
                     porcentajeDescuento: 0,
                     codImpuesto: listProduct[index].misc3,

@@ -76,11 +76,11 @@ class _Body extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final price =
                           state.listNewProducts[index].itemGroup == 'GRANEL'
-                              ? (state.listNewProducts[index].listPrice / 1000) + ((state.listNewProducts[index].listPrice / 1000)*(state.listNewProducts[index].misc1/100))
-                              : state.listNewProducts[index].listPrice + (state.listNewProducts[index].listPrice * (state.listNewProducts[index].misc1/100));
+                              ? (state.listNewProducts[index].listPrice / 1000)
+                              : state.listNewProducts[index].listPrice;
                       return ProductCard(
                           title: state.listNewProducts[index].name,
-                          price: price.toStringAsFixed(2),
+                          price: (price+(price*(state.listNewProducts[index].misc1 / 100))).toStringAsFixed(2),
                           code: state.listNewProducts[index].code,
                           category: state.listNewProducts[index].itemGroup,
                           imageUrl: state.listNewProducts[index].imageUrl,
@@ -97,24 +97,20 @@ class _Body extends StatelessWidget {
                                       state.listNewProducts[index].itemGroup == 'GRANEL'
                                           ? 1 / 1000
                                           : 1.0;
-                            final double montoIva = state.listNewProducts[index].listPrice *
-                                (state.listNewProducts[index].misc1 / 100);
+                            final double montoIva = state.listNewProducts[index].listPrice * (state.listNewProducts[index].misc1 / 100);
                             final _product = Product(
                                 codigoArticulo:
                                     state.listNewProducts[index].code,
                                 cantidad: quatity,
                                 notas: '',
                                 envioParcial: '',
-                                precioSinIva:
-                                    state.listNewProducts[index].listPrice,
+                                precioSinIva: state.listNewProducts[index].listPrice,
                                 montoIva: montoIva,
                                 porcentajeIva: state
                                     .listNewProducts[index].misc1
                                     .toDouble(),
                                 codigoTarifa: '',
-                                precioIva:
-                                    state.listNewProducts[index].listPrice +
-                                        montoIva,
+                                precioIva: state.listNewProducts[index].listPrice + montoIva,
                                 porcentajeDescuento: 0,
                                 montoDescuento: 0,
                                 bonificacion: '',
